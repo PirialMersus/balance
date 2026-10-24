@@ -5,6 +5,7 @@ import { useBooking } from "@/components/booking/BookingContext";
 
 interface BookingTriggerButtonProps {
   practiceSlug?: string;
+  timeSlot?: string;
   className?: string;
   style?: React.CSSProperties;
   children: React.ReactNode;
@@ -12,6 +13,7 @@ interface BookingTriggerButtonProps {
 
 export default function BookingTriggerButton({
   practiceSlug,
+  timeSlot,
   className,
   style,
   children,
@@ -21,7 +23,7 @@ export default function BookingTriggerButton({
   return (
     <button
       type="button"
-      onClick={() => openBooking(practiceSlug)}
+      onClick={() => openBooking(practiceSlug || timeSlot)}
       className={className}
       style={style}
     >

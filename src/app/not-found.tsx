@@ -8,16 +8,16 @@ export default function RootNotFound() {
           404
         </span>
         <h1 className="font-serif italic text-3xl md:text-4xl text-white mb-4">
-          Страница не найдена
+          Сторінку не знайдено
         </h1>
         <p className="text-[#828A73] text-sm md:text-base leading-relaxed mb-8">
-          Запрашиваемый адрес не существует. Перейдите на главную страницу студии горячей йоги Balance в Одессе.
+          Запитувана адреса не існує або була переміщена. Перейдіть на головну сторінку студії гарячої йоги Balance в Одесі.
         </p>
         <Link
-          href="/ru"
+          href="/"
           className="inline-block px-8 py-4 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium transition-colors"
         >
-          На главную
+          На головну
         </Link>
       </div>
     </div>

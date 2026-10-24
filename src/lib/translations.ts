@@ -1,337 +1,353 @@
-export type Locale = "ru" | "uk";
+export type Locale = "uk" | "en";
 
-export const translations = {
-  ru: {
-    nav: {
-      practices: "Практика",
-      schedule: "Расписание",
-      pricing: "Цены",
-      studio: "О студии",
-      teachers: "Преподаватели",
-      journal: "Журнал",
-      contacts: "Контакты",
-      book: "Записаться",
-      switchLang: "Українська",
-    },
-    hero: {
-      headline: "Горячая йога\nв Одессе",
-      sub: "Жарко. Влажно. Местами очень непросто.\nНо какое же после этого состояние…",
-      ctaPractice: "Выбрать практику",
-      ctaSchedule: "Расписание",
-    },
-    about: {
-      title: "Про атмосферу,\nлюдей и тепло",
-      body: "Balance — это не просто студия. Это место, где рождается особое ощущение. Горячая йога требует от вас присутствия здесь и сейчас, учит тело и ум работать вместе в условиях, которые выводят вас за привычные рамки.",
-      body2:
-        "Мы рекомендуем начинать с 2–3 занятий в неделю, чтобы тело успело адаптироваться. Регулярность важнее интенсивности. Именно постоянная практика открывает то самое состояние, ради которого всё это затевается.",
-    },
-    practices: {
-      title: "Горячая йога",
-      subtitle:
-        "Единственное и главное направление студии. Практика в специально оборудованном зале при повышенной температуре и влажности.",
-      viewAll: "Все практики",
-      learnMore: "Подробнее",
-    },
-    benefits: {
-      title: "Почему горячая йога",
-      items: [
-        {
-          title: "Глубокая детоксикация",
-          body: "Интенсивное потоотделение выводит токсины и очищает кожу.",
-        },
-        {
-          title: "Гибкость мышц",
-          body: "Тепло позволяет безопасно растягиваться глубже, чем в обычных условиях.",
-        },
-        {
-          title: "Сила и выносливость",
-          body: "Практика в жаре тренирует сердечно-сосудистую систему и укрепляет тело.",
-        },
-        {
-          title: "Ментальная устойчивость",
-          body: "Умение оставаться в балансе в сложных условиях переносится в повседневную жизнь.",
-        },
-        {
-          title: "Управление стрессом",
-          body: "Концентрация на дыхании и теле снижает уровень кортизола.",
-        },
-        {
-          title: "Комьюнити",
-          body: "Вы практикуете рядом с людьми, которые выбирают то же самое.",
-        },
-      ],
-    },
-    schedule: {
-      title: "Расписание",
-      subtitle:
-        "Актуальное расписание публикуется в Instagram. Запись через Direct.",
-      toInstagram: "Смотреть расписание в Instagram",
-      days: [
-        "Понедельник",
-        "Вторник",
-        "Среда",
-        "Четверг",
-        "Пятница",
-        "Суббота",
-        "Воскресенье",
-      ],
-    },
-    pricing: {
-      title: "Цены",
-      subtitle:
-        "Актуальные цены уточняйте в Instagram Direct. Студия новая — специальные условия для первых участников.",
-      askPrice: "Узнать цены",
-      trialLabel: "Первое занятие",
-      trialNote: "Уточняйте условия в Instagram",
-    },
-    studio: {
-      title: "Студия",
-      subtitle: "Пространство, созданное для практики",
-      philosophy: "Философия",
-      philosophyText:
-        "Balance родился из простой идеи: дать людям место, где можно по-настоящему отключиться от внешнего и погрузиться в себя. Горячая йога делает это честно — она не оставляет пространства для лишних мыслей.",
-    },
-    teachers: {
-      title: "Преподаватели",
-      founder: "Основательница студии",
-    },
-    journal: {
-      title: "Журнал",
-      subtitle: "Практика, тело, состояние",
-      readMore: "Читать",
-    },
-    contacts: {
-      title: "Контакты",
-      instagram: "Instagram",
-      booking: "Записаться",
-      address: "Адрес",
-      addressNote: "Уточняйте адрес при записи",
-      phone: "Телефон",
-      phoneNote: "Связь через Instagram Direct",
-    },
-    booking: {
-      title: "Записаться на занятие",
-      subtitle: "Выберите удобный способ записи",
-      via_instagram: "Написать в Instagram",
-      name: "Ваше имя",
-      phone: "Телефон",
-      practice: "Практика",
-      message: "Сообщение",
-      submit: "Отправить заявку",
-      privacy: "Я согласен с политикой конфиденциальности",
-      success: "Заявка отправлена! Мы свяжемся с вами в ближайшее время.",
-      error: "Произошла ошибка. Пожалуйста, напишите нам напрямую в Instagram.",
-    },
-    faq: {
-      title: "Часто задаваемые вопросы",
-      items: [
-        {
-          q: "Нужна ли подготовка для первого занятия?",
-          a: "Горячая йога подходит для начинающих. Важно прийти отдохнувшим, не есть за 2 часа до занятия и взять воду и коврик.",
-        },
-        {
-          q: "Что взять с собой?",
-          a: "Воду, коврик для йоги (можно арендовать), полотенце, удобную одежду из натуральных тканей.",
-        },
-        {
-          q: "Какая температура в зале?",
-          a: "Около 38–40°C с повышенной влажностью. Это безопасная среда для глубокой практики.",
-        },
-        {
-          q: "Как часто нужно заниматься?",
-          a: "Рекомендуем начинать с 2–3 раз в неделю. Регулярность важнее частоты — именно постоянная практика даёт результат.",
-        },
-        {
-          q: "Есть ли противопоказания?",
-          a: "При серьёзных сердечно-сосудистых заболеваниях, беременности или других медицинских состояниях проконсультируйтесь с врачом перед началом практики.",
-        },
-      ],
-    },
-    cta: {
-      title: "Начни практику\nсегодня",
-      sub: "Первый шаг — просто прийти.",
-      book: "Записаться",
-      instagram: "Написать в Instagram",
-    },
-    footer: {
-      rights: "© 2026 Balance Hot Yoga, Одесса",
-      privacy: "Политика конфиденциальности",
-    },
-    notFound: {
-      title: "Страница не найдена",
-      text: "Кажется, такой страницы не существует. Попробуйте вернуться на главную.",
-      home: "На главную",
-    },
-    privacy: {
-      title: "Политика конфиденциальности",
-    },
-  },
+export interface TranslationDictionary {
+  nav: {
+    practices: string;
+    schedule: string;
+    pricing: string;
+    studio: string;
+    contacts: string;
+    book: string;
+    switchLang: string;
+    langName: string;
+  };
+  hero: {
+    headline: string;
+    sub: string;
+    ctaPractice: string;
+    ctaSchedule: string;
+  };
+  about: {
+    title: string;
+    body1: string;
+    body2: string;
+    quote: string;
+    founder: string;
+  };
+  practices: {
+    title: string;
+    subtitle: string;
+    learnMore: string;
+    viewAll: string;
+  };
+  benefits: {
+    title: string;
+    items: Array<{
+      title: string;
+      body: string;
+      icon: string;
+    }>;
+  };
+  teachers: {
+    title: string;
+    founder: string;
+    bio: string;
+    credo: string;
+  };
+  faq: {
+    title: string;
+    items: Array<{
+      q: string;
+      a: string;
+    }>;
+  };
+  pricing: {
+    title: string;
+    subtitle: string;
+    askPrice: string;
+  };
+  schedule: {
+    title: string;
+    subtitle: string;
+  };
+  contacts: {
+    title: string;
+    subtitle: string;
+    address: string;
+    phone: string;
+    instagram: string;
+    telegram: string;
+    booking: string;
+  };
+  booking: {
+    title: string;
+    subtitle: string;
+    name: string;
+    contact: string;
+    practice: string;
+    time: string;
+    message: string;
+    submit: string;
+    success: string;
+  };
+  journal: {
+    title: string;
+    subtitle: string;
+    readMore: string;
+  };
+  cta: {
+    title: string;
+    sub: string;
+    book: string;
+    instagram: string;
+  };
+}
+
+export const translations: Record<Locale, TranslationDictionary> = {
   uk: {
     nav: {
       practices: "Практика",
       schedule: "Розклад",
       pricing: "Ціни",
       studio: "Про студію",
-      teachers: "Викладачі",
-      journal: "Журнал",
       contacts: "Контакти",
-      book: "Записатись",
-      switchLang: "Русский",
+      book: "Записатися",
+      switchLang: "English",
+      langName: "Українська",
     },
     hero: {
-      headline: "Гаряча йога\nв Одесі",
-      sub: "Жарко. Вологo. Місцями дуже непросто.\nАле яке ж після цього відчуття…",
-      ctaPractice: "Обрати практику",
+      headline: "Тепло.\nДихання.\nБаланс.",
+      sub: "Єдина спеціалізована студія гарячої йоги в Одесі.\nПрактика при 38–40°C для глибокого розкриття тіла та спокою розуму.",
+      ctaPractice: "Напрямки",
       ctaSchedule: "Розклад",
     },
     about: {
-      title: "Про атмосферу,\nлюдей і тепло",
-      body: "Balance — це не просто студія. Це місце, де народжується особливе відчуття. Гаряча йога вимагає від вас присутності тут і зараз, вчить тіло і розум працювати разом в умовах, які виводять вас за звичні межі.",
+      title: "Простір, де тіло згадує, як дихати глибоко",
+      body1:
+        "Студія «Баланс» створена для тих, хто шукає більше, ніж просто фізичні вправи. В нагрітому просторі тіло стає м'яким та сприйнятливим, зв'язки розслабляються, а розум позбавляється повсякденної тривожності.",
       body2:
-        "Ми рекомендуємо починати з 2–3 занять на тиждень, щоб тіло встигло адаптуватися. Регулярність важливіша за інтенсивність. Саме постійна практика відкриває той стан, заради якого все це починається.",
+        "Кожне заняття — це внутрішній діалог, безпечне подолання власного опору та повернення до внутрішнього спокою в теплій атмосфері однодумців.",
+      quote:
+        "«Ми створили Balance не як спортзал, а як безпечний прихисток від міського шуму, де кожен коврик — це особистий острів тепла».",
+      founder: "Марія Миронова, засновниця студії Balance",
     },
     practices: {
-      title: "Гаряча йога",
+      title: "Горяча йога: основа нашої студії",
       subtitle:
-        "Єдиний і головний напрям студії. Практика у спеціально обладнаному залі при підвищеній температурі та вологості.",
+        "Спеціально розроблений клас, адаптований під температурний режим 38–40°C. Безпечно для суглобів, ефективно для детоксикації та розкриття потенціалу тіла.",
+      learnMore: "Докладніше",
       viewAll: "Усі практики",
-      learnMore: "Детальніше",
     },
     benefits: {
-      title: "Чому гаряча йога",
+      title: "Чому саме гаряча йога",
       items: [
         {
-          title: "Глибока детоксикація",
-          body: "Інтенсивне потовиділення виводить токсини та очищає шкіру.",
+          title: "Глибоке та безпечне розтягнення",
+          body: "М'язи в нагрітому залі стають еластичними за лічені хвилини, що зводить ризик травм до мінімуму.",
+          icon: "flame",
         },
         {
-          title: "Гнучкість м'язів",
-          body: "Тепло дозволяє безпечно розтягуватися глибше, ніж у звичайних умовах.",
+          title: "Інтенсивна детоксикація",
+          body: "Активне потовиділення очищує шкіру, виводить токсини та стимулює лімфатичну систему.",
+          icon: "droplet",
         },
         {
-          title: "Сила та витривалість",
-          body: "Практика в жарі тренує серцево-судинну систему та зміцнює тіло.",
+          title: "Перезавантаження нервової системи",
+          body: "Спека змушує сконцентруватися виключно на подиху, відключаючи потік зайвих думок.",
+          icon: "wind",
         },
         {
-          title: "Ментальна стійкість",
-          body: "Вміння залишатися в балансі у складних умовах переноситься в повсякденне життя.",
-        },
-        {
-          title: "Управління стресом",
-          body: "Концентрація на диханні та тілі знижує рівень кортизолу.",
-        },
-        {
-          title: "Спільнота",
-          body: "Ви практикуєте поруч із людьми, які обирають те саме.",
+          title: "Здоров'я серця та суглобів",
+          body: "М'яке кардіонавантаження тренує серцево-судинну систему без ударного навантаження на коліна та хребет.",
+          icon: "heart",
         },
       ],
-    },
-    schedule: {
-      title: "Розклад",
-      subtitle:
-        "Актуальний розклад публікується в Instagram. Запис через Direct.",
-      toInstagram: "Дивитися розклад в Instagram",
-      days: [
-        "Понеділок",
-        "Вівторок",
-        "Середа",
-        "Четвер",
-        "П'ятниця",
-        "Субота",
-        "Неділя",
-      ],
-    },
-    pricing: {
-      title: "Ціни",
-      subtitle:
-        "Актуальні ціни уточнюйте в Instagram Direct. Студія нова — спеціальні умови для перших учасників.",
-      askPrice: "Дізнатися ціни",
-      trialLabel: "Перше заняття",
-      trialNote: "Уточнюйте умови в Instagram",
-    },
-    studio: {
-      title: "Студія",
-      subtitle: "Простір, створений для практики",
-      philosophy: "Філософія",
-      philosophyText:
-        "Balance народився з простої ідеї: дати людям місце, де можна по-справжньому відключитися від зовнішнього і зануритися в себе. Гаряча йога робить це чесно — вона не залишає простору для зайвих думок.",
     },
     teachers: {
       title: "Викладачі",
-      founder: "Засновниця студії",
-    },
-    journal: {
-      title: "Журнал",
-      subtitle: "Практика, тіло, стан",
-      readMore: "Читати",
-    },
-    contacts: {
-      title: "Контакти",
-      instagram: "Instagram",
-      booking: "Записатись",
-      address: "Адреса",
-      addressNote: "Уточнюйте адресу при записі",
-      phone: "Телефон",
-      phoneNote: "Зв'язок через Instagram Direct",
-    },
-    booking: {
-      title: "Записатись на заняття",
-      subtitle: "Оберіть зручний спосіб запису",
-      via_instagram: "Написати в Instagram",
-      name: "Ваше ім'я",
-      phone: "Телефон",
-      practice: "Практика",
-      message: "Повідомлення",
-      submit: "Надіслати заявку",
-      privacy: "Я погоджуюся з політикою конфіденційності",
-      success: "Заявку надіслано! Ми зв'яжемося з вами найближчим часом.",
-      error:
-        "Сталася помилка. Будь ласка, напишіть нам безпосередньо в Instagram.",
+      founder: "Засновниця та старший викладач",
+      bio: "Марія Миронова — сертифікований викладач йоги, авторка методики м'якої адаптації до практики в нагрітому просторі. Її класи вирізняються увагою до коректного вирівнювання, безпеки та поваги до можливостей власного тіла.",
+      credo: "«Спека вчить чесності. На коврику неможливо грати роль — залишається лише твоє справжнє дихання».",
     },
     faq: {
-      title: "Часті запитання",
+      title: "Часті питання",
       items: [
         {
-          q: "Чи потрібна підготовка для першого заняття?",
-          a: "Гаряча йога підходить для початківців. Важливо прийти відпочившим, не їсти за 2 години до заняття та взяти воду і килимок.",
+          q: "Чи підходить гаряча йога для повних новачків?",
+          a: "Так, абсолютно. Більшість наших учнів приходять без попереднього досвіду. Ви завжди можете зменшити інтенсивність, відпочити в позі дитини або випити води.",
         },
         {
-          q: "Що взяти із собою?",
-          a: "Воду, килимок для йоги (можна орендувати), рушник, зручний одяг із натуральних тканин.",
+          q: "Що потрібно взяти з собою на перше заняття?",
+          a: "Легкий зручний одяг (топ, шорти або легінси), пляшку негазованої води та змінну білизну для душу після практики. Коврики та рушники для зали ми надаємо.",
         },
         {
-          q: "Яка температура в залі?",
-          a: "Близько 38–40°C з підвищеною вологістю. Це безпечне середовище для глибокої практики.",
-        },
-        {
-          q: "Як часто потрібно займатися?",
-          a: "Рекомендуємо починати з 2–3 разів на тиждень. Регулярність важливіша за частоту — саме постійна практика дає результат.",
+          q: "Як підготуватися до практики?",
+          a: "Пийте достатньо води протягом дня до заняття. Останній прийом їжі бажано завершити за 2 години до початку практики.",
         },
         {
           q: "Чи є протипоказання?",
-          a: "При серйозних серцево-судинних захворюваннях, вагітності або інших медичних станах проконсультуйтеся з лікарем перед початком практики.",
+          a: "Гострі запальні процеси, висока температура, вагітність та серйозні серцево-судинні захворювання вимагають обов'язкової попередньої консультації лікаря.",
         },
       ],
     },
+    pricing: {
+      title: "Абонементи та відвідування",
+      subtitle:
+        "Ми пропонуємо гнучкі формати для новачків і регулярних практиків. Індивідуальні та групові формати в Одесі.",
+      askPrice: "Записатися на заняття",
+    },
+    schedule: {
+      title: "Розклад практик",
+      subtitle: "Ранкові, денні та вечірні класи гарячої йоги в Одесі.",
+    },
+    contacts: {
+      title: "Контакти та локація",
+      subtitle: "Одеса, Україна. Затишний простір тепла та усвідомленості.",
+      address: "Одеса, Україна",
+      phone: "Запис через Instagram Direct",
+      instagram: "@yoga_balance_odessa",
+      telegram: "Balance Hot Yoga",
+      booking: "Записатися в Direct",
+    },
+    booking: {
+      title: "Запис на заняття",
+      subtitle: "Залиште заявку — ми зв'яжемося з вами та забронюємо коврик у нагрітому залі.",
+      name: "Ваше ім'я",
+      contact: "Телефон або @instagram / telegram",
+      practice: "Напрямок практики",
+      time: "Зручний час",
+      message: "Коментар або побажання",
+      submit: "Забронювати місце",
+      success: "Дякуємо! Діалог відкрито в Instagram Direct студії.",
+    },
+    journal: {
+      title: "Журнал про гарячу йогу",
+      subtitle: "Статті, поради для початківців та знання про силу тепла для здоров'я.",
+      readMore: "Читати статтю",
+    },
     cta: {
-      title: "Почни практику\nсьогодні",
-      sub: "Перший крок — просто прийти.",
-      book: "Записатись",
-      instagram: "Написати в Instagram",
-    },
-    footer: {
-      rights: "© 2026 Balance Hot Yoga, Одеса",
-      privacy: "Політика конфіденційності",
-    },
-    notFound: {
-      title: "Сторінку не знайдено",
-      text: "Здається, такої сторінки не існує. Спробуйте повернутися на головну.",
-      home: "На головну",
-    },
-    privacy: {
-      title: "Політика конфіденційності",
+      title: "Відчуйте силу тепла\nта внутрішнього балансу",
+      sub: "Запишіться на своє перше заняття гарячою йогою в Одесі вже сьогодні.",
+      book: "Записатися на практику",
+      instagram: "Наш Instagram",
     },
   },
-} as const;
-
-export type Translations = (typeof translations)[Locale];
+  en: {
+    nav: {
+      practices: "Practices",
+      schedule: "Schedule",
+      pricing: "Pricing",
+      studio: "About Studio",
+      contacts: "Contacts",
+      book: "Book a Class",
+      switchLang: "Українська",
+      langName: "English",
+    },
+    hero: {
+      headline: "Warmth.\nBreath.\nBalance.",
+      sub: "The premier dedicated hot yoga studio in Odesa.\nPractice at 38–40°C for deep body opening and mental calm.",
+      ctaPractice: "Explore Classes",
+      ctaSchedule: "View Schedule",
+    },
+    about: {
+      title: "A sanctuary where your body remembers how to breathe deeply",
+      body1:
+        "Balance Studio is designed for those seeking more than conventional fitness. In our heated room, muscles soften, joints regain gentle freedom, and the mind unburdens itself from city stress.",
+      body2:
+        "Every class is a safe, mindful journey through internal dialogue, releasing tension and rediscovering inner harmony among a supportive community.",
+      quote:
+        "“We envisioned Balance not as a gym, but as a calming haven where each yoga mat becomes your personal sanctuary of warmth.”",
+      founder: "Maria Mironova, Founder of Balance Studio",
+    },
+    practices: {
+      title: "Hot Yoga: The Heart of Balance",
+      subtitle:
+        "Our signature practice thoughtfully adapted for 38–40°C heat and balanced humidity. Gentle on joints, powerful for detoxification, and revitalizing for body and mind.",
+      learnMore: "Learn More",
+      viewAll: "All Classes",
+    },
+    benefits: {
+      title: "Why Hot Yoga",
+      items: [
+        {
+          title: "Safe, Deep Flexibility",
+          body: "Heated muscles become naturally pliable within minutes, significantly reducing strain and injury risk.",
+          icon: "flame",
+        },
+        {
+          title: "Intense Detoxification",
+          body: "Purifying sweat unclogs skin pores, flushes toxins, and stimulates your lymphatic system.",
+          icon: "droplet",
+        },
+        {
+          title: "Mental Reset & Mindfulness",
+          body: "Ambient warmth naturally centers your awareness on breath, quieting digital overload and everyday noise.",
+          icon: "wind",
+        },
+        {
+          title: "Joint & Cardiovascular Health",
+          body: "Gentle aerobic training strengthens cardiovascular endurance with zero high-impact stress on spine or knees.",
+          icon: "heart",
+        },
+      ],
+    },
+    teachers: {
+      title: "Instructors",
+      founder: "Founder & Lead Teacher",
+      bio: "Maria Mironova is a certified yoga instructor and creator of our gentle thermal adaptation method. Her classes focus on precise alignment, joint safety, and honoring the authentic signals of your body.",
+      credo: "“Heat demands honesty. On the mat, there are no roles to play — only your true, present breath.”",
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      items: [
+        {
+          q: "Is hot yoga suitable for absolute beginners?",
+          a: "Yes, absolutely. Most of our students join with zero prior experience. You are always welcome to rest in child’s pose, sip water, and take it at your own natural pace.",
+        },
+        {
+          q: "What should I bring to my first class?",
+          a: "Light breathable sportswear (shorts, top, or leggings), a refillable water bottle, and fresh clothes for the shower afterwards. Studio mats and props are provided.",
+        },
+        {
+          q: "How should I prepare before coming?",
+          a: "Stay well-hydrated throughout the day. We advise enjoying your last meal around 2 hours before class begins.",
+        },
+        {
+          q: "Are there any contraindications?",
+          a: "Acute inflammation, fever, pregnancy, or severe cardiovascular conditions require prior medical consultation.",
+        },
+      ],
+    },
+    pricing: {
+      title: "Memberships & Passes",
+      subtitle:
+        "Flexible options for newcomers and committed practitioners. Group and private hot yoga sessions in Odesa.",
+      askPrice: "Book a Practice",
+    },
+    schedule: {
+      title: "Class Schedule",
+      subtitle: "Morning, afternoon, and evening hot yoga classes in Odesa.",
+    },
+    contacts: {
+      title: "Location & Contacts",
+      subtitle: "Odesa, Ukraine. A welcoming space of mindful warmth.",
+      address: "Odesa, Ukraine",
+      phone: "Direct booking via Instagram",
+      instagram: "@yoga_balance_odessa",
+      telegram: "Balance Hot Yoga",
+      booking: "Book via Direct",
+    },
+    booking: {
+      title: "Book a Practice",
+      subtitle: "Submit your details — our administrator will confirm your spot on the mat in the heated studio.",
+      name: "Your Name",
+      contact: "Phone or @instagram / telegram",
+      practice: "Class Format",
+      time: "Preferred Time",
+      message: "Notes or requests",
+      submit: "Reserve Your Spot",
+      success: "Thank you! Direct message opened in Instagram.",
+    },
+    journal: {
+      title: "Hot Yoga Journal",
+      subtitle: "Insights, beginner guides, and wisdom about the healing power of thermal practice.",
+      readMore: "Read Article",
+    },
+    cta: {
+      title: "Experience the power of warmth\nand inner balance",
+      sub: "Reserve your first hot yoga experience in Odesa today.",
+      book: "Book Your Class",
+      instagram: "Follow on Instagram",
+    },
+  },
+};

@@ -12,22 +12,19 @@ interface HeaderProps {
 }
 
 export function Header({ locale }: HeaderProps) {
-  const currentPathname = usePathname();
+  const currentPathname = usePathname() || "";
   const navigationTranslations = translations[locale].nav;
   const { openBooking } = useBooking();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const targetAlternateLocale: Locale = locale === "ru" ? "uk" : "ru";
-
   const alternateLanguageUrl = (() => {
-    if (!currentPathname) return `/${targetAlternateLocale}`;
-    const pathSegments = currentPathname.split("/").filter(Boolean);
-    if (pathSegments.length > 0 && (pathSegments[0] === "ru" || pathSegments[0] === "uk")) {
-      pathSegments[0] = targetAlternateLocale;
-      return `/${pathSegments.join("/")}`;
+    if (locale === "en") {
+      const strippedPathname = currentPathname.replace(/^\/en(?=\/|$)/, "");
+      return strippedPathname || "/";
     }
-    return `/${targetAlternateLocale}${currentPathname}`;
+    const cleanPathname = currentPathname === "/" ? "" : currentPathname;
+    return `/en${cleanPathname}`;
   })();
 
   useEffect(() => {
@@ -38,15 +35,20 @@ export function Header({ locale }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScrollActivity);
   }, []);
 
+  const routePrefix = locale === "en" ? "/en" : "";
+
   const headerNavigationLinks = [
-    { href: `/${locale}/practices`, label: navigationTranslations.practices },
-    { href: `/${locale}/schedule`, label: navigationTranslations.schedule },
-    { href: `/${locale}/pricing`, label: navigationTranslations.pricing },
-    { href: `/${locale}/studio`, label: navigationTranslations.studio },
-    { href: `/${locale}/teachers`, label: translations[locale].teachers.title },
-    { href: `/${locale}/journal`, label: translations[locale].journal.title },
-    { href: `/${locale}/contacts`, label: navigationTranslations.contacts },
+    { href: `${routePrefix}/practices`, label: navigationTranslations.practices },
+    { href: `${routePrefix}/schedule`, label: navigationTranslations.schedule },
+    { href: `${routePrefix}/pricing`, label: navigationTranslations.pricing },
+    { href: `${routePrefix}/studio`, label: navigationTranslations.studio },
+    { href: `${routePrefix}/teachers`, label: translations[locale].teachers.title },
+    { href: `${routePrefix}/journal`, label: translations[locale].journal.title },
+    { href: `${routePrefix}/contacts`, label: navigationTranslations.contacts },
   ];
+
+  const homePageUrl = locale === "en" ? "/en" : "/";
+  const studioSubtitle = locale === "uk" ? "Hot Yoga · Одеса" : "Hot Yoga · Odesa";
 
   return (
     <>
@@ -60,13 +62,13 @@ export function Header({ locale }: HeaderProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-6 lg:gap-8">
             <Link
-              href={`/${locale}`}
+              href={homePageUrl}
               className="flex items-center gap-3 transition-opacity hover:opacity-90 group flex-shrink-0"
             >
               <div className="relative w-10 h-10 md:w-11 md:h-11 rounded-full overflow-hidden border border-[#B87557]/60 shadow-md flex-shrink-0 bg-[#293A30]">
                 <img
                   src={getAssetPath("/images/brand/logo.jpg")}
-                  alt="Логотип Баланс"
+                  alt="Balance Hot Yoga"
                   width={48}
                   height={48}
                   className="w-full h-full object-cover"
@@ -77,7 +79,7 @@ export function Header({ locale }: HeaderProps) {
                   Баланс
                 </span>
                 <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-[#B87557] font-medium leading-none mt-1 whitespace-nowrap">
-                  Hot Yoga · Одесса
+                  {studioSubtitle}
                 </span>
               </div>
             </Link>
@@ -128,10 +130,10 @@ export function Header({ locale }: HeaderProps) {
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="px-3 py-1.5 rounded-full border border-white/20 hover:border-[#B87557] text-white transition-colors flex items-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
-                aria-label="Переключить меню"
+                aria-label="Toggle navigation menu"
               >
                 <span className="text-[11px] uppercase tracking-wider font-medium hidden xs:inline-block">
-                  {isMobileMenuOpen ? (locale === "ru" ? "Закрыть" : "Закрити") : (locale === "ru" ? "Меню" : "Меню")}
+                  {isMobileMenuOpen ? (locale === "uk" ? "Закрити" : "Close") : (locale === "uk" ? "Меню" : "Menu")}
                 </span>
                 <div className="w-4 flex flex-col gap-1">
                   <span
@@ -182,7 +184,7 @@ export function Header({ locale }: HeaderProps) {
               </button>
               <div className="text-center pt-2">
                 <span className="text-[11px] uppercase tracking-widest text-[#828A73]">
-                  Одесса · 38–40°C · Balance Hot Yoga
+                  {locale === "uk" ? "Одеса · 38–40°C · Balance Hot Yoga" : "Odesa · 38–40°C · Balance Hot Yoga"}
                 </span>
               </div>
             </div>

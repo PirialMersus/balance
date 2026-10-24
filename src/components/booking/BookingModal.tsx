@@ -43,7 +43,7 @@ export default function BookingModal({
     if (isOpen) {
       if (initialPracticeSlug === "first-trial") {
         setSelectedChoice("trial");
-      } else if (initialPracticeSlug === "hot-yoga-base") {
+      } else if (initialPracticeSlug === "hot-yoga-base" || initialPracticeSlug === "hot-yoga") {
         setSelectedChoice("hot-yoga");
       }
       setIsRenderedInDom(true);
@@ -81,18 +81,18 @@ export default function BookingModal({
   const choiceOptions = [
     {
       id: "trial" as PracticeChoice,
-      labelRu: "Пробное занятие",
       labelUk: "Пробне заняття",
+      labelEn: "Trial Class",
     },
     {
       id: "hot-yoga" as PracticeChoice,
-      labelRu: "Hot Yoga (38–40°C)",
       labelUk: "Hot Yoga (38–40°C)",
+      labelEn: "Hot Yoga (38–40°C)",
     },
     {
       id: "question" as PracticeChoice,
-      labelRu: "Узнать расписание",
       labelUk: "Дізнатися розклад",
+      labelEn: "Schedule & Info",
     },
   ];
 
@@ -100,12 +100,12 @@ export default function BookingModal({
     formEvent.preventDefault();
 
     const selectedOption = choiceOptions.find((item) => item.id === selectedChoice);
-    const chosenFormatName = locale === "ru" ? selectedOption?.labelRu : selectedOption?.labelUk;
+    const chosenFormatName = locale === "uk" ? selectedOption?.labelUk : selectedOption?.labelEn;
 
     const directMessagePayload =
-      locale === "ru"
-        ? `Здравствуйте! Хочу записаться в студию Баланс.\n\n• Формат: ${chosenFormatName}\n• Имя: ${guestName}\n• Контакт: ${guestContact}\n\nПодскажите, пожалуйста, свободное время?`
-        : `Вітаю! Хочу записатися до студії Баланс.\n\n• Формат: ${chosenFormatName}\n• Ім'я: ${guestName}\n• Контакт: ${guestContact}\n\nПідкажіть, будь ласка, вільний час?`;
+      locale === "uk"
+        ? `Вітаю! Хочу записатися до студії Balance.\n\n• Формат: ${chosenFormatName}\n• Ім'я: ${guestName}\n• Контакт: ${guestContact}\n\nПідкажіть, будь ласка, вільний час?`
+        : `Hello! I would like to book a hot yoga class at Balance Studio.\n\n• Format: ${chosenFormatName}\n• Name: ${guestName}\n• Contact: ${guestContact}\n\nPlease let me know the available time slots.`;
 
     const encodedInstagramPayload = encodeURIComponent(directMessagePayload);
     window.open(`${BRAND.instagram}?text=${encodedInstagramPayload}`, "_blank", "noopener,noreferrer");
@@ -136,7 +136,7 @@ export default function BookingModal({
           type="button"
           onClick={startCloseAnimationSequence}
           className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-[#E8DFD1] hover:text-white transition-all cursor-pointer"
-          aria-label={locale === "ru" ? "Закрыть" : "Закрити"}
+          aria-label={locale === "uk" ? "Закрити" : "Close"}
         >
           <svg
             width="12"
@@ -171,12 +171,12 @@ export default function BookingModal({
 
             <div className="space-y-1.5">
               <h3 className="font-serif italic text-2xl sm:text-3xl text-white">
-                {locale === "ru" ? "Заявка отправлена" : "Заявку надіслано"}
+                {locale === "uk" ? "Заявку надіслано" : "Request Sent"}
               </h3>
               <p className="text-xs sm:text-sm text-[#828A73] leading-relaxed max-w-xs mx-auto">
-                {locale === "ru"
-                  ? "Мы открыли диалог со студией в Instagram Direct. Напишите нам, и мы забронируем за вами коврик."
-                  : "Ми відкрили діалог зі студією в Instagram Direct. Напишіть нам, і ми забронюємо за вами килимок."}
+                {locale === "uk"
+                  ? "Ми відкрили діалог зі студією в Instagram Direct. Надішліть повідомлення, і ми забронюємо за вами коврик."
+                  : "We opened a direct conversation with Balance Studio on Instagram. Send your message and we will reserve your mat."}
               </p>
             </div>
 
@@ -185,28 +185,28 @@ export default function BookingModal({
               onClick={startCloseAnimationSequence}
               className="w-full py-3.5 px-6 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-widest font-medium transition-all cursor-pointer"
             >
-              {locale === "ru" ? "Понятно" : "Зрозуміло"}
+              {locale === "uk" ? "Зрозуміло" : "Got it"}
             </button>
           </div>
         ) : (
           <form onSubmit={handleFormSubmission} className="space-y-5">
             <div className="space-y-1 pr-6">
               <span className="text-[10px] uppercase tracking-widest text-[#B87557] font-semibold block">
-                Hot Yoga · Одесса · 38–40°C
+                {locale === "uk" ? "Hot Yoga · Одеса · 38–40°C" : "Hot Yoga · Odesa · 38–40°C"}
               </span>
               <h3 className="font-serif italic text-2xl sm:text-3xl text-white font-medium">
-                {locale === "ru" ? "Запись на практику" : "Запис на практику"}
+                {locale === "uk" ? "Запис на практику" : "Book a Practice"}
               </h3>
               <p className="text-xs text-[#828A73] font-light">
-                {locale === "ru"
-                  ? "Оставьте контакты — администратор свяжется с вами и подтвердит удобное время."
-                  : "Залиште контакти — адміністратор зв'яжеться з вами та підтвердить зручний час."}
+                {locale === "uk"
+                  ? "Залиште контакти — адміністратор зв'яжеться з вами та підтвердить зручний час."
+                  : "Leave your contact details — our administrator will confirm your preferred class time."}
               </p>
             </div>
 
             <div className="space-y-1.5">
               <label className="block text-[11px] uppercase tracking-wider text-[#828A73] font-medium">
-                {locale === "ru" ? "Что вас интересует" : "Що вас цікавить"}
+                {locale === "uk" ? "Що вас цікавить" : "Select Format"}
               </label>
               <div className="grid grid-cols-1 gap-1.5">
                 {choiceOptions.map((choiceOption) => {
@@ -223,7 +223,7 @@ export default function BookingModal({
                       }`}
                     >
                       <span className="font-medium">
-                        {locale === "ru" ? choiceOption.labelRu : choiceOption.labelUk}
+                        {locale === "uk" ? choiceOption.labelUk : choiceOption.labelEn}
                       </span>
                       <span
                         className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
@@ -245,7 +245,7 @@ export default function BookingModal({
                   required
                   value={guestName}
                   onChange={(inputChangeEvent) => setGuestName(inputChangeEvent.target.value)}
-                  placeholder={locale === "ru" ? "Ваше имя" : "Ваше ім'я"}
+                  placeholder={locale === "uk" ? "Ваше ім'я" : "Your Name"}
                   className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-sm text-white placeholder-[#828A73] outline-none transition-all"
                 />
               </div>
@@ -256,7 +256,7 @@ export default function BookingModal({
                   required
                   value={guestContact}
                   onChange={(inputChangeEvent) => setGuestContact(inputChangeEvent.target.value)}
-                  placeholder={locale === "ru" ? "Телефон или @instagram / telegram" : "Телефон або @instagram / telegram"}
+                  placeholder={locale === "uk" ? "Телефон або @instagram / telegram" : "Phone or @instagram / telegram"}
                   className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-sm text-white placeholder-[#828A73] outline-none transition-all"
                 />
               </div>
@@ -267,7 +267,7 @@ export default function BookingModal({
                 type="submit"
                 className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B87557] to-[#D4793A] hover:brightness-110 active:scale-[0.99] text-white font-medium text-xs uppercase tracking-widest transition-all shadow-lg shadow-[#B87557]/25 cursor-pointer flex items-center justify-center gap-2 group"
               >
-                <span>{locale === "ru" ? "Записаться на занятие" : "Записатися на заняття"}</span>
+                <span>{locale === "uk" ? "Записатися на заняття" : "Book Your Class"}</span>
                 <svg
                   width="14"
                   height="14"
@@ -284,9 +284,9 @@ export default function BookingModal({
                 </svg>
               </button>
               <p className="text-center text-[10px] text-[#828A73] mt-2 font-light">
-                {locale === "ru"
-                  ? "Без онлайн-оплаты · Ответим в течение 15 минут"
-                  : "Без онлайн-оплати · Відповімо протягом 15 хвилин"}
+                {locale === "uk"
+                  ? "Без онлайн-оплати · Відповімо протягом 15 хвилин"
+                  : "No upfront payment · Direct confirmation within 15 minutes"}
               </p>
             </div>
           </form>

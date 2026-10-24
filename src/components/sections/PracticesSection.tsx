@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { translations, Locale } from "@/lib/translations";
 import { practices } from "@/lib/practices";
 
@@ -7,14 +8,16 @@ interface PracticesSectionProps {
 
 export default function PracticesSection({ locale }: PracticesSectionProps) {
   const sectionTranslations = translations[locale].practices;
+  const routePrefix = locale === "uk" ? "" : "/en";
   const hotYogaPractice = practices.find((practice) => practice.slug === "hot-yoga");
+  const sectionBadge = locale === "uk" ? "Головний напрямок" : "Core Direction";
 
   return (
     <section className="bg-[#293A30] py-28 md:py-36">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="mb-16">
           <p className="text-[#828A73] text-xs tracking-widest uppercase mb-4 font-medium">
-            {locale === "ru" ? "Главное направление" : "Головний напрямок"}
+            {sectionBadge}
           </p>
           <h2
             className="font-serif italic text-white leading-tight"
@@ -62,18 +65,18 @@ export default function PracticesSection({ locale }: PracticesSectionProps) {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 border-t border-white/10 mt-auto">
-                <a
-                  href={`/${locale}/practices/${hotYogaPractice.slug}`}
+                <Link
+                  href={`${routePrefix}/practices/${hotYogaPractice.slug}`}
                   className="whitespace-nowrap px-7 py-3.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs font-medium tracking-widest transition-all duration-300 uppercase text-center rounded-full shadow-lg"
                 >
                   {sectionTranslations.learnMore}
-                </a>
-                <a
-                  href={`/${locale}/practices`}
+                </Link>
+                <Link
+                  href={`${routePrefix}/practices`}
                   className="whitespace-nowrap px-7 py-3.5 border border-white/30 hover:border-white text-[#F5F2E9] text-xs font-medium tracking-widest transition-all duration-300 uppercase text-center rounded-full"
                 >
                   {sectionTranslations.viewAll}
-                </a>
+                </Link>
               </div>
             </div>
           </div>

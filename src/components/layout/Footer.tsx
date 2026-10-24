@@ -8,16 +8,19 @@ interface FooterProps {
 
 export function Footer({ locale }: FooterProps) {
   const pageTranslations = translations[locale];
+  const routePrefix = locale === "en" ? "/en" : "";
 
   const primaryNavigationLinks = [
-    { href: `/${locale}/practices`, label: pageTranslations.nav.practices },
-    { href: `/${locale}/schedule`, label: pageTranslations.nav.schedule },
-    { href: `/${locale}/pricing`, label: pageTranslations.nav.pricing },
-    { href: `/${locale}/studio`, label: pageTranslations.nav.studio },
-    { href: `/${locale}/teachers`, label: pageTranslations.teachers.title },
-    { href: `/${locale}/journal`, label: pageTranslations.journal.title },
-    { href: `/${locale}/contacts`, label: pageTranslations.nav.contacts },
+    { href: `${routePrefix}/practices`, label: pageTranslations.nav.practices },
+    { href: `${routePrefix}/schedule`, label: pageTranslations.nav.schedule },
+    { href: `${routePrefix}/pricing`, label: pageTranslations.nav.pricing },
+    { href: `${routePrefix}/studio`, label: pageTranslations.nav.studio },
+    { href: `${routePrefix}/teachers`, label: pageTranslations.teachers.title },
+    { href: `${routePrefix}/journal`, label: pageTranslations.journal.title },
+    { href: `${routePrefix}/contacts`, label: pageTranslations.nav.contacts },
   ];
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#1A2019] text-[#F5F2E9] border-t border-[#828A73]/20">
@@ -28,23 +31,25 @@ export function Footer({ locale }: FooterProps) {
               {BRAND.name}
             </span>
             <p className="text-[#828A73] text-sm leading-relaxed max-w-sm">
-              {BRAND.description}
+              {locale === "uk"
+                ? "Єдина спеціалізована студія гарячої йоги в Одесі. Простір, де через тепло, практику та спільноту народжується внутрішній баланс."
+                : "The dedicated hot yoga studio in Odesa. A mindful space where warmth, intentional practice, and community nurture inner balance."}
             </p>
             <p className="text-xs text-[#B87557] font-medium tracking-wider uppercase pt-2">
-              {BRAND.city}, {BRAND.country}
+              {locale === "uk" ? "Одеса, Україна" : "Odesa, Ukraine"}
             </p>
           </div>
 
           <div className="md:col-span-4">
             <p className="text-xs uppercase tracking-widest text-[#B87557] font-semibold mb-6">
-              {locale === "ru" ? "Навигация" : "Навігація"}
+              {locale === "uk" ? "Навігація" : "Navigation"}
             </p>
             <nav className="grid grid-cols-2 gap-y-3 gap-x-6">
               {primaryNavigationLinks.map((navigationLink) => (
                 <Link
                   key={navigationLink.href}
                   href={navigationLink.href}
-                  className="text-sm text-[#828A73] hover:text-[#F5F2E9] transition-colors"
+                  className="text-xs uppercase tracking-wider text-[#F5F2E9]/80 hover:text-[#B87557] transition-colors"
                 >
                   {navigationLink.label}
                 </Link>
@@ -53,59 +58,50 @@ export function Footer({ locale }: FooterProps) {
           </div>
 
           <div className="md:col-span-3 space-y-4">
-            <p className="text-xs uppercase tracking-widest text-[#B87557] font-semibold mb-4">
-              {locale === "ru" ? "Связь и запись" : "Зв'язок та запис"}
+            <p className="text-xs uppercase tracking-widest text-[#B87557] font-semibold mb-6">
+              {locale === "uk" ? "Контакти" : "Connect"}
             </p>
-            <a
-              href={BRAND.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 text-sm text-[#F5F2E9] hover:text-[#B87557] transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
+            <div className="space-y-3 text-sm">
+              <a
+                href={BRAND.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-[#F5F2E9]/80 hover:text-[#B87557] transition-colors group"
               >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
-              <span>{BRAND.instagramHandle}</span>
-            </a>
-            <p className="text-xs text-[#828A73] leading-relaxed pt-2">
-              {locale === "ru"
-                ? "Запись на практики и консультации проводятся в Instagram Direct."
-                : "Запис на практики та консультації проводяться в Instagram Direct."}
-            </p>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-[#B87557] group-hover:scale-110 transition-transform"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                <span>{BRAND.instagramHandle}</span>
+              </a>
+              <div className="text-xs text-[#828A73] pt-2">
+                {locale === "uk"
+                  ? "Практики щодня за попереднім записом"
+                  : "Daily practices by prior appointment"}
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-[#828A73]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#828A73]">
-          <p>{pageTranslations.footer.rights}</p>
-          <div className="flex items-center gap-6">
-            <Link
-              href={`/${locale}/privacy`}
-              className="hover:text-[#F5F2E9] transition-colors"
-            >
-              {pageTranslations.footer.privacy}
-            </Link>
-            <a
-              href={BRAND.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#F5F2E9] transition-colors"
-            >
-              Instagram
-            </a>
-          </div>
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#828A73] gap-4">
+          <p>© {currentYear} Balance Hot Yoga Odesa. {locale === "uk" ? "Усі права захищені." : "All rights reserved."}</p>
+          <Link
+            href={`${routePrefix}/privacy`}
+            className="hover:text-[#F5F2E9] transition-colors underline-offset-4 hover:underline"
+          >
+            {locale === "uk" ? "Політика конфіденційності" : "Privacy Policy"}
+          </Link>
         </div>
       </div>
     </footer>

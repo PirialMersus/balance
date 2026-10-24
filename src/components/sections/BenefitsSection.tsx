@@ -6,6 +6,7 @@ interface BenefitsSectionProps {
 
 export default function BenefitsSection({ locale }: BenefitsSectionProps) {
   const sectionTranslations = translations[locale].benefits;
+  const sectionBadge = locale === "uk" ? "Ефект практики" : "Practice Benefits";
 
   return (
     <section className="bg-[#F5F2E9] py-28 md:py-36">
@@ -13,7 +14,7 @@ export default function BenefitsSection({ locale }: BenefitsSectionProps) {
         <div className="mb-20 max-w-2xl">
           <div className="w-16 h-px bg-[#B87557] mb-8" />
           <p className="text-[#828A73] text-xs uppercase tracking-widest font-medium mb-3">
-            {locale === "ru" ? "Эффект практики" : "Ефект практики"}
+            {sectionBadge}
           </p>
           <h2
             className="font-serif italic text-[#1A2019] leading-tight"

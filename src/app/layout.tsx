@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { getAssetPath } from "@/lib/brand";
+import { BookingProvider } from "@/components/booking/BookingContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://balance-odessa.com"),
-  title: "Баланс - Hot Yoga - Одесса",
-  description: "Единственная специализированная студия горячей йоги в Одессе.",
+  title: "Balance - Hot Yoga Studio - Одеса",
+  description: "Єдина спеціалізована студія гарячої йоги в Одесі. Практика при 38–40°C.",
   icons: {
     icon: [
       { url: getAssetPath("/favicon.png"), type: "image/png" },
@@ -22,8 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className="h-full">
-      <body className="min-h-full flex flex-col antialiased bg-[#F5F2E9] text-[#222923]">{children}</body>
+    <html lang="uk" className="h-full">
+      <body className="min-h-full flex flex-col antialiased bg-[#F5F2E9] text-[#222923]">
+        <BookingProvider>{children}</BookingProvider>
+      </body>
     </html>
   );
 }

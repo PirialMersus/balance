@@ -5,13 +5,19 @@ export interface SeoMeta {
   title: string;
   description: string;
   canonical: string;
-  alternateRu: string;
   alternateUk: string;
+  alternateEn: string;
   ogImage: string;
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://balance-odessa.com";
 const OG_IMAGE = `${BASE_URL}/images/og-default.jpg`;
+
+export function getLocalizedPath(locale: Locale, path: string): string {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const cleanPath = normalizedPath === "/" ? "" : normalizedPath;
+  return locale === "uk" ? (cleanPath || "/") : `/en${cleanPath}`;
+}
 
 export function buildSeoMeta(params: {
   locale: Locale;
@@ -22,25 +28,33 @@ export function buildSeoMeta(params: {
 }): SeoMeta {
   const { locale, pageTitle, pageDescription, path, ogImage } = params;
 
-  const siteName = BRAND.fullName;
+  const siteName =
+    locale === "uk"
+      ? "Баланс — Hot Yoga — Одеса"
+      : "Balance — Hot Yoga — Odesa";
+
   const title = pageTitle ? `${pageTitle} | ${siteName}` : siteName;
 
   const defaultDescriptions: Record<Locale, string> = {
-    ru: "Единственная специализированная студия горячей йоги в Одессе. Запись через Instagram.",
-    uk: "Єдина спеціалізована студія гарячої йоги в Одесі. Запис через Instagram.",
+    uk: "Єдина спеціалізована студія гарячої йоги в Одесі (38–40°C). Запис на практику через Instagram Direct.",
+    en: "The premier dedicated hot yoga studio in Odesa, Ukraine (38–40°C). Book your class via Instagram Direct.",
   };
   const description = pageDescription ?? defaultDescriptions[locale];
 
-  const canonical = `${BASE_URL}/${locale}${path}`;
-  const alternateRu = `${BASE_URL}/ru${path}`;
-  const alternateUk = `${BASE_URL}/uk${path}`;
+  const canonicalPath = getLocalizedPath(locale, path);
+  const ukPath = getLocalizedPath("uk", path);
+  const enPath = getLocalizedPath("en", path);
+
+  const canonical = `${BASE_URL}${canonicalPath === "/" ? "" : canonicalPath}`;
+  const alternateUk = `${BASE_URL}${ukPath === "/" ? "" : ukPath}`;
+  const alternateEn = `${BASE_URL}${enPath}`;
 
   return {
     title,
     description,
     canonical,
-    alternateRu,
     alternateUk,
+    alternateEn,
     ogImage: ogImage ?? OG_IMAGE,
   };
 }
@@ -49,19 +63,19 @@ export function buildJsonLd(locale: Locale) {
   return {
     "@context": "https://schema.org",
     "@type": "SportsActivityLocation",
-    name: BRAND.fullName,
+    name: locale === "uk" ? "Баланс - Hot Yoga - Одеса" : "Balance - Hot Yoga - Odesa",
     description:
-      locale === "ru"
-        ? "Единственная специализированная студия горячей йоги в Одессе (38–40°C)"
-        : "Єдина спеціалізована студія гарячої йоги в Одесі (38–40°C)",
-    url: `${BASE_URL}/${locale}`,
+      locale === "uk"
+        ? "Єдина спеціалізована студія гарячої йоги в Одесі (38–40°C)"
+        : "The dedicated hot yoga studio in Odesa (38–40°C)",
+    url: locale === "uk" ? `${BASE_URL}` : `${BASE_URL}/en`,
     sameAs: [BRAND.instagram],
     image: OG_IMAGE,
     priceRange: "$$",
     sport: "Hot Yoga",
     address: {
       "@type": "PostalAddress",
-      addressLocality: locale === "ru" ? "Одесса" : "Одеса",
+      addressLocality: locale === "uk" ? "Одеса" : "Odesa",
       addressCountry: "UA",
     },
     geo: {

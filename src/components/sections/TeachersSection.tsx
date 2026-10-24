@@ -12,6 +12,16 @@ export default function TeachersSection({ locale }: TeachersSectionProps) {
   const sectionTranslations = translations[locale].teachers;
   const { openBooking } = useBooking();
 
+  const bioText = locale === "uk"
+    ? "Засновниця та провідний інструктор Balance Hot Yoga в Одесі. Марія створила перший спеціалізований простір гарячої йоги в місті, поєднавши методику глибокого теплового прогріву, анатомічно безпечне вибудовування асан і уважне ставлення до дихання."
+    : "Founder and lead instructor at Balance Hot Yoga in Odesa. Maria created the city's first dedicated hot yoga space, blending deep radiant warmth, anatomically safe asana biomechanics, and attentive breathwork.";
+
+  const quoteText = locale === "uk"
+    ? "«Жарко. Волого. Місцями дуже непросто. Але яке ж після цього відчуття... Регулярність важливіша за інтенсивність — тіло обов'язково відповість вдячністю»."
+    : "“It's hot. It's humid. Sometimes intensely demanding. But the feeling afterwards is unmatched... Regularity always trumps intensity — your body will thank you.”";
+
+  const buttonText = locale === "uk" ? "Записатися на заняття" : "Book a class";
+
   return (
     <section className="bg-[#222923] py-28 md:py-36 text-[#F5F2E9]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -56,15 +66,11 @@ export default function TeachersSection({ locale }: TeachersSectionProps) {
             <div className="w-12 h-px bg-[#B87557]" />
 
             <p className="text-[#F5F2E9]/80 text-base md:text-lg leading-relaxed font-light">
-              {locale === "ru"
-                ? "Основательница и ведущий инструктор Balance Hot Yoga в Одессе. Мария создала первое специализированное пространство горячей йоги в городе, объединив методику глубокого теплового прогрева, анатомически безопасную отстройку асан и внимательное отношение к дыханию."
-                : "Засновниця та провідний інструктор Balance Hot Yoga в Одесі. Марія створила перший спеціалізований простір гарячої йоги в місті, поєднавши методику глибокого теплового прогріву, анатомічно безпечне вибудовування асан і уважне ставлення до дихання."}
+              {bioText}
             </p>
 
             <div className="p-6 rounded-xl bg-[#1A2019] border-l-4 border-[#B87557] text-sm md:text-base italic font-serif text-[#F5F2E9]/90">
-              {locale === "ru"
-                ? "«Жарко. Влажно. Местами очень непросто. Но какое же после этого состояние... Регулярность важнее интенсивности — тело обязательно ответит благодарностью»."
-                : "«Жарко. Волого. Місцями дуже непросто. Але яке ж після цього відчуття... Регулярність важливіша за інтенсивність — тіло обов'язково відповість вдячністю»."}
+              {quoteText}
             </div>
 
             <div className="pt-4 flex flex-wrap gap-4 items-center">
@@ -73,7 +79,7 @@ export default function TeachersSection({ locale }: TeachersSectionProps) {
                 onClick={() => openBooking("first-trial")}
                 className="px-8 py-3.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium rounded-full transition-colors shadow-lg cursor-pointer"
               >
-                {locale === "ru" ? "Записаться на занятие" : "Записатися на заняття"}
+                {buttonText}
               </button>
               {BRAND.founderInstagram && (
                 <a

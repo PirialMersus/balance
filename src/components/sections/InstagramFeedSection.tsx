@@ -6,38 +6,40 @@ interface InstagramFeedSectionProps {
 }
 
 export default function InstagramFeedSection({ locale }: InstagramFeedSectionProps) {
+  const watchOnInstagramText = locale === "uk" ? "Дивитися в Instagram" : "Follow on Instagram";
+
   const instagramPhotos = [
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_9.jpg",
-      alt: "Практика горячей йоги Balance Одесса",
+      alt: locale === "uk" ? "Практика гарячої йоги Balance Одеса" : "Balance Hot Yoga Practice Odesa",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_2.jpg",
-      alt: "Атмосфера в зале Balance",
+      alt: locale === "uk" ? "Атмосфера в залі Balance" : "Balance Studio Atmosphere",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_3.jpg",
-      alt: "Интерьер студии горячей йоги",
+      alt: locale === "uk" ? "Інтер'єр студії гарячої йоги" : "Hot Yoga Studio Interior",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_4.jpg",
-      alt: "Дыхание и концентрация на коврике",
+      alt: locale === "uk" ? "Дихання та концентрація на килимку" : "Breath and Mindfulness on Mat",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_5.jpg",
-      alt: "Моменты теплой практики",
+      alt: locale === "uk" ? "Моменти теплої практики" : "Moments of Warm Practice",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_6.jpg",
-      alt: "Люди и комьюнити студии Balance",
+      alt: locale === "uk" ? "Люди та спільнота студії Balance" : "People and Balance Community",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_7.jpg",
-      alt: "Раскрытие тела в нагретом пространстве",
+      alt: locale === "uk" ? "Розкриття тіла в нагрітому просторі" : "Body Release in Heated Room",
     },
     {
       src: "/images/instagram/2026-10-06_13-22-14_UTC_8.jpg",
-      alt: "Баланс и спокойствие после занятия",
+      alt: locale === "uk" ? "Баланс і спокій після заняття" : "Balance and Serenity Post-Class",
     },
   ];
 
@@ -63,7 +65,7 @@ export default function InstagramFeedSection({ locale }: InstagramFeedSectionPro
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-3.5 border border-white/30 hover:border-[#B87557] hover:text-[#B87557] rounded-full text-xs uppercase tracking-widest font-medium transition-all duration-300"
           >
-            <span>{locale === "ru" ? "Смотреть в Instagram" : "Дивитися в Instagram"}</span>
+            <span>{watchOnInstagramText}</span>
             <span>→</span>
           </a>
         </div>

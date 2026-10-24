@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { translations, Locale } from "@/lib/translations";
 import AtmosphericCanvas from "@/components/ambient/AtmosphericCanvas";
 import { getAssetPath } from "@/lib/brand";
@@ -8,13 +9,20 @@ interface HeroSectionProps {
 
 export default function HeroSection({ locale }: HeroSectionProps) {
   const heroTranslations = translations[locale].hero;
+  const routePrefix = locale === "uk" ? "" : "/en";
+  const badgeText = locale === "uk"
+    ? "Єдина студія гарячої йоги в Одесі"
+    : "The only dedicated hot yoga studio in Odesa";
+  const heroAltText = locale === "uk"
+    ? "Студія гарячої йоги Balance Одеса"
+    : "Balance Hot Yoga Studio Odesa";
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#1A2019]">
       <div className="absolute inset-0 z-0">
         <img
           src={getAssetPath("/images/hero-bg.webp")}
-          alt="Студия горячей йоги Balance Одесса"
+          alt={heroAltText}
           width={1920}
           height={1080}
           loading="eager"
@@ -62,7 +70,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-8">
           <span className="w-2 h-2 rounded-full bg-[#D4793A] animate-pulse" />
           <span className="text-xs uppercase tracking-widest text-[#F5F2E9] font-medium">
-            {locale === "ru" ? "Единственная студия горячей йоги в Одессе" : "Єдина студія гарячої йоги в Одесі"}
+            {badgeText}
           </span>
         </div>
 
@@ -85,24 +93,19 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-5 items-center">
-          <a
-            href={`/${locale}/practices`}
+          <Link
+            href={`${routePrefix}/practices`}
             className="w-full sm:w-auto px-9 py-4 bg-[#B87557] hover:bg-[#D4793A] text-white font-medium tracking-widest transition-all duration-300 text-xs uppercase shadow-xl hover:shadow-2xl text-center rounded-full"
           >
             {heroTranslations.ctaPractice}
-          </a>
-          <a
-            href={`/${locale}/schedule`}
+          </Link>
+          <Link
+            href={`${routePrefix}/schedule`}
             className="w-full sm:w-auto px-9 py-4 border border-white/80 hover:bg-white/10 text-white font-medium tracking-widest transition-all duration-300 text-xs uppercase text-center rounded-full backdrop-blur-sm"
           >
             {heroTranslations.ctaSchedule}
-          </a>
+          </Link>
         </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none">
-        <span className="text-white/60 text-[10px] tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent animate-pulse" />
       </div>
     </section>
   );
