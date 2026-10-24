@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BookingProvider } from "@/components/booking/BookingContext";
 import BookingModalWrapper from "@/components/booking/BookingModalWrapper";
+import { getAssetPath } from "@/lib/brand";
 
 const supportedLocales: Locale[] = ["ru", "uk"];
 
@@ -31,9 +32,12 @@ export async function generateMetadata({
     title: "Баланс - Hot Yoga - Одесса",
     description: seo.description,
     icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-      apple: "/favicon.ico",
+      icon: [
+        { url: getAssetPath("/favicon.png"), type: "image/png" },
+        { url: getAssetPath("/favicon.ico") },
+      ],
+      shortcut: getAssetPath("/favicon.png"),
+      apple: getAssetPath("/apple-touch-icon.png"),
     },
     alternates: {
       canonical: seo.canonical,

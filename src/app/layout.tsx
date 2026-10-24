@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getAssetPath } from "@/lib/brand";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -6,9 +7,12 @@ export const metadata: Metadata = {
   title: "Баланс - Hot Yoga - Одесса",
   description: "Единственная специализированная студия горячей йоги в Одессе.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: [
+      { url: getAssetPath("/favicon.png"), type: "image/png" },
+      { url: getAssetPath("/favicon.ico") },
+    ],
+    shortcut: getAssetPath("/favicon.png"),
+    apple: getAssetPath("/apple-touch-icon.png"),
   },
 };
 

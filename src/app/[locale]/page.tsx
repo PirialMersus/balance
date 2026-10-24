@@ -31,11 +31,6 @@ export async function generateMetadata({
   return {
     title: "Баланс - Hot Yoga - Одесса",
     description: seo.description,
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-      apple: "/favicon.ico",
-    },
     alternates: {
       canonical: seo.canonical,
       languages: {
