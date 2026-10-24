@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#293A30"/>
+  <circle cx="400" cy="300" r="150" fill="none" stroke="#B87557" stroke-width="1" opacity="0.3"/>
+  <circle cx="400" cy="300" r="200" fill="none" stroke="#828A73" stroke-width="0.5" opacity="0.2"/>
+  <text x="400" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#F5F2E9" opacity="0.4">Горячая йога</text>
+  <text x="400" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#828A73" opacity="0.4">Balance · Одесса</text>
+</svg>

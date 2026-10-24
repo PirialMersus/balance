@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#222923"/>
+  <rect x="20" y="20" width="760" height="560" rx="2" fill="#1A2019"/>
+  <rect x="100" y="150" width="600" height="4" rx="2" fill="#293A30"/>
+  <rect x="100" y="200" width="400" height="4" rx="2" fill="#293A30"/>
+  <rect x="100" y="250" width="500" height="250" rx="2" fill="#293A30"/>
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#828A73" opacity="0.5">Зал студии Balance</text>
+</svg>

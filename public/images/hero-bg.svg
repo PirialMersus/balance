@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#1A2019"/>
+  <rect x="0" y="0" width="1920" height="1080" fill="url(#grad)"/>
+  <defs>
+    <radialGradient id="grad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#293A30;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#1A2019;stop-opacity:1"/>
+    </radialGradient>
+  </defs>
+  <text x="960" y="500" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#F5F2E9" opacity="0.3">Balance</text>
+  <text x="960" y="580" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#B87557" opacity="0.4">Hot Yoga · Одесса</text>
+  <line x1="800" y1="540" x2="1120" y2="540" stroke="#B87557" stroke-width="1" opacity="0.3"/>
+</svg>

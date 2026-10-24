@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#222923"/>
+  <circle cx="300" cy="250" r="100" fill="#293A30"/>
+  <circle cx="300" cy="250" r="95" fill="#3A4A3A"/>
+  <text x="300" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#F5F2E9" opacity="0.6">Мария Миронова</text>
+  <text x="300" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#828A73" opacity="0.5">Основательница · Balance</text>
+</svg>

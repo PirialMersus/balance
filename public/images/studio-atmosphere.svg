@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#F5F2E9"/>
+  <rect x="50" y="50" width="700" height="500" rx="4" fill="#E8E4D9"/>
+  <text x="400" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#293A30" opacity="0.5">Атмосфера студии</text>
+  <text x="400" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#828A73" opacity="0.5">Balance · Одесса</text>
+</svg>
