@@ -1,4 +1,5 @@
 import { Locale } from "./translations";
+import { getAssetPath } from "./brand";
 
 export interface Practice {
   slug: string;
@@ -36,7 +37,7 @@ export const practices: Practice[] = [
       uk: "Усі рівні",
     },
     duration: "60–90 мин",
-    image: "/images/hot-yoga-class.jpg",
+    image: getAssetPath("/images/hot-yoga-class.jpg"),
     benefits: {
       ru: [
         "Глубокая гибкость",

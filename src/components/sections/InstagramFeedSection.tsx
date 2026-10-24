@@ -1,5 +1,5 @@
 import { Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 
 interface InstagramFeedSectionProps {
   locale: Locale;
@@ -78,7 +78,7 @@ export default function InstagramFeedSection({ locale }: InstagramFeedSectionPro
               className="group relative aspect-square overflow-hidden rounded-2xl bg-[#222923] shadow-md hover:shadow-2xl transition-all duration-500"
             >
               <img
-                src={photoItem.src}
+                src={getAssetPath(photoItem.src)}
                 alt={photoItem.alt}
                 width={600}
                 height={600}

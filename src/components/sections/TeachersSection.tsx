@@ -1,7 +1,7 @@
 "use client";
 
 import { translations, Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 import { useBooking } from "@/components/booking/BookingContext";
 
 interface TeachersSectionProps {
@@ -26,7 +26,7 @@ export default function TeachersSection({ locale }: TeachersSectionProps) {
           <div className="lg:col-span-5 relative">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-[3/4] bg-[#1A2019]">
               <img
-                src="/images/teacher-maria.jpg"
+                src={getAssetPath("/images/teacher-maria.jpg")}
                 alt={BRAND.founderName}
                 width={800}
                 height={1067}

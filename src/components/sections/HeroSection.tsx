@@ -1,5 +1,6 @@
 import { translations, Locale } from "@/lib/translations";
 import AtmosphericCanvas from "@/components/ambient/AtmosphericCanvas";
+import { getAssetPath } from "@/lib/brand";
 
 interface HeroSectionProps {
   locale: Locale;
@@ -12,7 +13,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#1A2019]">
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-bg.webp"
+          src={getAssetPath("/images/hero-bg.webp")}
           alt="Студия горячей йоги Balance Одесса"
           width={1920}
           height={1080}

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type Locale, translations } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 import { useBooking } from "@/components/booking/BookingContext";
 
 interface HeaderProps {
@@ -65,7 +65,7 @@ export function Header({ locale }: HeaderProps) {
             >
               <div className="relative w-10 h-10 md:w-11 md:h-11 rounded-full overflow-hidden border border-[#B87557]/60 shadow-md flex-shrink-0 bg-[#293A30]">
                 <img
-                  src="/images/brand/logo.jpg"
+                  src={getAssetPath("/images/brand/logo.jpg")}
                   alt="Логотип Баланс"
                   width={48}
                   height={48}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { translations, type Locale } from "@/lib/translations";
-import { BRAND, COLORS } from "@/lib/brand";
+import { BRAND, COLORS, getAssetPath } from "@/lib/brand";
 import { buildSeoMeta } from "@/lib/seo";
 import { practices } from "@/lib/practices";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
@@ -51,7 +51,7 @@ export default async function PracticesPage({
       >
         <div className="relative h-[70vh] min-h-[480px]">
           <img
-            src="/images/hot-yoga-class.jpg"
+            src={getAssetPath("/images/hot-yoga-class.jpg")}
             alt={hotYoga.name[resolvedLocale]}
             loading="lazy"
             decoding="async"

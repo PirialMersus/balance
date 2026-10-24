@@ -1,4 +1,5 @@
 import { Locale } from "@/lib/translations";
+import { getAssetPath } from "@/lib/brand";
 
 interface StudioGallerySectionProps {
   locale: Locale;
@@ -33,7 +34,7 @@ export default function StudioGallerySection({ locale }: StudioGallerySectionPro
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
           <div className="md:col-span-7 relative overflow-hidden rounded-2xl shadow-2xl bg-[#1A2019] min-h-[420px] md:min-h-[520px] group">
             <img
-              src="/images/studio-interior-01.webp"
+              src={getAssetPath("/images/studio-interior-01.webp")}
               alt="Зал горячей йоги Balance"
               width={1200}
               height={800}
@@ -57,7 +58,7 @@ export default function StudioGallerySection({ locale }: StudioGallerySectionPro
           <div className="md:col-span-5 flex flex-col gap-8">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-[#1A2019] min-h-[260px] flex-1 group">
               <img
-                src="/images/studio-atmosphere.webp"
+                src={getAssetPath("/images/studio-atmosphere.webp")}
                 alt="Атмосфера студии"
                 width={800}
                 height={600}

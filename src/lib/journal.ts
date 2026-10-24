@@ -1,4 +1,5 @@
 import { Locale } from "./translations";
+import { getAssetPath } from "./brand";
 
 export interface JournalArticle {
   slug: string;
@@ -68,7 +69,7 @@ export const journalArticles: JournalArticle[] = [
     },
     publishedAt: "2026-10-20",
     readingTime: "5 мин",
-    image: "/images/journal-hot-yoga-intro.jpg",
+    image: getAssetPath("/images/journal-hot-yoga-intro.jpg"),
     tags: {
       ru: ["горячая йога", "начинающим", "практика"],
       uk: ["гаряча йога", "початківцям", "практика"],
@@ -132,7 +133,7 @@ export const journalArticles: JournalArticle[] = [
     },
     publishedAt: "2026-10-15",
     readingTime: "4 мин",
-    image: "/images/journal-first-class.jpg",
+    image: getAssetPath("/images/journal-first-class.jpg"),
     tags: {
       ru: ["начинающим", "советы", "первое занятие"],
       uk: ["початківцям", "поради", "перше заняття"],

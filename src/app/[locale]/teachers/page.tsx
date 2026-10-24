@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { translations, type Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 import { buildSeoMeta } from "@/lib/seo";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 
@@ -75,7 +75,7 @@ export default async function TeachersPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5 relative">
               <img
-                src="/images/teacher-maria.webp"
+                src={getAssetPath("/images/teacher-maria.webp")}
                 alt={BRAND.founderName}
                 width={600}
                 height={800}

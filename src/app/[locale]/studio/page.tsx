@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { translations, type Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 import { buildSeoMeta } from "@/lib/seo";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 
@@ -89,7 +89,7 @@ export default async function StudioPage({
 
           <div className="relative">
             <img
-              src="/images/studio-atmosphere.webp"
+              src={getAssetPath("/images/studio-atmosphere.webp")}
               alt="Атмосфера Balance Hot Yoga"
               width={800}
               height={600}

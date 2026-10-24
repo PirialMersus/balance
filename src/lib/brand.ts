@@ -28,3 +28,9 @@ export const COLORS = {
   hotAmber: "#D4793A",
   deepNight: "#1A2019",
 } as const;
+
+export function getAssetPath(filePath: string): string {
+  const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const normalizedFilePath = filePath.startsWith("/") ? filePath : `/${filePath}`;
+  return `${publicBasePath}${normalizedFilePath}`;
+}

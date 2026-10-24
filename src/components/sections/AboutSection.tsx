@@ -1,4 +1,5 @@
 import { translations, Locale } from "@/lib/translations";
+import { getAssetPath } from "@/lib/brand";
 
 interface AboutSectionProps {
   locale: Locale;
@@ -52,7 +53,7 @@ export default function AboutSection({ locale }: AboutSectionProps) {
           <div className="lg:col-span-5 order-1 lg:order-2 relative">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/5] bg-[#1A2019]">
               <img
-                src="/images/studio-atmosphere.jpg"
+                src={getAssetPath("/images/studio-atmosphere.jpg")}
                 alt="Атмосфера студии Balance"
                 width={800}
                 height={1000}
