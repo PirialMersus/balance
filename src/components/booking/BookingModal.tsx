@@ -213,7 +213,7 @@ export default function BookingModal({
         <button
           type="button"
           onClick={startCloseAnimationSequence}
-          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-[#E8DFD1] hover:text-white transition-all cursor-pointer"
+          className="absolute top-4 right-4 z-20 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-[#E8DFD1] hover:text-white transition-all cursor-pointer"
           aria-label={locale === "en" ? "Close" : (locale === "ru" ? "Закрыть" : "Закрити")}
         >
           <svg
@@ -224,9 +224,10 @@ export default function BookingModal({
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
+            className="pointer-events-none select-none"
           >
             <line x1="1" y1="1" x2="13" y2="13" />
-            <line x1="1" y1="1" x2="13" y2="13" />
+            <line x1="13" y1="1" x2="1" y2="13" />
           </svg>
         </button>
 
