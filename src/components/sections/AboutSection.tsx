@@ -56,7 +56,7 @@ export default function AboutSection({ locale }: AboutSectionProps) {
           <div className="lg:col-span-5 order-1 lg:order-2 relative">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/5] bg-[#1A2019]">
               <img
-                src={getAssetPath("/images/studio-atmosphere.jpg")}
+                src={getAssetPath("/images/studio-atmosphere.webp")}
                 alt={imageAlt}
                 width={800}
                 height={1000}

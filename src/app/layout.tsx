@@ -23,8 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="uk" className="h-full">
-      <body className="min-h-full flex flex-col antialiased bg-[#F5F2E9] text-[#222923]">
+    <html lang="uk" className="h-full" suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col antialiased bg-[#F5F2E9] text-[#222923]"
+      >
         <BookingProvider>{children}</BookingProvider>
       </body>
     </html>

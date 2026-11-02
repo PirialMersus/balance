@@ -6,40 +6,85 @@ interface InstagramFeedSectionProps {
 }
 
 export default function InstagramFeedSection({ locale }: InstagramFeedSectionProps) {
-  const watchOnInstagramText = locale === "uk" ? "Дивитися в Instagram" : "Follow on Instagram";
+  const watchOnInstagramText =
+    locale === "uk"
+      ? "Дивитися в Instagram"
+      : locale === "ru"
+      ? "Смотреть в Instagram"
+      : "Follow on Instagram";
 
   const instagramPhotos = [
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_9.jpg",
-      alt: locale === "uk" ? "Практика гарячої йоги Balance Одеса" : "Balance Hot Yoga Practice Odesa",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_9.webp",
+      alt:
+        locale === "uk"
+          ? "Практика гарячої йоги Balance Одеса"
+          : locale === "ru"
+          ? "Практика горячей йоги Balance Одесса"
+          : "Balance Hot Yoga Practice Odesa",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_2.jpg",
-      alt: locale === "uk" ? "Атмосфера в залі Balance" : "Balance Studio Atmosphere",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_2.webp",
+      alt:
+        locale === "uk"
+          ? "Атмосфера в залі Balance"
+          : locale === "ru"
+          ? "Атмосфера в зале Balance"
+          : "Balance Studio Atmosphere",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_3.jpg",
-      alt: locale === "uk" ? "Інтер'єр студії гарячої йоги" : "Hot Yoga Studio Interior",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_3.webp",
+      alt:
+        locale === "uk"
+          ? "Інтер'єр студії гарячої йоги"
+          : locale === "ru"
+          ? "Интерьер студии горячей йоги"
+          : "Hot Yoga Studio Interior",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_4.jpg",
-      alt: locale === "uk" ? "Дихання та концентрація на килимку" : "Breath and Mindfulness on Mat",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_4.webp",
+      alt:
+        locale === "uk"
+          ? "Дихання та концентрація на килимку"
+          : locale === "ru"
+          ? "Дыхание и концентрация на коврике"
+          : "Breath and Mindfulness on Mat",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_5.jpg",
-      alt: locale === "uk" ? "Моменти теплої практики" : "Moments of Warm Practice",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_5.webp",
+      alt:
+        locale === "uk"
+          ? "Моменти теплої практики"
+          : locale === "ru"
+          ? "Моменты теплой практики"
+          : "Moments of Warm Practice",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_6.jpg",
-      alt: locale === "uk" ? "Люди та спільнота студії Balance" : "People and Balance Community",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_6.webp",
+      alt:
+        locale === "uk"
+          ? "Люди та спільнота студії Balance"
+          : locale === "ru"
+          ? "Люди и сообщество студии Balance"
+          : "People and Balance Community",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_7.jpg",
-      alt: locale === "uk" ? "Розкриття тіла в нагрітому просторі" : "Body Release in Heated Room",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_7.webp",
+      alt:
+        locale === "uk"
+          ? "Розкриття тіла в нагрітому просторі"
+          : locale === "ru"
+          ? "Раскрытие тела в нагретом пространстве"
+          : "Body Release in Heated Room",
     },
     {
-      src: "/images/instagram/2026-10-06_13-22-14_UTC_8.jpg",
-      alt: locale === "uk" ? "Баланс і спокій після заняття" : "Balance and Serenity Post-Class",
+      src: "/images/instagram/2026-10-06_13-22-14_UTC_8.webp",
+      alt:
+        locale === "uk"
+          ? "Баланс і спокій після заняття"
+          : locale === "ru"
+          ? "Баланс и спокойствие после занятия"
+          : "Balance and Serenity Post-Class",
     },
   ];
 

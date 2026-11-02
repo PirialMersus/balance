@@ -42,7 +42,7 @@ export const practices: Practice[] = [
       ru: "Все уровни",
     },
     duration: "60–90 хв",
-    image: getAssetPath("/images/hot-yoga-class.jpg"),
+    image: getAssetPath("/images/hot-yoga-class.webp"),
     benefits: {
       uk: [
         "Глибока та безпечна гнучкість",

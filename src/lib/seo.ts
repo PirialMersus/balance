@@ -12,7 +12,7 @@ export interface SeoMeta {
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://balance-odessa.com";
-const OG_IMAGE = `${BASE_URL}/images/og-default.jpg`;
+const OG_IMAGE = `${BASE_URL}/images/og-default.webp`;
 
 export function getLocalizedPath(locale: Locale, path: string): string {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;

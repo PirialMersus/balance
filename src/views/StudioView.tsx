@@ -106,8 +106,8 @@ export function StudioView({ locale }: { locale: Locale }) {
 
           <div className="relative">
             <img
-              src={getAssetPath("/images/studio-atmosphere.webp")}
-              alt="Balance Hot Yoga Atmosphere"
+              src={getAssetPath("/images/balance-exterior.webp")}
+              alt="Balance Hot Yoga Exterior"
               width={800}
               height={600}
               loading="lazy"

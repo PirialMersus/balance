@@ -17,7 +17,7 @@ export function PracticesView({ locale }: { locale: Locale }) {
       >
         <div className="relative h-[70vh] min-h-[480px]">
           <img
-            src={getAssetPath("/images/hot-yoga-class.jpg")}
+            src={getAssetPath("/images/hot-yoga-class.webp")}
             alt={hotYoga.name[locale]}
             loading="lazy"
             decoding="async"

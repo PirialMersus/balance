@@ -36,7 +36,7 @@ export default function TeachersSection({ locale }: TeachersSectionProps) {
           <div className="lg:col-span-5 relative">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-[3/4] bg-[#1A2019]">
               <img
-                src={getAssetPath("/images/teacher-maria.jpg")}
+                src={getAssetPath("/images/teacher-maria.webp")}
                 alt={BRAND.founderName}
                 width={800}
                 height={1067}

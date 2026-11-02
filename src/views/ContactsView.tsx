@@ -1,20 +1,22 @@
 import { translations, type Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 
 export function ContactsView({ locale }: { locale: Locale }) {
   const currentTranslations = translations[locale];
 
   const heroDescription = locale === "en"
-    ? "We are in touch every single day. All inquiries, class reservations, and personalized consultations happen directly via our Instagram."
+    ? "We are in touch every single day. Reserve your mat through our online booking or follow us on Instagram."
     : (locale === "ru"
-      ? "Мы на связи каждый день. Все вопросы, бронирование мест и индивидуальные консультации проходят напрямую через наш Instagram."
-      : "Ми на зв'язку щодня. Усі питання, бронювання місць та індивідуальні консультації проходять безпосередньо через наш Instagram.");
+      ? "Мы на связи каждый день. Забронируйте коврик онлайн на сайте или подписывайтесь на наш Instagram."
+      : "Ми на зв'язку щодня. Забронюйте килимок онлайн на сайті або підписуйтесь на наш Instagram.");
 
   const channelDescription = locale === "en"
-    ? "The primary and fastest channel of communication. Send us a message, and we will reply within minutes."
+    ? "Follow our daily schedule, updates, and studio atmosphere on Instagram."
     : (locale === "ru"
-      ? "Основной и самый быстрый канал связи. Напишите нам сообщение, и мы ответим в течение нескольких минут."
-      : "Основний і найшвидший канал зв'язку. Напишіть нам повідомлення, і ми відповімо протягом декількох хвилин.");
+      ? "Следите за ежедневным расписанием, новостями и атмосферой студии в Instagram."
+      : "Слідкуйте за щоденним розкладом, новинами та атмосферою студії в Instagram.");
+
+  const openInstagramButtonLabel = locale === "en" ? "Open Instagram" : (locale === "ru" ? "Открыть Instagram" : "Відкрити Instagram");
 
   const hoursLabel = locale === "en" ? "Studio Hours" : (locale === "ru" ? "Часы работы" : "Години роботи");
   const hoursText = locale === "en" ? "Daily: 08:30 – 21:30" : (locale === "ru" ? "Ежедневно: 08:30 – 21:30" : "Щодня: 08:30 – 21:30");
@@ -29,11 +31,16 @@ export function ContactsView({ locale }: { locale: Locale }) {
 
   const addressText = locale === "en" ? BRAND.addressEn : (locale === "ru" ? BRAND.addressRu : BRAND.address);
   const openInMapsText = locale === "en" ? "Open in Google Maps" : (locale === "ru" ? "Открыть на картах Google" : "Відкрити на картах Google");
+  const directionsText = locale === "en" ? "Get Directions" : (locale === "ru" ? "Проложить маршрут" : "Прокласти маршрут");
+  const mapSectionBadge = locale === "en" ? "Interactive Map" : (locale === "ru" ? "Интерактивная карта" : "Інтерактивна карта");
+  const mapSectionTitle = locale === "en" ? "How to Find Us" : (locale === "ru" ? "Как нас найти" : "Як нас знайти");
   const mapHintText = locale === "en"
     ? "Odisey Complex, convenient entrance from Liustdorfska Road, guest parking available."
     : (locale === "ru"
       ? "ЖК «Одиссей», удобный подъезд с Люстдорфской дороги, гостевой паркинг возле комплекса."
       : "ЖК «Одісей», зручний під'їзд з Люстдорфської дороги, гостьовий паркінг біля комплексу.");
+
+  const mapIframeSourceUrl = `https://maps.google.com/maps?q=${encodeURIComponent("Одеса, Люстдорфська дорога, 55К")}&hl=${locale}&z=16&output=embed`;
 
   const city = locale === "en" ? BRAND.cityEn : (locale === "ru" ? BRAND.cityRu : BRAND.city);
 
@@ -93,7 +100,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
           <div className="lg:col-span-5 space-y-8">
             <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm rounded-2xl">
               <span className="text-xs uppercase tracking-widest text-[#B87557] font-semibold block mb-2">
-                Instagram Direct
+                Instagram
               </span>
               <h2 className="font-serif text-2xl text-[#1A2019] mb-3">
                 {BRAND.instagramHandle}
@@ -107,7 +114,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center min-h-[48px] w-full py-4 px-6 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium text-center transition-colors rounded-full shadow-md"
               >
-                {currentTranslations.contacts.booking}
+                {openInstagramButtonLabel}
               </a>
             </div>
 
@@ -145,8 +152,33 @@ export function ContactsView({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 mb-8 rounded-2xl shadow-lg border-l-4 border-[#B87557]">
+          <div className="lg:col-span-7 space-y-8">
+            <div className="relative overflow-hidden rounded-2xl border border-[#293A30]/10 shadow-lg bg-[#1A2019] aspect-[16/10] sm:aspect-[16/9]">
+              <img
+                src={getAssetPath("/images/balance-exterior.webp")}
+                alt={locale === "en" ? "Balance Hot Yoga Studio Entrance" : (locale === "ru" ? "Вход в студию Balance Hot Yoga" : "Вхід до студії Balance Hot Yoga")}
+                width={1200}
+                height={800}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-[#1A2019]/85 backdrop-blur-md p-4 rounded-xl border border-white/10 flex items-center justify-between text-xs text-[#F5F2E9]">
+                <div>
+                  <span className="text-[#B87557] font-semibold block uppercase tracking-wider text-[10px]">
+                    {locale === "en" ? "Studio Entrance" : (locale === "ru" ? "Фасад и вход" : "Фасад та вхід")}
+                  </span>
+                  <span className="font-medium text-sm font-serif italic">
+                    {locale === "en" ? "55K Liustdorfska Road" : (locale === "ru" ? "Люстдорфская дорога, 55К" : "Люстдорфська дорога, 55К")}
+                  </span>
+                </div>
+                <span className="text-[11px] text-[#EAE5D9]/80 hidden sm:inline-block">
+                  {locale === "en" ? "Odisey Complex" : (locale === "ru" ? "ЖК «Одиссей»" : "ЖК «Одісей»")}
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 rounded-2xl shadow-lg border-l-4 border-[#B87557]">
               <h2 className="font-serif italic text-2xl md:text-3xl mb-4">
                 {BRAND.fullName}
               </h2>
@@ -186,6 +218,41 @@ export function ContactsView({ locale }: { locale: Locale }) {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-white border border-[#293A30]/10 rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div>
+              <span className="text-xs uppercase tracking-widest text-[#B87557] font-semibold block mb-2">
+                {mapSectionBadge}
+              </span>
+              <h2 className="font-serif italic text-2xl sm:text-3xl text-[#1A2019]">
+                {mapSectionTitle}
+              </h2>
+            </div>
+            <a
+              href={BRAND.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 self-start md:self-auto px-6 py-3 rounded-full bg-[#293A30] hover:bg-[#1A2019] text-white text-xs uppercase tracking-wider font-medium transition-colors shadow-sm"
+            >
+              <span>{directionsText}</span>
+              <span>↗</span>
+            </a>
+          </div>
+          <div className="relative w-full h-[380px] sm:h-[460px] rounded-2xl overflow-hidden border border-[#293A30]/10 shadow-inner bg-[#EAE5D9]">
+            <iframe
+              title="Google Maps Location"
+              src={mapIframeSourceUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full"
+            />
           </div>
         </div>
       </div>

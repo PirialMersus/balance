@@ -17,7 +17,7 @@ export const BRAND = {
   countryEn: "Ukraine",
   countryRu: "Украина",
   bookingUrl: "https://www.instagram.com/yoga_balance_odessa/",
-  bookingLabel: "Написати в Instagram",
+  bookingLabel: "Записатися онлайн",
   email: null as string | null,
   phone: null as string | null,
   address: "Одеса, Люстдорфська дорога, 55К (ЖК «Одісей»)",

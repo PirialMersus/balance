@@ -8,19 +8,53 @@ interface FooterProps {
 
 export function Footer({ locale }: FooterProps) {
   const pageTranslations = translations[locale];
-  const routePrefix = locale === "en" ? "/en" : "";
+  const routePrefix = locale === "uk" ? "" : `/${locale}`;
 
   const primaryNavigationLinks = [
     { href: `${routePrefix}/practices`, label: pageTranslations.nav.practices },
     { href: `${routePrefix}/schedule`, label: pageTranslations.nav.schedule },
     { href: `${routePrefix}/pricing`, label: pageTranslations.nav.pricing },
     { href: `${routePrefix}/studio`, label: pageTranslations.nav.studio },
-    { href: `${routePrefix}/teachers`, label: locale === "uk" ? "Команда" : "Team" },
-    { href: `${routePrefix}/journal`, label: locale === "uk" ? "Журнал" : "Journal" },
+    { href: `${routePrefix}/teachers`, label: locale === "en" ? "Team" : (locale === "ru" ? "Команда" : "Команда") },
+    { href: `${routePrefix}/journal`, label: locale === "en" ? "Journal" : (locale === "ru" ? "Журнал" : "Журнал") },
     { href: `${routePrefix}/contacts`, label: pageTranslations.nav.contacts },
   ];
 
   const currentYear = new Date().getFullYear();
+
+  const brandDescription = locale === "en"
+    ? "The dedicated hot yoga studio in Odesa. A mindful space where warmth, intentional practice, and community nurture inner balance."
+    : (locale === "ru"
+      ? "Единственная специализированная студия горячей йоги в Одессе. Пространство, где через тепло, практику и сообщество рождается внутренний баланс."
+      : "Єдина спеціалізована студія гарячої йоги в Одесі. Простір, де через тепло, практику та спільноту народжується внутрішній баланс.");
+
+  const brandAddress = locale === "en"
+    ? "Odesa, 55K Liustdorfska Road (Odisey Complex)"
+    : (locale === "ru"
+      ? "Одесса, Люстдорфская дорога, 55К (ЖК «Одиссей»)"
+      : "Одеса, Люстдорфська дорога, 55К (ЖК «Одісей»)");
+
+  const navigationTitle = locale === "en"
+    ? "Navigation"
+    : (locale === "ru" ? "Навигация" : "Навігація");
+
+  const connectTitle = locale === "en"
+    ? "Connect"
+    : (locale === "ru" ? "Контакты" : "Контакти");
+
+  const appointmentNotice = locale === "en"
+    ? "Daily practices by prior appointment"
+    : (locale === "ru"
+      ? "Практики ежедневно по предварительной записи"
+      : "Практики щодня за попереднім записом");
+
+  const rightsReservedText = locale === "en"
+    ? "All rights reserved."
+    : (locale === "ru" ? "Все права защищены." : "Усі права захищені.");
+
+  const privacyPolicyLabel = locale === "en"
+    ? "Privacy Policy"
+    : (locale === "ru" ? "Политика конфиденциальности" : "Політика конфіденційності");
 
   return (
     <footer className="bg-[#1A2019] text-[#F5F2E9] border-t border-[#828A73]/20">
@@ -31,18 +65,16 @@ export function Footer({ locale }: FooterProps) {
               {BRAND.name}
             </span>
             <p className="text-[#828A73] text-sm leading-relaxed max-w-sm">
-              {locale === "uk"
-                ? "Єдина спеціалізована студія гарячої йоги в Одесі. Простір, де через тепло, практику та спільноту народжується внутрішній баланс."
-                : "The dedicated hot yoga studio in Odesa. A mindful space where warmth, intentional practice, and community nurture inner balance."}
+              {brandDescription}
             </p>
             <p className="text-xs text-[#B87557] font-medium tracking-wider uppercase pt-2">
-              {locale === "uk" ? "Одеса, Люстдорфська дорога, 55К (ЖК «Одісей»)" : "Odesa, 55K Liustdorfska Road (Odisey Complex)"}
+              {brandAddress}
             </p>
           </div>
 
           <div className="md:col-span-4">
             <p className="text-xs uppercase tracking-widest text-[#B87557] font-semibold mb-6">
-              {locale === "uk" ? "Навігація" : "Navigation"}
+              {navigationTitle}
             </p>
             <nav className="grid grid-cols-2 gap-y-3 gap-x-6">
               {primaryNavigationLinks.map((navigationLink) => (
@@ -59,7 +91,7 @@ export function Footer({ locale }: FooterProps) {
 
           <div className="md:col-span-3 space-y-4">
             <p className="text-xs uppercase tracking-widest text-[#B87557] font-semibold mb-6">
-              {locale === "uk" ? "Контакти" : "Connect"}
+              {connectTitle}
             </p>
             <div className="space-y-3 text-sm">
               <a
@@ -86,21 +118,19 @@ export function Footer({ locale }: FooterProps) {
                 <span>{BRAND.instagramHandle}</span>
               </a>
               <div className="text-xs text-[#828A73] pt-1">
-                {locale === "uk"
-                  ? "Практики щодня за попереднім записом"
-                  : "Daily practices by prior appointment"}
+                {appointmentNotice}
               </div>
             </div>
           </div>
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#828A73] gap-4">
-          <p>© {currentYear} Balance Hot Yoga Odesa. {locale === "uk" ? "Усі права захищені." : "All rights reserved."}</p>
+          <p>© {currentYear} Balance Hot Yoga Odesa. {rightsReservedText}</p>
           <Link
             href={`${routePrefix}/privacy`}
             className="hover:text-[#B87557] transition-colors min-h-[44px] flex items-center"
           >
-            {locale === "uk" ? "Політика конфіденційності" : "Privacy Policy"}
+            {privacyPolicyLabel}
           </Link>
         </div>
       </div>
