@@ -122,9 +122,14 @@ export function ContactsView({ locale }: { locale: Locale }) {
               <span className="text-xs uppercase tracking-widest text-[#828A73] font-semibold block mb-2">
                 {currentTranslations.contacts.address}
               </span>
-              <p className="font-serif italic text-xl text-[#1A2019] mb-4 leading-snug">
+              <a
+                href={BRAND.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-serif italic text-xl text-[#1A2019] hover:text-[#B87557] mb-4 leading-snug block transition-colors"
+              >
                 {addressText}
-              </p>
+              </a>
               <p className="text-xs text-[#79776E] mb-6 leading-relaxed">
                 {mapHintText}
               </p>
@@ -168,13 +173,23 @@ export function ContactsView({ locale }: { locale: Locale }) {
                   <span className="text-[#B87557] font-semibold block uppercase tracking-wider text-[10px]">
                     {locale === "en" ? "Studio Entrance" : (locale === "ru" ? "Фасад и вход" : "Фасад та вхід")}
                   </span>
-                  <span className="font-medium text-sm font-serif italic">
-                    {locale === "en" ? "55K Liustdorfska Road" : (locale === "ru" ? "Люстдорфская дорога, 55К" : "Люстдорфська дорога, 55К")}
-                  </span>
+                  <a
+                    href={BRAND.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-sm font-serif italic hover:text-[#B87557] transition-colors block"
+                  >
+                    {locale === "en" ? "55K Liustdorfska Road" : (locale === "ru" ? "Люстдорфская дорога, 55К" : "Люстдорфська дорога, 55К")} ↗
+                  </a>
                 </div>
-                <span className="text-[11px] text-[#EAE5D9]/80 hidden sm:inline-block">
-                  {locale === "en" ? "Odisey Complex" : (locale === "ru" ? "ЖК «Одиссей»" : "ЖК «Одісей»")}
-                </span>
+                <a
+                  href={BRAND.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-[#EAE5D9]/80 hover:text-[#B87557] transition-colors hidden sm:inline-block"
+                >
+                  {locale === "en" ? "Odisey Complex" : (locale === "ru" ? "ЖК «Одиссей»" : "ЖК «Одісей»")} ↗
+                </a>
               </div>
             </div>
 
@@ -190,7 +205,14 @@ export function ContactsView({ locale }: { locale: Locale }) {
                   <span className="text-[#B87557] block mb-1">
                     {locale === "en" ? "Location" : (locale === "ru" ? "Локация" : "Локація")}
                   </span>
-                  <span>{locale === "en" ? "Odisey Complex" : (locale === "ru" ? "ЖК «Одиссей»" : "ЖК «Одісей»")}</span>
+                  <a
+                    href={BRAND.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#B87557] transition-colors underline decoration-[#B87557]/40 underline-offset-2"
+                  >
+                    {locale === "en" ? "Odisey Complex" : (locale === "ru" ? "ЖК «Одиссей»" : "ЖК «Одісей»")} ↗
+                  </a>
                 </div>
                 <div>
                   <span className="text-[#B87557] block mb-1">

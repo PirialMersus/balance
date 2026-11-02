@@ -1,5 +1,6 @@
 import { translations, type Locale } from "@/lib/translations";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
+import { BRAND } from "@/lib/brand";
 
 export function PricingView({ locale }: { locale: Locale }) {
   const currentTranslations = translations[locale];
@@ -86,7 +87,15 @@ export function PricingView({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
           <p className="text-xs uppercase tracking-widest text-[#B87557] mb-4 font-medium">
-            Balance Hot Yoga · {locationBadge}
+            Balance Hot Yoga ·{" "}
+            <a
+              href={BRAND.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#D4793A] transition-colors underline decoration-[#B87557]/40 underline-offset-2"
+            >
+              {locationBadge} ↗
+            </a>
           </p>
           <h1
             className="font-serif italic text-[#1A2019] leading-tight mb-6"

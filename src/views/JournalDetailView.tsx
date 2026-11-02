@@ -60,9 +60,12 @@ export function JournalDetailView({
   const backLinkText = locale === "uk" ? "Назад до журналу" : "Back to journal";
   const authorRoleText = locale === "uk" ? "Засновниця Balance Hot Yoga" : "Founder of Balance Hot Yoga";
   const ctaTitleText = locale === "uk" ? "Відчуйте силу гарячої йоги особисто" : "Experience the power of hot yoga firsthand";
-  const ctaSubtitleText = locale === "uk"
-    ? "Запишіться на пробне заняття у студії Balance (ЖК «Одісей», Одеса)."
-    : "Book your trial class at Balance studio (Odisey Complex, Odesa).";
+  const ctaSubtitlePrefix = locale === "uk"
+    ? "Запишіться на пробне заняття у студії Balance ("
+    : "Book your trial class at Balance studio (";
+  const ctaLocationText = locale === "uk"
+    ? "ЖК «Одісей», Одеса"
+    : "Odisey Complex, Odesa";
 
   return (
     <article className="bg-[#F5F2E9] text-[#222923] min-h-screen pt-28 pb-24">
@@ -131,7 +134,16 @@ export function JournalDetailView({
             {ctaTitleText}
           </h2>
           <p className="text-sm text-[#EAE5D9] max-w-xl mx-auto mb-6">
-            {ctaSubtitleText}
+            {ctaSubtitlePrefix}
+            <a
+              href={BRAND.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#B87557] hover:text-[#D4793A] transition-colors underline decoration-[#B87557]/40 underline-offset-2"
+            >
+              {ctaLocationText} ↗
+            </a>
+            ).
           </p>
           <BookingTriggerButton
             tariffTitle="Пробне заняття (350 ₴)"

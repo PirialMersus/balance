@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { translations, Locale } from "@/lib/translations";
 import { useBooking } from "@/components/booking/BookingContext";
-import { getAssetPath } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 
 interface HeaderProps {
   locale: Locale;
@@ -262,7 +262,9 @@ export function Header({ locale }: HeaderProps) {
                 aria-hidden="true"
                 className={`absolute bottom-0 h-0.5 bg-[#B87557] rounded-full shadow-[0_0_8px_rgba(184,117,87,0.8)] pointer-events-none ${
                   indicatorGeometry.isReady
-                    ? "transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                    ? hoveredNavigationHref !== null
+                      ? "transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                      : "transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                     : "transition-opacity duration-200"
                 }`}
                 style={{
@@ -401,11 +403,16 @@ export function Header({ locale }: HeaderProps) {
                 {navigationTranslations.book}
               </button>
               <div className="text-center pt-2">
-                <span className="text-[11px] uppercase tracking-widest text-[#828A73]">
+                <a
+                  href={BRAND.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] uppercase tracking-widest text-[#828A73] hover:text-[#B87557] transition-colors inline-block"
+                >
                   {locale === "en"
                     ? "Odesa · Odisey Complex · 38–40°C · Balance"
-                    : (locale === "ru" ? "Одесса · ЖК «Одиссей» · 38–40°C · Balance" : "Одеса · ЖК «Одісей» · 38–40°C · Balance")}
-                </span>
+                    : (locale === "ru" ? "Одесса · ЖК «Одиссей» · 38–40°C · Balance" : "Одеса · ЖК «Одісей» · 38–40°C · Balance")} ↗
+                </a>
               </div>
             </div>
           </div>

@@ -311,9 +311,14 @@ export default function BookingModal({
         ) : (
           <form onSubmit={handleFormSubmission} className="space-y-4">
             <div className="space-y-1 pr-8">
-              <span className="text-[10px] uppercase tracking-widest text-[#B87557] font-semibold block">
-                {badgeHeader}
-              </span>
+              <a
+                href={BRAND.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] uppercase tracking-widest text-[#B87557] hover:text-[#D4793A] font-semibold inline-block transition-colors"
+              >
+                {badgeHeader} ↗
+              </a>
               <h3
                 id="booking-modal-title"
                 className="font-serif italic text-2xl sm:text-3xl text-white font-medium"

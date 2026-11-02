@@ -2,7 +2,7 @@ import Link from "next/link";
 import { translations, Locale } from "@/lib/translations";
 import AtmosphericCanvas from "@/components/ambient/AtmosphericCanvas";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
-import { getAssetPath } from "@/lib/brand";
+import { BRAND, getAssetPath } from "@/lib/brand";
 
 interface HeroSectionProps {
   locale: Locale;
@@ -71,12 +71,17 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       </svg>
 
       <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 max-w-4xl mx-auto pt-24 sm:pt-28 pb-12 sm:pb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-6 sm:mb-8">
+        <a
+          href={BRAND.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 mb-6 sm:mb-8 transition-colors group cursor-pointer"
+        >
           <span className="w-2 h-2 rounded-full bg-[#D4793A] animate-pulse" />
-          <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#F5F2E9] font-medium">
-            {badgeText}
+          <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#F5F2E9] group-hover:text-white font-medium">
+            {badgeText} ↗
           </span>
-        </div>
+        </a>
 
         <h1
           className="font-serif italic text-white leading-[1.08] mb-6 sm:mb-8 drop-shadow-md"

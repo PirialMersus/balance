@@ -67,9 +67,14 @@ export function Footer({ locale }: FooterProps) {
             <p className="text-[#828A73] text-sm leading-relaxed max-w-sm">
               {brandDescription}
             </p>
-            <p className="text-xs text-[#B87557] font-medium tracking-wider uppercase pt-2">
-              {brandAddress}
-            </p>
+            <a
+              href={BRAND.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-xs text-[#B87557] hover:text-[#D4793A] font-medium tracking-wider uppercase pt-2 transition-colors"
+            >
+              {brandAddress} ↗
+            </a>
           </div>
 
           <div className="md:col-span-4">
