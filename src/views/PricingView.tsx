@@ -1,5 +1,4 @@
 import { translations, type Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 
 export function PricingView({ locale }: { locale: Locale }) {
@@ -7,72 +6,80 @@ export function PricingView({ locale }: { locale: Locale }) {
 
   const pricingTiers = [
     {
-      title: locale === "uk" ? "Пробне заняття" : "Trial Class",
+      title: locale === "uk" ? "Пробне заняття" : (locale === "ru" ? "Пробное занятие" : "Trial Class"),
       price: "350 ₴",
-      pricePerClass: locale === "uk" ? "для нових гостей студії" : "for new guests",
+      pricePerClass: locale === "uk" ? "для нових гостей студії" : (locale === "ru" ? "для новых гостей студии" : "for new guests"),
       description:
         locale === "uk"
           ? "Ідеальне перше знайомство з практикою гарячої йоги в Одесі."
-          : "The ideal first introduction to hot yoga practice in Odesa.",
-      highlight: locale === "uk" ? "Спецціна для новачків" : "Special offer for beginners",
-      buttonLabel: locale === "uk" ? "Записатися на пробне" : "Book Trial Class",
+          : (locale === "ru"
+            ? "Идеальное первое знакомство с практикой горячей йоги в Одессе."
+            : "The ideal first introduction to hot yoga practice in Odesa."),
+      highlight: locale === "uk" ? "Спецціна для новачків" : (locale === "ru" ? "Спеццена для новичков" : "Special offer for beginners"),
+      buttonLabel: locale === "uk" ? "Записатися на пробне" : (locale === "ru" ? "Записаться на пробное" : "Book Trial Class"),
       features: [
-        locale === "uk" ? "75 хвилин практики при 38–40°C" : "75 minutes of practice at 38–40°C",
-        locale === "uk" ? "Персональний інструктаж перед класом" : "Personal briefing before class",
-        locale === "uk" ? "Килимок і рушник включені" : "Mat and towel included",
-        locale === "uk" ? "Чай після заняття" : "Herbal tea after class",
+        locale === "uk" ? "75 хвилин практики при 38–40°C" : (locale === "ru" ? "75 минут практики при 38–40°C" : "75 minutes of practice at 38–40°C"),
+        locale === "uk" ? "Персональний інструктаж перед класом" : (locale === "ru" ? "Персональный инструктаж перед классом" : "Personal briefing before class"),
+        locale === "uk" ? "Килимок і рушник включені" : (locale === "ru" ? "Коврик и полотенце включены" : "Mat and towel included"),
+        locale === "uk" ? "Чай після заняття" : (locale === "ru" ? "Чай после занятия" : "Herbal tea after class"),
       ],
       isPopular: false,
     },
     {
-      title: locale === "uk" ? "Абонемент на 8 занять" : "8-Class Pass",
+      title: locale === "uk" ? "Абонемент на 8 занять" : (locale === "ru" ? "Абонемент на 8 занятий" : "8-Class Pass"),
       price: "3 200 ₴",
-      pricePerClass: locale === "uk" ? "400 ₴ за одне заняття" : "400 ₴ per class",
+      pricePerClass: locale === "uk" ? "400 ₴ за одне заняття" : (locale === "ru" ? "400 ₴ за одно занятие" : "400 ₴ per class"),
       description:
         locale === "uk"
           ? "Оптимальна регулярність (2 рази на тиждень) для стабільної адаптації тіла."
-          : "Optimal regularity (twice a week) for sustainable body adaptation.",
-      highlight: locale === "uk" ? "Рекомендований вибір" : "Most recommended",
-      buttonLabel: locale === "uk" ? "Придбати абонемент" : "Select 8-Class Pass",
+          : (locale === "ru"
+            ? "Оптимальная регулярность (2 раза в неделю) для стабильной адаптации тела."
+            : "Optimal regularity (twice a week) for sustainable body adaptation."),
+      highlight: locale === "uk" ? "Рекомендований вибір" : (locale === "ru" ? "Рекомендованный выбор" : "Most recommended"),
+      buttonLabel: locale === "uk" ? "Придбати абонемент" : (locale === "ru" ? "Купить абонемент" : "Select 8-Class Pass"),
       features: [
-        locale === "uk" ? "Діє 35 днів" : "Valid for 35 days",
-        locale === "uk" ? "Доступ до всіх класів розкладу" : "Access to all scheduled classes",
-        locale === "uk" ? "Можливість заморозки на 7 днів" : "7-day freeze option",
-        locale === "uk" ? "Пріоритетна бронь місць у групі" : "Priority group reservation",
+        locale === "uk" ? "Діє 35 днів" : (locale === "ru" ? "Действует 35 дней" : "Valid for 35 days"),
+        locale === "uk" ? "Доступ до всіх класів розкладу" : (locale === "ru" ? "Доступ ко всем классам расписания" : "Access to all scheduled classes"),
+        locale === "uk" ? "Можливість заморозки на 7 днів" : (locale === "ru" ? "Возможность заморозки на 7 дней" : "7-day freeze option"),
+        locale === "uk" ? "Пріоритетна бронь місць у групі" : (locale === "ru" ? "Приоритетная бронь мест в группе" : "Priority group reservation"),
       ],
       isPopular: true,
     },
     {
-      title: locale === "uk" ? "Індивідуальна практика" : "Private Practice",
+      title: locale === "uk" ? "Індивідуальна практика" : (locale === "ru" ? "Индивидуальная практика" : "Private Practice"),
       price: "1 400 ₴",
-      pricePerClass: locale === "uk" ? "персональний сеанс 75 хв" : "75 min personal session",
+      pricePerClass: locale === "uk" ? "персональний сеанс 75 хв" : (locale === "ru" ? "персональный сеанс 75 мин" : "75 min personal session"),
       description:
         locale === "uk"
           ? "Персональна робота з Марією Мироновою під ваші цілі та фізичні особливості."
-          : "Personal 1-on-1 session with Maria Mironova tailored to your goals.",
-      highlight: locale === "uk" ? "1 на 1 із засновницею" : "1-on-1 with founder",
-      buttonLabel: locale === "uk" ? "Замовити індивідуальну" : "Book Private Session",
+          : (locale === "ru"
+            ? "Персональная работа с Марией Мироновой под ваши цели и особенности тела."
+            : "Personal 1-on-1 session with Maria Mironova tailored to your goals."),
+      highlight: locale === "uk" ? "1 на 1 із засновницею" : (locale === "ru" ? "1 на 1 с основательницей" : "1-on-1 with founder"),
+      buttonLabel: locale === "uk" ? "Замовити індивідуальну" : (locale === "ru" ? "Заказать индивидуальную" : "Book Private Session"),
       features: [
-        locale === "uk" ? "Індивідуальний температурний режим" : "Customized temperature settings",
-        locale === "uk" ? "Глибоке налаштування біомеханіки асан" : "In-depth biomechanics alignment",
-        locale === "uk" ? "Гнучкий вибір часу" : "Flexible time slot selection",
-        locale === "uk" ? "Повна конфіденційність залу" : "Complete privacy of the studio",
+        locale === "uk" ? "Індивідуальний температурний режим" : (locale === "ru" ? "Индивидуальный температурный режим" : "Customized temperature settings"),
+        locale === "uk" ? "Глибоке налаштування біомеханіки асан" : (locale === "ru" ? "Глубокая отстройка биомеханики асан" : "In-depth biomechanics alignment"),
+        locale === "uk" ? "Гнучкий вибір часу" : (locale === "ru" ? "Гибкий выбор времени" : "Flexible time slot selection"),
+        locale === "uk" ? "Повна конфіденційність залу" : (locale === "ru" ? "Полная конфиденциальность зала" : "Complete privacy of the studio"),
       ],
       isPopular: false,
     },
   ];
 
-  const popularBadgeText = locale === "uk" ? "Популярний" : "Popular";
+  const popularBadgeText = locale === "uk" ? "Популярний" : (locale === "ru" ? "Популярный" : "Popular");
   const dropInText = locale === "uk"
     ? "Також доступне разове відвідування будь-якого групового заняття без абонемента — 500 ₴."
-    : "Single drop-in class without a membership pass is also available — 500 ₴.";
-  const locationBadge = locale === "uk" ? "Одеса · ЖК «Одісей»" : "Odesa · Odisey Complex";
+    : (locale === "ru"
+      ? "Также доступно разовое посещение любого группового занятия без абонемента — 500 ₴."
+      : "Single drop-in class without a membership pass is also available — 500 ₴.");
+  const locationBadge = locale === "en" ? "Odesa · Odisey Complex" : (locale === "ru" ? "Одесса · ЖК «Одиссей»" : "Одеса · ЖК «Одісей»");
 
-  const noteTitle = locale === "uk" ? "Усі абонементи включають:" : "All memberships include:";
-  const noteOne = locale === "uk" ? "Оренду фірмового несковзкого килимка" : "Use of premium non-slip mat";
-  const noteTwo = locale === "uk" ? "Великий махровий рушник для практики" : "Large plush practice towel";
-  const noteThree = locale === "uk" ? "Очищену питну воду та трав'яний чай" : "Purified drinking water & herbal tea";
-  const noteFour = locale === "uk" ? "Простору душову з натуральною косметикою" : "Spacious showers with natural cosmetics";
+  const noteTitle = locale === "en" ? "All memberships include:" : (locale === "ru" ? "Все абонементы включают:" : "Усі абонементи включають:");
+  const noteOne = locale === "en" ? "Use of premium non-slip mat" : (locale === "ru" ? "Аренду фирменного нескользящего коврика" : "Оренду фірмового несковзкого килимка");
+  const noteTwo = locale === "en" ? "Large plush practice towel" : (locale === "ru" ? "Большое махровое полотенце для практики" : "Великий махровий рушник для практики");
+  const noteThree = locale === "en" ? "Purified drinking water & herbal tea" : (locale === "ru" ? "Очищенную питьевую воду и травяной чай" : "Очищену питну воду та трав'яний чай");
+  const noteFour = locale === "en" ? "Spacious showers with natural cosmetics" : (locale === "ru" ? "Просторную душевую с натуральной косметикой" : "Простору душову з натуральною косметикою");
 
   return (
     <div className="bg-[#F5F2E9] text-[#222923] min-h-screen pt-28 pb-24">

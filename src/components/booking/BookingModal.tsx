@@ -49,9 +49,10 @@ export default function BookingModal({
   useEffect(() => {
     if (isOpen) {
       if (bookingDetails?.tariffTitle) {
-        if (bookingDetails.tariffTitle.includes("8") || bookingDetails.tariffTitle.toLowerCase().includes("абонемент")) {
+        const lowerTariff = bookingDetails.tariffTitle.toLowerCase();
+        if (bookingDetails.tariffTitle.includes("8") || lowerTariff.includes("абонемент")) {
           setSelectedChoice("pass-8");
-        } else if (bookingDetails.tariffTitle.toLowerCase().includes("індивіду") || bookingDetails.tariffTitle.toLowerCase().includes("private")) {
+        } else if (lowerTariff.includes("індивіду") || lowerTariff.includes("индивиду") || lowerTariff.includes("private")) {
           setSelectedChoice("private");
         } else {
           setSelectedChoice("trial");
@@ -110,40 +111,50 @@ export default function BookingModal({
       id: "trial" as PracticeChoice,
       labelUk: "Пробне заняття (350 ₴)",
       labelEn: "Trial Class (350 ₴)",
+      labelRu: "Пробное занятие (350 ₴)",
     },
     {
       id: "pass-8" as PracticeChoice,
       labelUk: "Абонемент на 8 занять (3 200 ₴)",
       labelEn: "8-Class Pass (3 200 ₴)",
+      labelRu: "Абонемент на 8 занятий (3 200 ₴)",
     },
     {
       id: "hot-yoga" as PracticeChoice,
       labelUk: "Гаряча йога за розкладом",
       labelEn: "Hot Yoga Scheduled Class",
+      labelRu: "Горячая йога по расписанию",
     },
     {
       id: "private" as PracticeChoice,
       labelUk: "Індивідуальна практика (1 400 ₴)",
       labelEn: "Private 1-on-1 Practice (1 400 ₴)",
+      labelRu: "Индивидуальная практика (1 400 ₴)",
     },
     {
       id: "question" as PracticeChoice,
       labelUk: "Консультація та розклад",
       labelEn: "Schedule & Consultation",
+      labelRu: "Консультация и расписание",
     },
   ];
 
   const selectedOptionObject = choiceOptions.find((item) => item.id === selectedChoice);
-  const chosenFormatName = locale === "uk" ? selectedOptionObject?.labelUk : selectedOptionObject?.labelEn;
+  const chosenFormatName = locale === "en"
+    ? selectedOptionObject?.labelEn
+    : (locale === "ru" ? selectedOptionObject?.labelRu : selectedOptionObject?.labelUk);
 
-  const preparedMessageText =
-    locale === "uk"
-      ? `Вітаю! Хочу записатися до студії Balance Hot Yoga (Одеса).\n\n• Напрям / Тариф: ${chosenFormatName}${
+  const preparedMessageText = locale === "en"
+    ? `Hello! I would like to book a session at Balance Hot Yoga (Odesa).\n\n• Option: ${chosenFormatName}${
+        selectedTimeSlot ? `\n• Preferred Time: ${selectedTimeSlot}` : ""
+      }\n• Name: ${guestName}\n• Contact: ${guestContact}\n\nPlease confirm availability for this slot.`
+    : (locale === "ru"
+      ? `Здравствуйте! Хочу записаться в студию Balance Hot Yoga (Одесса).\n\n• Направление / Тариф: ${chosenFormatName}${
+          selectedTimeSlot ? `\n• Желаемое время: ${selectedTimeSlot}` : ""
+        }\n• Имя: ${guestName}\n• Контактный телефон: ${guestContact}\n\nПодскажите, пожалуйста, наличие свободного места?`
+      : `Вітаю! Хочу записатися до студії Balance Hot Yoga (Одеса).\n\n• Напрям / Тариф: ${chosenFormatName}${
           selectedTimeSlot ? `\n• Бажаний час: ${selectedTimeSlot}` : ""
-        }\n• Ім'я: ${guestName}\n• Контактний телефон: ${guestContact}\n\nПідкажіть, будь ласка, наявність вільного місця?`
-      : `Hello! I would like to book a session at Balance Hot Yoga (Odesa).\n\n• Option: ${chosenFormatName}${
-          selectedTimeSlot ? `\n• Preferred Time: ${selectedTimeSlot}` : ""
-        }\n• Name: ${guestName}\n• Contact: ${guestContact}\n\nPlease confirm availability for this slot.`;
+        }\n• Ім'я: ${guestName}\n• Контактний телефон: ${guestContact}\n\nПідкажіть, будь ласка, наявність вільного місця?`);
 
   const handleFormSubmission = (formEvent: React.FormEvent) => {
     formEvent.preventDefault();
@@ -171,6 +182,29 @@ export default function BookingModal({
     window.open(directUrl, "_blank", "noopener,noreferrer");
   };
 
+  const copyButtonLabel = hasCopiedMessageToClipboard
+    ? (locale === "en" ? "✓ Copied to clipboard" : (locale === "ru" ? "✓ Текст скопирован" : "✓ Текст скопійовано"))
+    : (locale === "en" ? "Copy Message Text" : (locale === "ru" ? "Скопировать текст заявки" : "Скопіювати текст заявки"));
+
+  const directButtonLabel = locale === "en" ? "Open Instagram Direct" : (locale === "ru" ? "Перейти в Instagram Direct" : "Перейти в Instagram Direct");
+  const changeDataLabel = locale === "en" ? "← Change information" : (locale === "ru" ? "← Изменить данные или время" : "← Змінити дані або час");
+
+  const badgeHeader = locale === "en"
+    ? "Hot Yoga · Odisey Complex · 38–40°C"
+    : (locale === "ru" ? "Hot Yoga · ЖК «Одиссей» · 38–40°C" : "Hot Yoga · ЖК «Одісей» · 38–40°C");
+
+  const modalHeading = locale === "en" ? "Book a Practice" : (locale === "ru" ? "Запись на практику" : "Запис на практику");
+  const modalSub = locale === "en"
+    ? "Leave your name and phone — we will reserve your mat."
+    : (locale === "ru" ? "Оставьте имя и телефон — мы забронируем коврик за вами." : "Залиште ім'я та телефон — ми зарезервуємо килимок за вами.");
+
+  const choiceCategoryLabel = locale === "en" ? "Select Format / Pass" : (locale === "ru" ? "Направление или тариф" : "Напрям або тариф");
+  const submitButtonLabel = locale === "en" ? "Continue Booking" : (locale === "ru" ? "Продолжить запись" : "Продовжити запис");
+
+  const submitFooterNote = locale === "en"
+    ? "No upfront payment · Direct confirmation in 10–15 mins"
+    : (locale === "ru" ? "Без предоплаты на сайте · Подтверждение за 10–15 минут" : "Без передплати на сайті · Підтвердження за 10–15 хвилин");
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out ${
@@ -195,7 +229,7 @@ export default function BookingModal({
           type="button"
           onClick={startCloseAnimationSequence}
           className="absolute top-4 right-4 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-[#E8DFD1] hover:text-white transition-all cursor-pointer"
-          aria-label={locale === "uk" ? "Закрити" : "Close"}
+          aria-label={locale === "en" ? "Close" : (locale === "ru" ? "Закрыть" : "Закрити")}
         >
           <svg
             width="14"
@@ -233,12 +267,16 @@ export default function BookingModal({
                 id="booking-modal-title"
                 className="font-serif italic text-2xl sm:text-3xl text-white font-medium"
               >
-                {locale === "uk" ? "Завершіть запис у Direct" : "Send Request in Direct"}
+                {locale === "en"
+                  ? "Send Request in Direct"
+                  : (locale === "ru" ? "Завершите запись в Direct" : "Завершіть запис у Direct")}
               </h3>
               <p className="text-xs text-[#828A73] leading-relaxed max-w-sm mx-auto">
-                {locale === "uk"
-                  ? "Ми сформували текст вашої заявки. Натисніть кнопку, щоб перейти в Direct, або скопіюйте текст для повідомлення:"
-                  : "Your reservation request is prepared. Tap below to open Direct or copy the message text:"}
+                {locale === "en"
+                  ? "Your reservation request is prepared. Tap below to open Direct or copy the message text:"
+                  : (locale === "ru"
+                    ? "Мы сформировали текст вашей заявки. Нажмите кнопку для перехода в Direct или скопируйте текст:"
+                    : "Ми сформували текст вашої заявки. Натисніть кнопку, щоб перейти в Direct, або скопіюйте текст для повідомлення:")}
               </p>
             </div>
 
@@ -250,9 +288,9 @@ export default function BookingModal({
               <button
                 type="button"
                 onClick={handleCopyToClipboard}
-                className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer min-h-[44px]"
               >
-                <span>{hasCopiedMessageToClipboard ? "✓ Текст скопійовано" : (locale === "uk" ? "Скопіювати текст заявки" : "Copy Message Text")}</span>
+                <span>{copyButtonLabel}</span>
               </button>
             </div>
 
@@ -262,7 +300,7 @@ export default function BookingModal({
                 onClick={handleOpenInstagramDirect}
                 className="w-full min-h-[48px] py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B87557] to-[#D4793A] hover:brightness-110 active:scale-[0.99] text-white font-medium text-xs uppercase tracking-widest transition-all shadow-lg shadow-[#B87557]/25 cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>{locale === "uk" ? "Перейти в Instagram Direct" : "Open Instagram Direct"}</span>
+                <span>{directButtonLabel}</span>
                 <svg
                   width="14"
                   height="14"
@@ -281,9 +319,9 @@ export default function BookingModal({
               <button
                 type="button"
                 onClick={() => setIsReadyToSendMessage(false)}
-                className="w-full py-2.5 text-xs text-[#828A73] hover:text-white transition-colors cursor-pointer"
+                className="w-full py-2.5 text-xs text-[#828A73] hover:text-white transition-colors cursor-pointer min-h-[44px] flex items-center justify-center"
               >
-                {locale === "uk" ? "← Змінити дані або час" : "← Change information"}
+                {changeDataLabel}
               </button>
             </div>
           </div>
@@ -291,18 +329,16 @@ export default function BookingModal({
           <form onSubmit={handleFormSubmission} className="space-y-4">
             <div className="space-y-1 pr-8">
               <span className="text-[10px] uppercase tracking-widest text-[#B87557] font-semibold block">
-                {locale === "uk" ? "Hot Yoga · ЖК «Одісей» · 38–40°C" : "Hot Yoga · Odisey Complex · 38–40°C"}
+                {badgeHeader}
               </span>
               <h3
                 id="booking-modal-title"
                 className="font-serif italic text-2xl sm:text-3xl text-white font-medium"
               >
-                {locale === "uk" ? "Запис на практику" : "Book a Practice"}
+                {modalHeading}
               </h3>
               <p className="text-xs text-[#828A73] font-light">
-                {locale === "uk"
-                  ? "Залиште ім'я та телефон — ми зарезервуємо килимок за вами."
-                  : "Leave your name and phone — we will reserve your mat."}
+                {modalSub}
               </p>
             </div>
 
@@ -317,18 +353,22 @@ export default function BookingModal({
                   onClick={() => setSelectedTimeSlot(null)}
                   className="text-[10px] text-[#B87557] hover:underline"
                 >
-                  {locale === "uk" ? "Змінити" : "Clear"}
+                  {locale === "en" ? "Clear" : (locale === "ru" ? "Изменить" : "Змінити")}
                 </button>
               </div>
             )}
 
             <div className="space-y-1.5">
               <label className="block text-[11px] uppercase tracking-wider text-[#828A73] font-medium">
-                {locale === "uk" ? "Напрям або тариф" : "Select Format / Pass"}
+                {choiceCategoryLabel}
               </label>
               <div className="grid grid-cols-1 gap-1.5">
                 {choiceOptions.map((choiceOption) => {
                   const isChoiceSelected = selectedChoice === choiceOption.id;
+                  const itemLabel = locale === "en"
+                    ? choiceOption.labelEn
+                    : (locale === "ru" ? choiceOption.labelRu : choiceOption.labelUk);
+
                   return (
                     <button
                       key={choiceOption.id}
@@ -340,9 +380,7 @@ export default function BookingModal({
                           : "bg-white/[0.03] border-white/10 text-[#828A73] hover:text-white hover:border-white/20"
                       }`}
                     >
-                      <span className="font-medium">
-                        {locale === "uk" ? choiceOption.labelUk : choiceOption.labelEn}
-                      </span>
+                      <span className="font-medium">{itemLabel}</span>
                       <span
                         className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                           isChoiceSelected ? "border-[#B87557] bg-[#B87557]" : "border-white/20"
@@ -359,28 +397,28 @@ export default function BookingModal({
             <div className="space-y-2.5">
               <div>
                 <label className="sr-only">
-                  {locale === "uk" ? "Ваше ім'я" : "Your Name"}
+                  {locale === "en" ? "Your Name" : (locale === "ru" ? "Ваше имя" : "Ваше ім'я")}
                 </label>
                 <input
                   type="text"
                   required
                   value={guestName}
                   onChange={(inputChangeEvent) => setGuestName(inputChangeEvent.target.value)}
-                  placeholder={locale === "uk" ? "Ваше ім'я *" : "Your Name *"}
+                  placeholder={locale === "en" ? "Your Name *" : (locale === "ru" ? "Ваше имя *" : "Ваше ім'я *")}
                   className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-base text-white placeholder-[#828A73] outline-none transition-all"
                 />
               </div>
 
               <div>
                 <label className="sr-only">
-                  {locale === "uk" ? "Телефон або @instagram / telegram" : "Phone or @instagram / telegram"}
+                  {locale === "en" ? "Phone or @instagram / telegram" : (locale === "ru" ? "Телефон или @instagram / telegram" : "Телефон або @instagram / telegram")}
                 </label>
                 <input
                   type="text"
                   required
                   value={guestContact}
                   onChange={(inputChangeEvent) => setGuestContact(inputChangeEvent.target.value)}
-                  placeholder={locale === "uk" ? "Телефон або @instagram *" : "Phone or @instagram *"}
+                  placeholder={locale === "en" ? "Phone or @instagram *" : (locale === "ru" ? "Телефон или @instagram *" : "Телефон або @instagram *")}
                   className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-base text-white placeholder-[#828A73] outline-none transition-all"
                 />
               </div>
@@ -391,7 +429,7 @@ export default function BookingModal({
                 type="submit"
                 className="w-full min-h-[48px] py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B87557] to-[#D4793A] hover:brightness-110 active:scale-[0.99] text-white font-medium text-xs uppercase tracking-widest transition-all shadow-lg shadow-[#B87557]/25 cursor-pointer flex items-center justify-center gap-2 group"
               >
-                <span>{locale === "uk" ? "Продовжити запис" : "Continue Booking"}</span>
+                <span>{submitButtonLabel}</span>
                 <svg
                   width="14"
                   height="14"
@@ -408,9 +446,7 @@ export default function BookingModal({
                 </svg>
               </button>
               <p className="text-center text-[10px] text-[#828A73] mt-2 font-light">
-                {locale === "uk"
-                  ? "Без передплати на сайті · Підтвердження за 10–15 хвилин"
-                  : "No upfront payment · Direct confirmation in 10–15 mins"}
+                {submitFooterNote}
               </p>
             </div>
           </form>

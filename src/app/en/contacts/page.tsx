@@ -21,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       languages: {
         uk: seoMetadata.alternateUk,
         en: seoMetadata.alternateEn,
+        ru: seoMetadata.alternateRu,
       },
     },
     openGraph: {

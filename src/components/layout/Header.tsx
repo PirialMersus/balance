@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { translations, Locale } from "@/lib/translations";
 import { useBooking } from "@/components/booking/BookingContext";
 import { getAssetPath } from "@/lib/brand";
@@ -10,9 +11,12 @@ interface HeaderProps {
   locale: Locale;
 }
 
+const SUPPORTED_LOCALES: Locale[] = ["uk", "en", "ru"];
+
 export function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname() || "/";
   const { openBooking } = useBooking();
 
   const navigationTranslations = translations[locale].nav;
@@ -37,21 +41,41 @@ export function Header({ locale }: HeaderProps) {
     return () => window.removeEventListener("keydown", handleEscapeKey);
   }, [isMobileMenuOpen]);
 
-  const routePrefix = locale === "en" ? "/en" : "";
+  const routePrefix = locale === "uk" ? "" : `/${locale}`;
 
   const headerNavigationLinks = [
     { href: `${routePrefix}/practices`, label: navigationTranslations.practices },
     { href: `${routePrefix}/schedule`, label: navigationTranslations.schedule },
     { href: `${routePrefix}/pricing`, label: navigationTranslations.pricing },
     { href: `${routePrefix}/studio`, label: navigationTranslations.studio },
-    { href: `${routePrefix}/teachers`, label: locale === "uk" ? "Команда" : "Team" },
-    { href: `${routePrefix}/journal`, label: locale === "uk" ? "Журнал" : "Journal" },
+    { href: `${routePrefix}/teachers`, label: locale === "en" ? "Team" : (locale === "ru" ? "Команда" : "Команда") },
+    { href: `${routePrefix}/journal`, label: locale === "en" ? "Journal" : (locale === "ru" ? "Журнал" : "Журнал") },
     { href: `${routePrefix}/contacts`, label: navigationTranslations.contacts },
   ];
 
-  const alternateLanguageUrl = locale === "uk" ? "/en" : "/";
-  const homePageUrl = locale === "en" ? "/en" : "/";
-  const studioSubtitle = locale === "uk" ? "Hot Yoga · ЖК «Одісей»" : "Hot Yoga · Odisey Complex";
+  const getTargetUrlForLocale = (targetLocale: Locale) => {
+    let cleanPath = pathname;
+    if (cleanPath.startsWith("/en")) {
+      cleanPath = cleanPath.slice(3);
+    } else if (cleanPath.startsWith("/ru")) {
+      cleanPath = cleanPath.slice(3);
+    }
+    if (!cleanPath.startsWith("/")) {
+      cleanPath = `/${cleanPath}`;
+    }
+    if (cleanPath === "/") {
+      cleanPath = "";
+    }
+    if (targetLocale === "uk") {
+      return cleanPath || "/";
+    }
+    return `/${targetLocale}${cleanPath}`;
+  };
+
+  const homePageUrl = locale === "uk" ? "/" : `/${locale}`;
+  const studioSubtitle = locale === "en"
+    ? "Hot Yoga · Odisey Complex"
+    : (locale === "ru" ? "Hot Yoga · ЖК «Одиссей»" : "Hot Yoga · ЖК «Одісей»");
 
   return (
     <>
@@ -100,12 +124,25 @@ export function Header({ locale }: HeaderProps) {
             </nav>
 
             <div className="hidden xl:flex items-center gap-3.5 2xl:gap-5 flex-shrink-0">
-              <Link
-                href={alternateLanguageUrl}
-                className="text-xs uppercase tracking-widest font-semibold px-3 py-1.5 border border-[#828A73]/40 rounded-full text-[#F5F2E9] hover:border-[#B87557] hover:text-[#B87557] transition-colors whitespace-nowrap min-h-[38px] flex items-center"
-              >
-                {navigationTranslations.switchLang}
-              </Link>
+              <div className="flex items-center rounded-full border border-[#828A73]/40 p-1 bg-black/20 text-xs font-semibold">
+                {SUPPORTED_LOCALES.map((targetLoc) => {
+                  const isActive = targetLoc === locale;
+                  return (
+                    <Link
+                      key={targetLoc}
+                      href={getTargetUrlForLocale(targetLoc)}
+                      className={`px-2.5 py-1 rounded-full uppercase transition-all ${
+                        isActive
+                          ? "bg-[#B87557] text-white shadow-sm"
+                          : "text-[#F5F2E9]/70 hover:text-white"
+                      }`}
+                    >
+                      {targetLoc}
+                    </Link>
+                  );
+                })}
+              </div>
+
               <button
                 type="button"
                 onClick={() => openBooking("first-trial")}
@@ -116,14 +153,25 @@ export function Header({ locale }: HeaderProps) {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 xl:hidden">
-              <Link
-                href={alternateLanguageUrl}
-                className="text-[11px] uppercase tracking-wider font-semibold px-2.5 py-1.5 border border-[#828A73]/40 rounded-full text-[#F5F2E9] whitespace-nowrap min-h-[40px] min-w-[40px] flex items-center justify-center hover:border-[#B87557] transition-colors"
-                aria-label={navigationTranslations.switchLang}
-              >
-                <span className="sm:hidden">{locale === "uk" ? "EN" : "UA"}</span>
-                <span className="hidden sm:inline">{navigationTranslations.switchLang}</span>
-              </Link>
+              <div className="flex items-center rounded-full border border-[#828A73]/40 p-0.5 bg-black/20 text-[11px] font-semibold">
+                {SUPPORTED_LOCALES.map((targetLoc) => {
+                  const isActive = targetLoc === locale;
+                  return (
+                    <Link
+                      key={targetLoc}
+                      href={getTargetUrlForLocale(targetLoc)}
+                      className={`px-2 py-1 rounded-full uppercase transition-all min-h-[36px] flex items-center justify-center ${
+                        isActive
+                          ? "bg-[#B87557] text-white"
+                          : "text-[#F5F2E9]/70 hover:text-white"
+                      }`}
+                    >
+                      {targetLoc}
+                    </Link>
+                  );
+                })}
+              </div>
+
               <button
                 type="button"
                 onClick={() => openBooking("first-trial")}
@@ -131,6 +179,7 @@ export function Header({ locale }: HeaderProps) {
               >
                 {navigationTranslations.book}
               </button>
+
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -139,7 +188,9 @@ export function Header({ locale }: HeaderProps) {
                 aria-expanded={isMobileMenuOpen}
               >
                 <span className="text-[11px] uppercase tracking-wider font-medium hidden xs:inline-block">
-                  {isMobileMenuOpen ? (locale === "uk" ? "Закрити" : "Close") : (locale === "uk" ? "Меню" : "Menu")}
+                  {isMobileMenuOpen
+                    ? (locale === "en" ? "Close" : (locale === "ru" ? "Закрыть" : "Закрити"))
+                    : (locale === "en" ? "Menu" : (locale === "ru" ? "Меню" : "Меню"))}
                 </span>
                 <div className="w-4 flex flex-col gap-1">
                   <span
@@ -190,7 +241,9 @@ export function Header({ locale }: HeaderProps) {
               </button>
               <div className="text-center pt-2">
                 <span className="text-[11px] uppercase tracking-widest text-[#828A73]">
-                  {locale === "uk" ? "Одеса · ЖК «Одісей» · 38–40°C · Balance" : "Odesa · Odisey Complex · 38–40°C · Balance"}
+                  {locale === "en"
+                    ? "Odesa · Odisey Complex · 38–40°C · Balance"
+                    : (locale === "ru" ? "Одесса · ЖК «Одиссей» · 38–40°C · Balance" : "Одеса · ЖК «Одісей» · 38–40°C · Balance")}
                 </span>
               </div>
             </div>

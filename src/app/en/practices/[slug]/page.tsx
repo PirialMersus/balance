@@ -32,6 +32,7 @@ export async function generateMetadata({
       languages: {
         uk: seoMetadata.alternateUk,
         en: seoMetadata.alternateEn,
+        ru: seoMetadata.alternateRu,
       },
     },
     openGraph: {

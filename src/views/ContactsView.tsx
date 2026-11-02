@@ -4,49 +4,70 @@ import { BRAND } from "@/lib/brand";
 export function ContactsView({ locale }: { locale: Locale }) {
   const currentTranslations = translations[locale];
 
-  const heroDescription = locale === "uk"
-    ? "Ми на зв'язку щодня. Усі питання, бронювання місць та індивідуальні консультації проходять безпосередньо через наш Instagram."
-    : "We are in touch every single day. All inquiries, class reservations, and personalized consultations happen directly via our Instagram.";
+  const heroDescription = locale === "en"
+    ? "We are in touch every single day. All inquiries, class reservations, and personalized consultations happen directly via our Instagram."
+    : (locale === "ru"
+      ? "Мы на связи каждый день. Все вопросы, бронирование мест и индивидуальные консультации проходят напрямую через наш Instagram."
+      : "Ми на зв'язку щодня. Усі питання, бронювання місць та індивідуальні консультації проходять безпосередньо через наш Instagram.");
 
-  const channelDescription = locale === "uk"
-    ? "Основний і найшвидший канал зв'язку. Напишіть нам повідомлення, і ми відповімо протягом декількох хвилин."
-    : "The primary and fastest channel of communication. Send us a message, and we will reply within minutes.";
+  const channelDescription = locale === "en"
+    ? "The primary and fastest channel of communication. Send us a message, and we will reply within minutes."
+    : (locale === "ru"
+      ? "Основной и самый быстрый канал связи. Напишите нам сообщение, и мы ответим в течение нескольких минут."
+      : "Основний і найшвидший канал зв'язку. Напишіть нам повідомлення, і ми відповімо протягом декількох хвилин.");
 
-  const hoursLabel = locale === "uk" ? "Години роботи" : "Studio Hours";
-  const hoursText = locale === "uk" ? "Щодня: 08:30 – 21:30" : "Daily: 08:30 – 21:30";
-  const hoursNote = locale === "uk" ? "За попереднім записом на класи" : "By prior reservation for classes";
-  const studioSummary = locale === "uk"
-    ? "Єдина спеціалізована студія гарячої йоги в Одесі. Практика при 38–40°C для глибокого розкриття тіла та спокою розуму."
-    : "The only dedicated hot yoga studio in Odesa. Practice at 38–40°C for deep somatic release and mental serenity.";
+  const hoursLabel = locale === "en" ? "Studio Hours" : (locale === "ru" ? "Часы работы" : "Години роботи");
+  const hoursText = locale === "en" ? "Daily: 08:30 – 21:30" : (locale === "ru" ? "Ежедневно: 08:30 – 21:30" : "Щодня: 08:30 – 21:30");
+  const hoursNote = locale === "en"
+    ? "By prior reservation for classes"
+    : (locale === "ru" ? "По предварительной записи на классы" : "За попереднім записом на класи");
+  const studioSummary = locale === "en"
+    ? "The only dedicated hot yoga studio in Odesa. Practice at 38–40°C for deep somatic release and mental serenity."
+    : (locale === "ru"
+      ? "Единственная специализированная студия горячей йоги в Одессе. Практика при 38–40°C для глубокого раскрытия тела и покоя ума."
+      : "Єдина спеціалізована студія гарячої йоги в Одесі. Практика при 38–40°C для глибокого розкриття тіла та спокою розуму.");
 
-  const addressText = locale === "uk" ? BRAND.address : BRAND.addressEn;
-  const openInMapsText = locale === "uk" ? "Відкрити на картах Google" : "Open in Google Maps";
-  const mapHintText = locale === "uk"
-    ? "ЖК «Одісей», зручний під'їзд з Люстдорфської дороги, гостьовий паркінг біля комплексу."
-    : "Odisey Complex, convenient entrance from Liustdorfska Road, guest parking available.";
+  const addressText = locale === "en" ? BRAND.addressEn : (locale === "ru" ? BRAND.addressRu : BRAND.address);
+  const openInMapsText = locale === "en" ? "Open in Google Maps" : (locale === "ru" ? "Открыть на картах Google" : "Відкрити на картах Google");
+  const mapHintText = locale === "en"
+    ? "Odisey Complex, convenient entrance from Liustdorfska Road, guest parking available."
+    : (locale === "ru"
+      ? "ЖК «Одиссей», удобный подъезд с Люстдорфской дороги, гостевой паркинг возле комплекса."
+      : "ЖК «Одісей», зручний під'їзд з Люстдорфської дороги, гостьовий паркінг біля комплексу.");
 
-  const faqTitle = locale === "uk" ? "Часті питання перед візитом" : "Frequently Asked Questions";
+  const city = locale === "en" ? BRAND.cityEn : (locale === "ru" ? BRAND.cityRu : BRAND.city);
+
+  const faqTitle = locale === "en" ? "Frequently Asked Questions" : (locale === "ru" ? "Частые вопросы перед визитом" : "Часті питання перед візитом");
   const faqItems = [
     {
-      q: locale === "uk" ? "Чи потрібно записуватися заздалегідь?" : "Do I need to book in advance?",
-      a:
-        locale === "uk"
-          ? "Так, кількість місць у нагрітому залі суворо обмежена для забезпечення вашого комфорту та якісної вентиляції. Будь ласка, бронюйте заняття заздалегідь."
-          : "Yes, studio capacity in the heated room is strictly limited to ensure personal comfort and proper air exchange. Please book ahead.",
+      q: locale === "en"
+        ? "Do I need to book in advance?"
+        : (locale === "ru" ? "Нужно ли записываться заранее?" : "Чи потрібно записуватися заздалегідь?"),
+      a: locale === "en"
+        ? "Yes, studio capacity in the heated room is strictly limited to ensure personal comfort and proper air exchange. Please book ahead."
+        : (locale === "ru"
+          ? "Да, количество мест в нагретом зале строго ограничено ради вашего комфорта и качественной вентиляции. Пожалуйста, бронируйте занятие заранее."
+          : "Так, кількість місць у нагрітому залі суворо обмежена для забезпечення вашого комфорту та якісної вентиляції. Будь ласка, бронюйте заняття заздалегідь."),
     },
     {
-      q: locale === "uk" ? "Що брати з собою?" : "What should I bring?",
-      a:
-        locale === "uk"
-          ? "Легкий одяг для практики, пляшку для води та змінне взуття для пересування студією. Спеціальний килимок і рушник ми надаємо."
-          : "Lightweight workout wear, a reusable water bottle, and clean slippers for studio corridors. Premium practice mat and towel are provided.",
+      q: locale === "en"
+        ? "What should I bring?"
+        : (locale === "ru" ? "Что брать с собой?" : "Що брати з собою?"),
+      a: locale === "en"
+        ? "Lightweight workout wear, a reusable water bottle, and clean slippers for studio corridors. Premium practice mat and towel are provided."
+        : (locale === "ru"
+          ? "Легкую одежду для практики, бутылочку воды и сменную обувь для студии. Специальный коврик и полотенце мы предоставляем."
+          : "Легкий одяг для практики, пляшку для води та змінне взуття для пересування студією. Спеціальний килимок і рушник ми надаємо."),
     },
     {
-      q: locale === "uk" ? "Чи підходить гаряча йога новачкам?" : "Is hot yoga suitable for beginners?",
-      a:
-        locale === "uk"
-          ? "Безумовно. Наші інструктори завжди підкажуть полегшені варіації асан. Ви завжди можете відпочити в позі дитини, якщо відчуєте потребу."
-          : "Absolutely. Our instructors always offer accessible modifications for all poses. You are free to rest in child's pose whenever needed.",
+      q: locale === "en"
+        ? "Is hot yoga suitable for beginners?"
+        : (locale === "ru" ? "Подходит ли горячая йога новичкам?" : "Чи підходить гаряча йога новачкам?"),
+      a: locale === "en"
+        ? "Absolutely. Our instructors always offer accessible modifications for all poses. You are free to rest in child's pose whenever needed."
+        : (locale === "ru"
+          ? "Безусловно. Инструкторы всегда подскажут облегченные вариации асан. Вы всегда можете отдохнуть в позе ребенка, когда это нужно."
+          : "Безумовно. Наші інструктори завжди підкажуть полегшені варіації асан. Ви завжди можете відпочити в позі дитини, якщо відчуєте потребу."),
     },
   ];
 
@@ -55,7 +76,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
           <p className="text-xs uppercase tracking-widest text-[#B87557] mb-4 font-medium">
-            Balance Hot Yoga · {locale === "uk" ? "Одеса" : "Odesa"}
+            Balance Hot Yoga · {city}
           </p>
           <h1
             className="font-serif italic text-[#1A2019] leading-tight mb-6"
@@ -135,13 +156,13 @@ export function ContactsView({ locale }: { locale: Locale }) {
               <div className="border-t border-[#F5F2E9]/15 pt-6 grid grid-cols-2 gap-4 text-xs">
                 <div>
                   <span className="text-[#B87557] block mb-1">
-                    {locale === "uk" ? "Локація" : "Location"}
+                    {locale === "en" ? "Location" : (locale === "ru" ? "Локация" : "Локація")}
                   </span>
-                  <span>ЖК «Одісей»</span>
+                  <span>{locale === "en" ? "Odisey Complex" : (locale === "ru" ? "ЖК «Одиссей»" : "ЖК «Одісей»")}</span>
                 </div>
                 <div>
                   <span className="text-[#B87557] block mb-1">
-                    {locale === "uk" ? "Температура" : "Temperature"}
+                    {locale === "en" ? "Temperature" : (locale === "ru" ? "Температура" : "Температура")}
                   </span>
                   <span>38–40°C</span>
                 </div>

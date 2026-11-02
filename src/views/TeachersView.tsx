@@ -5,49 +5,67 @@ import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 export function TeachersView({ locale }: { locale: Locale }) {
   const currentTranslations = translations[locale];
 
-  const categoryLabel = locale === "uk" ? "Команда" : "Team";
-  const cityLabel = locale === "uk" ? "Одеса" : "Odesa";
-  const heroDescription = locale === "uk"
-    ? "Люди, які дбайливо ведуть вас крізь тепло, дихання та внутрішній діалог."
-    : "The mentors who gently guide you through radiant heat, breathwork, and mindful self-discovery.";
+  const categoryLabel = locale === "en" ? "Team" : (locale === "ru" ? "Команда" : "Команда");
+  const cityLabel = locale === "en" ? "Odesa" : (locale === "ru" ? "Одесса" : "Одеса");
+  const founderName = locale === "en" ? BRAND.founderNameEn : (locale === "ru" ? BRAND.founderNameRu : BRAND.founderName);
 
-  const biographyTitle = locale === "uk" ? "Біографія та шлях у практиці" : "Biography & Journey in Yoga";
-  const credentialsTitle = locale === "uk" ? "Кваліфікація та стандарти:" : "Qualifications & Standards:";
-  const principlesHeading = locale === "uk" ? "Принципи викладання в Balance" : "Teaching Principles at Balance";
+  const heroDescription = locale === "en"
+    ? "The mentors who gently guide you through radiant heat, breathwork, and mindful self-discovery."
+    : (locale === "ru"
+      ? "Люди, которые бережно ведут вас через тепло, дыхание и внутренний диалог."
+      : "Люди, які дбайливо ведуть вас крізь тепло, дихання та внутрішній діалог.");
+
+  const biographyTitle = locale === "en" ? "Biography & Journey in Yoga" : (locale === "ru" ? "Биография и путь в практике" : "Біографія та шлях у практиці");
+  const credentialsTitle = locale === "en" ? "Qualifications & Standards:" : (locale === "ru" ? "Квалификация и стандарты:" : "Кваліфікація та стандарти:");
+  const principlesHeading = locale === "en" ? "Teaching Principles at Balance" : (locale === "ru" ? "Принципы преподавания в Balance" : "Принципи викладання в Balance");
 
   const credentials = [
-    locale === "uk"
-      ? "Сертифікований викладач напрямів Hot Yoga, Vinyasa Flow та Yin Yoga"
-      : "Certified instructor in Hot Yoga, Vinyasa Flow, and Yin Yoga",
-    locale === "uk"
-      ? "Понад 7 років особистої практики та 4 роки викладання"
-      : "Over 7 years of dedicated personal practice and 4 years of teaching",
-    locale === "uk"
-      ? "Поглиблене вивчення анатомії руху та безпечної біомеханіки асан"
-      : "In-depth study of movement anatomy and injury-free asana biomechanics",
-    locale === "uk"
-      ? "Досвід адаптації практик під індивідуальні особливості тіла"
-      : "Proven methodology for adjusting practices to individual physiology",
+    locale === "en"
+      ? "Certified instructor in Hot Yoga, Vinyasa Flow, and Yin Yoga"
+      : (locale === "ru"
+        ? "Сертифицированный преподаватель направлений Hot Yoga, Vinyasa Flow и Yin Yoga"
+        : "Сертифікований викладач напрямів Hot Yoga, Vinyasa Flow та Yin Yoga"),
+    locale === "en"
+      ? "Over 7 years of dedicated personal practice and 4 years of teaching"
+      : (locale === "ru"
+        ? "Более 7 лет личной практики и 4 года преподавания"
+        : "Понад 7 років особистої практики та 4 роки викладання"),
+    locale === "en"
+      ? "In-depth study of movement anatomy and injury-free asana biomechanics"
+      : (locale === "ru"
+        ? "Углубленное изучение анатомии движения и безопасной биомеханики асан"
+        : "Поглиблене вивчення анатомії руху та безпечної біомеханіки асан"),
+    locale === "en"
+      ? "Proven methodology for adjusting practices to individual physiology"
+      : (locale === "ru"
+        ? "Опыт бережной адаптации практик под физиологические особенности каждого ученика"
+        : "Досвід адаптації практик під індивідуальні особливості тіла"),
   ];
 
   const teacherQuotes = [
     {
-      quote: locale === "uk"
-        ? "«Йога в нагрітому залі вчить не боротися з дискомфортом, а слухати його і відпускати через глибокий видих»"
-        : "“Hot yoga teaches you not to fight discomfort, but to listen to it and let it go through a calm, sustained exhale”",
-      principle: locale === "uk" ? "Принцип усвідомленості" : "Principle of Mindfulness",
+      quote: locale === "en"
+        ? "“Hot yoga teaches you not to fight discomfort, but to listen to it and let it go through a calm, sustained exhale”"
+        : (locale === "ru"
+          ? "«Йога в нагретом зале учит не бороться с дискомфортом, а слушать его и отпускать через глубокий выдох»"
+          : "«Йога в нагрітому залі вчить не боротися з дискомфортом, а слухати його і відпускати через глибокий видих»"),
+      principle: locale === "en" ? "Principle of Mindfulness" : (locale === "ru" ? "Принцип осознанности" : "Принцип усвідомленості"),
     },
     {
-      quote: locale === "uk"
-        ? "«У кожному класі немає змагання. Є тільки ваше тіло сьогодні і ваша увага до нього»"
-        : "“There is zero competition in our room. Only your body today and your respectful attention to it”",
-      principle: locale === "uk" ? "Принцип ненасильства" : "Principle of Non-Violence (Ahimsa)",
+      quote: locale === "en"
+        ? "“There is zero competition in our room. Only your body today and your respectful attention to it”"
+        : (locale === "ru"
+          ? "«В зале нет соревнования. Есть только ваше тело сегодня и ваше бережное внимание к нему»"
+          : "«У кожному класі немає змагання. Є тільки ваше тіло сьогодні і ваша увага до нього»"),
+      principle: locale === "en" ? "Principle of Non-Violence (Ahimsa)" : (locale === "ru" ? "Принцип ненасилия (Ахимса)" : "Принцип ненасильства"),
     },
     {
-      quote: locale === "uk"
-        ? "«Тепло — це інструмент безпеки. Воно дає змогу рухатися глибше без надриву й травм»"
-        : "“Heat is a tool of safety. It unlocks deeper mobility without strain or risk of injury”",
-      principle: locale === "uk" ? "Принцип біомеханіки" : "Principle of Biomechanics",
+      quote: locale === "en"
+        ? "“Heat is a tool of safety. It unlocks deeper mobility without strain or risk of injury”"
+        : (locale === "ru"
+          ? "«Тепло — это инструмент безопасности. Оно позволяет двигаться глубже без надрыва и риска травм»"
+          : "«Тепло — це інструмент безпеки. Воно дає змогу рухатися глибше без надриву й травм»"),
+      principle: locale === "en" ? "Principle of Biomechanics" : (locale === "ru" ? "Принцип биомеханики" : "Принцип біомеханіки"),
     },
   ];
 
@@ -69,17 +87,17 @@ export function TeachersView({ locale }: { locale: Locale }) {
           </p>
         </div>
 
-        <div className="bg-white border border-[#293A30]/10 p-8 md:p-14 mb-20 shadow-sm">
+        <div className="bg-white border border-[#293A30]/10 p-8 md:p-14 mb-20 shadow-sm rounded-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5 relative">
               <img
                 src={getAssetPath("/images/teacher-maria.webp")}
-                alt={BRAND.founderName}
+                alt={founderName}
                 width={600}
                 height={800}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-auto object-cover border border-[#293A30]/15"
+                className="w-full h-auto object-cover border border-[#293A30]/15 rounded-xl"
               />
               <div className="mt-4 flex items-center justify-between text-xs text-[#828A73]">
                 <span>{cityLabel}</span>
@@ -102,7 +120,7 @@ export function TeachersView({ locale }: { locale: Locale }) {
                   {currentTranslations.teachers.founder}
                 </span>
                 <h2 className="font-serif italic text-3xl md:text-5xl text-[#1A2019] mb-4">
-                  {BRAND.founderName}
+                  {founderName}
                 </h2>
                 <p className="text-lg text-[#1A2019] font-medium">
                   {currentTranslations.teachers.bio}
@@ -130,7 +148,10 @@ export function TeachersView({ locale }: { locale: Locale }) {
               </div>
 
               <div className="pt-4">
-                <BookingTriggerButton className="inline-block px-8 py-3.5 bg-[#293A30] hover:bg-[#B87557] text-[#F5F2E9] text-xs uppercase tracking-widest transition-colors cursor-pointer">
+                <BookingTriggerButton
+                  tariffTitle="Пробне заняття (350 ₴)"
+                  className="inline-block px-8 py-3.5 bg-[#293A30] hover:bg-[#B87557] text-[#F5F2E9] text-xs uppercase tracking-widest transition-colors cursor-pointer rounded-full min-h-[44px]"
+                >
                   {currentTranslations.nav.book}
                 </BookingTriggerButton>
               </div>
@@ -146,7 +167,7 @@ export function TeachersView({ locale }: { locale: Locale }) {
             {teacherQuotes.map((quoteItem, quoteIndex) => (
               <div
                 key={quoteIndex}
-                className="bg-white border border-[#293A30]/10 p-8 flex flex-col justify-between"
+                className="bg-white border border-[#293A30]/10 p-8 flex flex-col justify-between rounded-2xl"
               >
                 <p className="font-serif italic text-lg text-[#1A2019] mb-6 leading-relaxed">
                   {quoteItem.quote}

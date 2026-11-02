@@ -35,6 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: routePath === "" ? 1.0 : 0.8,
   }));
 
+  const russianStaticEntries = staticRoutePaths.map((routePath) => ({
+    url: `${baseDomain}/ru${routePath}`,
+    lastModified: currentDate,
+    changeFrequency: (routePath === "" ? "daily" : "weekly") as "daily" | "weekly",
+    priority: routePath === "" ? 1.0 : 0.8,
+  }));
+
   const ukrainianPracticeEntries = practices.map((practiceItem) => ({
     url: `${baseDomain}/practices/${practiceItem.slug}`,
     lastModified: currentDate,
@@ -44,6 +51,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const englishPracticeEntries = practices.map((practiceItem) => ({
     url: `${baseDomain}/en/practices/${practiceItem.slug}`,
+    lastModified: currentDate,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
+  const russianPracticeEntries = practices.map((practiceItem) => ({
+    url: `${baseDomain}/ru/practices/${practiceItem.slug}`,
     lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.9,
@@ -63,12 +77,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const russianJournalEntries = journalArticles.map((articleItem) => ({
+    url: `${baseDomain}/ru/journal/${articleItem.slug}`,
+    lastModified: articleItem.publishedAt,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   return [
     ...ukrainianStaticEntries,
     ...englishStaticEntries,
+    ...russianStaticEntries,
     ...ukrainianPracticeEntries,
     ...englishPracticeEntries,
+    ...russianPracticeEntries,
     ...ukrainianJournalEntries,
     ...englishJournalEntries,
+    ...russianJournalEntries,
   ];
 }

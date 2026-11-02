@@ -18,10 +18,12 @@ export const journalArticles: JournalArticle[] = [
     title: {
       uk: "Що таке гаряча йога і чому її варто спробувати",
       en: "What is Hot Yoga and Why You Should Experience It",
+      ru: "Что такое горячая йога и почему её стоит попробовать",
     },
     excerpt: {
       uk: "Гаряча йога — це усвідомлена практика, яка одночасно звільняє тіло від затисків і заспокоює розум у нагрітому просторі.",
       en: "Hot yoga is a transformative mindful practice that releases muscular stiffness while calming the mind in a warm, nurturing environment.",
+      ru: "Горячая йога — это осознанная практика, которая бережно освобождает тело от зажимов и дарит покой уму в согревающем пространстве.",
     },
     body: {
       uk: `Коли ви вперше входите до нагрітої зали студії Balance, вас огортає м'яке та обволікаюче тепло. Перша реакція тіла — глибокий видих. Саме в цей момент починається справжнє повернення до себе.
@@ -49,70 +51,108 @@ Thermal warmth gently loosens muscular connective tissues, facilitating deeper, 
 
 **How your mind quiets down**
 
-In the warmth, mental distractions naturally fade. Your attention naturally anchors into every conscious inhale and exhale. It is effortless dynamic meditation that resets an overworked nervous system.
+In ambient heat, returning to daily errands or phone notifications feels unnatural. Your full attention narrows directly to each inhalation and exhalation. It functions as a dynamic meditation that washes away accumulated exhaustion.
 
-**Consistency over intensity**
+**Why regularity matters most**
 
-Practicing two to three sessions each week builds lasting vitality, enhances deep sleep, and cultivates grounded serenity in your daily life.`,
+Attending classes two or three times weekly establishes enduring physical lightness, deepens nighttime sleep, and restores peaceful balance to everyday life.`,
+      ru: `Когда вы впервые входите в нагретый зал студии Balance, вас окутывает мягкое и бережное тепло. Первая естественная реакция тела — глубокий выдох. Именно в эту секунду начинается настоящее возвращение к себе.
+
+Горячая йога — это выверенная последовательность асан, выполняемых при температуре 38–40°C с контролируемой влажностью. Особый микроклимат создает условия, в которых тело раскрывается без надрыва и сопротивления.
+
+**Что происходит с телом**
+
+Мягкое инфракрасное тепло прогревает мышцы и связки за считанные минуты, позволяя глубже и безопаснее осваивать асаны. Усиливается лимфоток, сердечно-сосудистая система получает комфортную кардиотренировку, а естественное потоотделение способствует очищению организма.
+
+**Что происходит с умом**
+
+В нагретом зале невозможно прокручивать в голове рабочие списки или отвлекаться на телефон. Фокус естественным образом сужается до текущего вдоха и выдоха. Это мощная динамическая медитация, стирающая накопленную усталость и фоновую тревожность.
+
+**Почему регулярность важнее интенсивности**
+
+Два-три занятия в неделю формируют ощущение устойчивой легкости в теле, нормализуют сон и дарят внутренний баланс в суете города.`,
     },
-    publishedAt: "2026-10-20",
-    readingTime: "5 min",
-    image: getAssetPath("/images/journal-hot-yoga-intro.jpg"),
+    publishedAt: "2026-10-15",
+    readingTime: "4 хв",
+    image: getAssetPath("/images/journal-hot-yoga-intro.webp"),
     tags: {
-      uk: ["гаряча йога", "початківцям", "практика"],
-      en: ["hot yoga", "beginners", "practice"],
+      uk: ["Гаряча йога", "Здоров'я", "Початківцям"],
+      en: ["Hot Yoga", "Wellness", "Beginners"],
+      ru: ["Горячая йога", "Здоровье", "Новичкам"],
     },
   },
   {
     slug: "first-class-tips",
     title: {
-      uk: "Перше заняття гарячою йогою: як підготуватися",
-      en: "Your First Hot Yoga Class: Preparation & Essentials",
+      uk: "Як підготуватися до першого заняття гарячою йогою",
+      en: "How to Prepare for Your First Hot Yoga Class",
+      ru: "Как подготовиться к первому занятию горячей йогой",
     },
     excerpt: {
-      uk: "Прості та перевірені рекомендації, які допоможуть почуватися впевнено й комфортно з першої хвилини на коврику.",
-      en: "Practical recommendations to ensure your inaugural hot yoga experience is calm, comfortable, and deeply rewarding.",
+      uk: "Прості та дієві поради, які зроблять ваш перший візит до студії комфортним, безпечним та ресурсним.",
+      en: "Essential, practical tips to ensure your first hot studio visit is safe, deeply empowering, and memorable.",
+      ru: "Простые и понятные рекомендации, которые сделают ваш первый визит комфортным, безопасным и наполняющим.",
     },
     body: {
-      uk: `Якщо ви збираєтеся на своє перше заняття в Balance, хвилювання — це цілком природно. Гаряча йога доступна кожному, незалежно від віку чи рівня гнучкості.
+      uk: `Перше відвідування гарячої йоги — це завжди новий досвід для організму. Тіло потрапляє в незвичне середовище, і щоб адаптація пройшла м'яко, варто дотримуватися кількох перевірених правил.
 
-**Підготовка протягом дня**
+**1. Водний баланс заздалегідь**
 
-Пийте достатньо чистої негазованої води протягом усього дня перед практикою. Не варто приходити на повний шлунок: останній прийом їжі завершіть за 2 години до початку заняття.
+Пийте чисту воду впродовж усього дня до практики, а не лише перед самим входом до залу. Приходьте з гарним запасом гідратації — це основа вашого гарного самопочуття на коврику. Візьміть із собою пляшку з водою в зал.
 
-**Що взяти з собою**
+**2. Легкість у шлунку**
 
-1. Зручний легкий одяг із дихаючих тканин (топ, шорти або легінси).
-2. Пляшку з питною водою.
-3. Змінну білизну для освіжаючого душу після заняття.
-Коврики та рушники для практики ми з радістю надаємо в студії.
+Останній ситний прийом їжі завершіть за 2–3 години до початку класу. Якщо відчуваєте голод, за 40–60 хвилин можна з'їсти половинку банана або випити легкий смузі.
 
-**Під час заняття**
+**3. Зручний мінімалістичний одяг**
 
-Слухайте вказівки викладача і насамперед власне тіло. Якщо ви відчули потребу зупинитися — будь-якої миті опустіться в позу дитини на коврик, зробіть кілька ковтків води та повертайтеся до потоку, коли будете готові.`,
-      en: `If you are preparing for your first visit to Balance, feeling curious or a little nervous is entirely natural. Hot yoga is accessible to anyone, regardless of prior flexibility or fitness level.
+Обирайте легкий спортивний одяг із тканин, що дихають. Легінси або велосипедки та зручний спортивний топ — ідеальний вибір.
 
-**Preparation throughout the day**
+**4. Не поспішайте і слухайте себе**
 
-Hydrate consistently with clean water throughout your day. Avoid heavy meals close to class; your last nourishing meal should ideally be finished two hours prior.
+На першому занятті головне завдання — не повторити кожну позу ідеально, а познайомити тіло з теплом. Якщо відчули запаморочення чи втому — просто сядьте на коврик або ляжте в баласану (позу дитини) і спокійно дихайте.`,
+      en: `Your first hot yoga experience is an exciting, unique milestone for your body. Stepping into thermal warmth calls for gentle awareness and simple mindful preparation.
 
-**What to pack**
+**1. Hydrate throughout the day**
 
-1. Lightweight, breathable sportswear (shorts, sports top, or leggings).
-2. A personal refillable water bottle.
-3. Fresh change of clothes for our post-practice showers.
-Studio mats and towels are provided for your comfort.
+Drink water consistently all day before your class, rather than gulping water right before entering the room. Good cellular hydration is the bedrock of feeling vibrant and energetic. Bring your reusable bottle inside.
 
-**During the class**
+**2. Keep digestion light**
 
-Listen to the teacher's gentle cues and respect your body's rhythm. Whenever you need a pause, simply rest in child's pose on your mat, take a sip of water, and rejoin the flow when you feel ready.`,
+Finish your last solid meal 2 to 3 hours prior to class. If you require sustained energy beforehand, a small banana or fresh fruit smoothie an hour prior is ideal.
+
+**3. Wear breathable, fitted apparel**
+
+Select lightweight fabrics tailored for movement and moisture absorption. Fitted leggings or shorts coupled with an active top allow full range of motion.
+
+**4. Honor your pace and rest**
+
+Your primary intention in your first class is to introduce your physiology to warmth, not to execute postures perfectly. Rest in child's pose whenever your breathing requests it.`,
+      ru: `Первое занятие горячей йогой — это всегда яркий и новый опыт для организма. Тело оказывается в необычной среде, и чтобы адаптация прошла мягко, полезно помнить о нескольких простых правилах.
+
+**1. Пейте воду заранее**
+
+Насыщайте организм чистой водой в течение всего дня перед тренировкой, а не только перед дверью зала. Хороший водный баланс — основа вашего комфортного самочувствия. Обязательно возьмите бутылочку с водой на коврик.
+
+**2. Легкость в желудке**
+
+Плотный прием пищи лучше завершить за 2–3 часа до начала практики. Если чувствуете голод, за час до класса можно перекусить половинкой банана или выпить легкий смузи.
+
+**3. Удобная форма**
+
+Выбирайте легкую спортивную одежду из дышащих влагоотводящих тканей. Спортивный топ и леггинсы или шорты — оптимальный вариант.
+
+**4. Не соревнуйтесь и слушайте себя**
+
+Главная цель первого занятия — не сделать все асаны идеально, а дать телу привыкнуть к теплу. Если чувствуете усталость, в любой момент опуститесь на коврик в позу ребенка и восстановите дыхание.`,
     },
-    publishedAt: "2026-10-15",
-    readingTime: "4 min",
-    image: getAssetPath("/images/journal-first-class.jpg"),
+    publishedAt: "2026-10-20",
+    readingTime: "3 хв",
+    image: getAssetPath("/images/journal-hot-yoga-tips.webp"),
     tags: {
-      uk: ["початківцям", "поради", "перше заняття"],
-      en: ["beginners", "tips", "first class"],
+      uk: ["Поради", "Підготовка", "Перше заняття"],
+      en: ["Tips", "Preparation", "First Class"],
+      ru: ["Советы", "Подготовка", "Первое занятие"],
     },
   },
 ];

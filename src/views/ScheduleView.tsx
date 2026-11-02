@@ -1,5 +1,4 @@
 import { translations, type Locale } from "@/lib/translations";
-import { BRAND } from "@/lib/brand";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 
 function formatClassCount(count: number, locale: Locale): string {
@@ -8,137 +7,157 @@ function formatClassCount(count: number, locale: Locale): string {
     if (count >= 2 && count <= 4) return `${count} класи`;
     return `${count} класів`;
   }
+  if (locale === "ru") {
+    if (count === 1) return "1 класс";
+    if (count >= 2 && count <= 4) return `${count} класса`;
+    return `${count} классов`;
+  }
   return count === 1 ? "1 class" : `${count} classes`;
 }
 
 export function ScheduleView({ locale }: { locale: Locale }) {
   const currentTranslations = translations[locale];
 
+  const instructorName = locale === "en" ? "Maria Mironova" : (locale === "ru" ? "Мария Миронова" : "Марія Миронова");
+
+  const durationText = locale === "en" ? "75 min" : (locale === "ru" ? "75 мин" : "75 хв");
+  const durationTextLong = locale === "en" ? "90 min" : (locale === "ru" ? "90 мин" : "90 хв");
+
   const scheduleDays = [
     {
-      dayName: locale === "uk" ? "Понеділок" : "Monday",
+      dayName: locale === "uk" ? "Понеділок" : (locale === "ru" ? "Понедельник" : "Monday"),
       classes: [
         {
           time: "09:00",
-          title: locale === "uk" ? "Гаряча йога: Ранковий баланс" : "Hot Yoga: Morning Balance",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Ранковий баланс" : (locale === "ru" ? "Горячая йога: Утренний баланс" : "Hot Yoga: Morning Balance"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
         {
           time: "19:00",
-          title: locale === "uk" ? "Гаряча йога: Вечірнє перезавантаження" : "Hot Yoga: Evening Reset",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Вечірнє перезавантаження" : (locale === "ru" ? "Горячая йога: Вечерняя перезагрузка" : "Hot Yoga: Evening Reset"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
       ],
     },
     {
-      dayName: locale === "uk" ? "Вівторок" : "Tuesday",
+      dayName: locale === "uk" ? "Вівторок" : (locale === "ru" ? "Вторник" : "Tuesday"),
       classes: [
         {
           time: "18:30",
-          title: locale === "uk" ? "Гаряча йога: Сила та детокс" : "Hot Yoga: Strength & Detox",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Сила та детокс" : (locale === "ru" ? "Горячая йога: Сила и детокс" : "Hot Yoga: Strength & Detox"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
       ],
     },
     {
-      dayName: locale === "uk" ? "Середа" : "Wednesday",
+      dayName: locale === "uk" ? "Середа" : (locale === "ru" ? "Среда" : "Wednesday"),
       classes: [
         {
           time: "09:00",
-          title: locale === "uk" ? "Гаряча йога: Ранковий баланс" : "Hot Yoga: Morning Balance",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Ранковий баланс" : (locale === "ru" ? "Горячая йога: Утренний баланс" : "Hot Yoga: Morning Balance"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
         {
           time: "19:00",
-          title: locale === "uk" ? "Гаряча йога: Глибоке розкриття" : "Hot Yoga: Deep Opening",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Глибоке розкриття" : (locale === "ru" ? "Горячая йога: Глубокое раскрытие" : "Hot Yoga: Deep Opening"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
       ],
     },
     {
-      dayName: locale === "uk" ? "Четвер" : "Thursday",
+      dayName: locale === "uk" ? "Четвер" : (locale === "ru" ? "Четверг" : "Thursday"),
       classes: [
         {
           time: "18:30",
-          title: locale === "uk" ? "Гаряча йога: Сила та детокс" : "Hot Yoga: Strength & Detox",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Сила та детокс" : (locale === "ru" ? "Горячая йога: Сила и детокс" : "Hot Yoga: Strength & Detox"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
       ],
     },
     {
-      dayName: locale === "uk" ? "П'ятниця" : "Friday",
+      dayName: locale === "uk" ? "П'ятниця" : (locale === "ru" ? "Пятница" : "Friday"),
       classes: [
         {
           time: "09:00",
-          title: locale === "uk" ? "Гаряча йога: Ранковий баланс" : "Hot Yoga: Morning Balance",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Ранковий баланс" : (locale === "ru" ? "Горячая йога: Утренний баланс" : "Hot Yoga: Morning Balance"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
         {
           time: "18:30",
-          title: locale === "uk" ? "Гаряча йога: Вечірнє розслаблення" : "Hot Yoga: Evening Relaxation",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "Гаряча йога: Вечірнє розслаблення" : (locale === "ru" ? "Горячая йога: Вечернее расслабление" : "Hot Yoga: Evening Relaxation"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38–40°C",
         },
       ],
     },
     {
-      dayName: locale === "uk" ? "Субота" : "Saturday",
+      dayName: locale === "uk" ? "Субота" : (locale === "ru" ? "Суббота" : "Saturday"),
       classes: [
         {
           time: "11:00",
-          title: locale === "uk" ? "Гаряча йога: Вікенд практика" : "Hot Yoga: Weekend Flow",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "90 хв" : "90 min",
+          title: locale === "uk" ? "Гаряча йога: Вікенд практика" : (locale === "ru" ? "Горячая йога: Уикенд практика" : "Hot Yoga: Weekend Flow"),
+          instructor: instructorName,
+          duration: durationTextLong,
           temp: "38–40°C",
         },
       ],
     },
     {
-      dayName: locale === "uk" ? "Неділя" : "Sunday",
+      dayName: locale === "uk" ? "Неділя" : (locale === "ru" ? "Воскресенье" : "Sunday"),
       classes: [
         {
           time: "12:00",
-          title: locale === "uk" ? "М'яка гаряча йога та медитація" : "Gentle Hot Yoga & Meditation",
-          instructor: "Марія Миронова",
-          duration: locale === "uk" ? "75 хв" : "75 min",
+          title: locale === "uk" ? "М'яка гаряча йога та медитація" : (locale === "ru" ? "Мягкая горячая йога и медитация" : "Gentle Hot Yoga & Meditation"),
+          instructor: instructorName,
+          duration: durationText,
           temp: "38°C",
         },
       ],
     },
   ];
 
-  const instructorLabel = locale === "uk" ? "Інструктор" : "Instructor";
-  const bookSlotText = locale === "uk" ? "Записатися" : "Book slot";
-  const recommendationTitle = locale === "uk" ? "Важливі рекомендації перед заняттям" : "Important class guidelines";
-  const recommendationWaterTitle = locale === "uk" ? "Водний баланс" : "Hydration";
-  const recommendationWaterText = locale === "uk"
-    ? "Пийте воду заздалегідь упродовж дня. Не приходьте зневодненими, візьміть із собою пляшку для води в зал."
-    : "Drink water throughout the day. Do not arrive dehydrated, bring a reusable water bottle to the hall.";
-  const recommendationFoodTitle = locale === "uk" ? "Легкий шлунок" : "Light digestion";
-  const recommendationFoodText = locale === "uk"
-    ? "Останній ситний прийом їжі — за 2–3 години до практики. Дозволено легкий фруктовий перекус за 1 годину."
-    : "Last hearty meal should be 2–3 hours before practice. A light fruit snack is acceptable 1 hour before.";
-  const recommendationWearTitle = locale === "uk" ? "Зручний одяг" : "Comfortable wear";
-  const recommendationWearText = locale === "uk"
-    ? "Вибирайте легкий спортивний одяг, що дихає та не сковує амплітуду рухів."
-    : "Choose lightweight, breathable sportswear that does not restrict your movement range.";
+  const instructorLabel = locale === "en" ? "Instructor" : (locale === "ru" ? "Инструктор" : "Інструктор");
+  const bookSlotText = locale === "en" ? "Book slot" : (locale === "ru" ? "Записаться" : "Записатися");
+  const recommendationTitle = locale === "en"
+    ? "Important class guidelines"
+    : (locale === "ru" ? "Важные рекомендации перед занятием" : "Важливі рекомендації перед заняттям");
+  const recommendationWaterTitle = locale === "en" ? "Hydration" : (locale === "ru" ? "Водный баланс" : "Водний баланс");
+  const recommendationWaterText = locale === "en"
+    ? "Drink water throughout the day. Do not arrive dehydrated, bring a reusable water bottle to the hall."
+    : (locale === "ru"
+      ? "Пейте воду заранее в течение дня. Не приходите обезвоженными, обязательно возьмите бутылочку воды в зал."
+      : "Пийте воду заздалегідь упродовж дня. Не приходьте зневодненими, візьміть із собою пляшку для води в зал.");
 
-  const locationBadge = locale === "uk" ? "Одеса · ЖК «Одісей»" : "Odesa · Odisey Complex";
+  const recommendationFoodTitle = locale === "en" ? "Light digestion" : (locale === "ru" ? "Легкий желудок" : "Легкий шлунок");
+  const recommendationFoodText = locale === "en"
+    ? "Last hearty meal should be 2–3 hours before practice. A light fruit snack is acceptable 1 hour before."
+    : (locale === "ru"
+      ? "Плотный прием пищи лучше завершить за 2–3 часа до практики. За час допустим легкий фруктовый перекус."
+      : "Останній ситний прийом їжі — за 2–3 години до практики. Дозволено легкий фруктовий перекус за 1 годину.");
+
+  const recommendationWearTitle = locale === "en" ? "Comfortable wear" : (locale === "ru" ? "Удобная одежда" : "Зручний одяг");
+  const recommendationWearText = locale === "en"
+    ? "Choose lightweight, breathable sportswear that does not restrict your movement range."
+    : (locale === "ru"
+      ? "Выбирайте легкую дышащую спортивную форму, не сковывающую движения."
+      : "Вибирайте легкий спортивний одяг, що дихає та не сковує амплітуду рухів.");
+
+  const locationBadge = locale === "en" ? "Odesa · Odisey Complex" : (locale === "ru" ? "Одесса · ЖК «Одиссей»" : "Одеса · ЖК «Одісей»");
 
   return (
     <div className="bg-[#F5F2E9] text-[#222923] min-h-screen pt-28 pb-24">

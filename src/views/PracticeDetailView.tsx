@@ -17,10 +17,10 @@ export function PracticeDetailView({
     notFound();
   }
 
-  const levelLabel = locale === "uk" ? "Рівень" : "Level";
-  const durationLabel = locale === "uk" ? "Тривалість" : "Duration";
-  const temperatureLabel = locale === "uk" ? "Температура" : "Temperature";
-  const audienceLabel = locale === "uk" ? "Для кого" : "For whom";
+  const levelLabel = locale === "en" ? "Level" : (locale === "ru" ? "Уровень" : "Рівень");
+  const durationLabel = locale === "en" ? "Duration" : (locale === "ru" ? "Длительность" : "Тривалість");
+  const temperatureLabel = locale === "en" ? "Temperature" : (locale === "ru" ? "Температура" : "Температура");
+  const audienceLabel = locale === "en" ? "For whom" : (locale === "ru" ? "Для кого" : "Для кого");
 
   return (
     <main style={{ background: COLORS.warmCream, minHeight: "100vh" }}>
