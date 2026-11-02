@@ -245,12 +245,12 @@ export function Header({ locale }: HeaderProps) {
                     }}
                     onMouseEnter={() => setHoveredNavigationHref(navigationLink.href)}
                     aria-current={isCurrentActive ? "page" : undefined}
-                    className={`text-xs uppercase tracking-wider transition-colors duration-200 whitespace-nowrap py-1 relative ${
+                    className={`text-xs uppercase tracking-wider font-medium transition-colors duration-200 whitespace-nowrap py-1 relative ${
                       isTargetHighlighted
-                        ? "text-[#B87557] font-semibold"
+                        ? "text-[#B87557]"
                         : isCurrentActive
-                        ? "text-[#B87557]/90 font-medium"
-                        : "text-[#F5F2E9]/80 hover:text-[#B87557] font-medium"
+                        ? "text-[#B87557]/90"
+                        : "text-[#F5F2E9]/80 hover:text-[#B87557]"
                     }`}
                   >
                     <span>{navigationLink.label}</span>
