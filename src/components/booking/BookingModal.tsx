@@ -3,29 +3,35 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Locale } from "@/lib/translations";
 import { BRAND } from "@/lib/brand";
+import { BookingDetails } from "@/components/booking/BookingContext";
 
 interface BookingModalProps {
   locale: Locale;
   isOpen: boolean;
   onClose: () => void;
   initialPracticeSlug?: string;
+  bookingDetails?: BookingDetails;
 }
 
-type PracticeChoice = "trial" | "hot-yoga" | "question";
+type PracticeChoice = "trial" | "pass-8" | "hot-yoga" | "private" | "question";
 
 export default function BookingModal({
   locale,
   isOpen,
   onClose,
   initialPracticeSlug,
+  bookingDetails,
 }: BookingModalProps) {
   const [isRenderedInDom, setIsRenderedInDom] = useState(false);
   const [isAnimationActive, setIsAnimationActive] = useState(false);
   const [selectedChoice, setSelectedChoice] = useState<PracticeChoice>("trial");
   const [guestName, setGuestName] = useState("");
   const [guestContact, setGuestContact] = useState("");
-  const [isRequestSubmitted, setIsRequestSubmitted] = useState(false);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
+  const [isReadyToSendMessage, setIsReadyToSendMessage] = useState(false);
+  const [hasCopiedMessageToClipboard, setHasCopiedMessageToClipboard] = useState(false);
   const animationTimerReference = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const copyResetTimerReference = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const startCloseAnimationSequence = useCallback(() => {
     setIsAnimationActive(false);
@@ -34,18 +40,35 @@ export default function BookingModal({
     }
     animationTimerReference.current = setTimeout(() => {
       setIsRenderedInDom(false);
-      setIsRequestSubmitted(false);
+      setIsReadyToSendMessage(false);
+      setHasCopiedMessageToClipboard(false);
       onClose();
     }, 280);
   }, [onClose]);
 
   useEffect(() => {
     if (isOpen) {
-      if (initialPracticeSlug === "first-trial") {
+      if (bookingDetails?.tariffTitle) {
+        if (bookingDetails.tariffTitle.includes("8") || bookingDetails.tariffTitle.toLowerCase().includes("абонемент")) {
+          setSelectedChoice("pass-8");
+        } else if (bookingDetails.tariffTitle.toLowerCase().includes("індивіду") || bookingDetails.tariffTitle.toLowerCase().includes("private")) {
+          setSelectedChoice("private");
+        } else {
+          setSelectedChoice("trial");
+        }
+      } else if (bookingDetails?.timeSlot) {
+        setSelectedChoice("hot-yoga");
+        setSelectedTimeSlot(bookingDetails.timeSlot);
+      } else if (initialPracticeSlug === "first-trial") {
         setSelectedChoice("trial");
+        setSelectedTimeSlot(null);
       } else if (initialPracticeSlug === "hot-yoga-base" || initialPracticeSlug === "hot-yoga") {
         setSelectedChoice("hot-yoga");
+        setSelectedTimeSlot(null);
+      } else {
+        setSelectedTimeSlot(null);
       }
+
       setIsRenderedInDom(true);
       const openAnimationFrame = requestAnimationFrame(() => {
         setIsAnimationActive(true);
@@ -68,64 +91,100 @@ export default function BookingModal({
         if (animationTimerReference.current) {
           clearTimeout(animationTimerReference.current);
         }
+        if (copyResetTimerReference.current) {
+          clearTimeout(copyResetTimerReference.current);
+        }
       };
     } else {
       setIsAnimationActive(false);
       setIsRenderedInDom(false);
-      setIsRequestSubmitted(false);
+      setIsReadyToSendMessage(false);
+      setHasCopiedMessageToClipboard(false);
     }
-  }, [isOpen, initialPracticeSlug, startCloseAnimationSequence]);
+  }, [isOpen, initialPracticeSlug, bookingDetails, startCloseAnimationSequence]);
 
   if (!isRenderedInDom) return null;
 
   const choiceOptions = [
     {
       id: "trial" as PracticeChoice,
-      labelUk: "Пробне заняття",
-      labelEn: "Trial Class",
+      labelUk: "Пробне заняття (350 ₴)",
+      labelEn: "Trial Class (350 ₴)",
+    },
+    {
+      id: "pass-8" as PracticeChoice,
+      labelUk: "Абонемент на 8 занять (3 200 ₴)",
+      labelEn: "8-Class Pass (3 200 ₴)",
     },
     {
       id: "hot-yoga" as PracticeChoice,
-      labelUk: "Hot Yoga (38–40°C)",
-      labelEn: "Hot Yoga (38–40°C)",
+      labelUk: "Гаряча йога за розкладом",
+      labelEn: "Hot Yoga Scheduled Class",
+    },
+    {
+      id: "private" as PracticeChoice,
+      labelUk: "Індивідуальна практика (1 400 ₴)",
+      labelEn: "Private 1-on-1 Practice (1 400 ₴)",
     },
     {
       id: "question" as PracticeChoice,
-      labelUk: "Дізнатися розклад",
-      labelEn: "Schedule & Info",
+      labelUk: "Консультація та розклад",
+      labelEn: "Schedule & Consultation",
     },
   ];
 
+  const selectedOptionObject = choiceOptions.find((item) => item.id === selectedChoice);
+  const chosenFormatName = locale === "uk" ? selectedOptionObject?.labelUk : selectedOptionObject?.labelEn;
+
+  const preparedMessageText =
+    locale === "uk"
+      ? `Вітаю! Хочу записатися до студії Balance Hot Yoga (Одеса).\n\n• Напрям / Тариф: ${chosenFormatName}${
+          selectedTimeSlot ? `\n• Бажаний час: ${selectedTimeSlot}` : ""
+        }\n• Ім'я: ${guestName}\n• Контактний телефон: ${guestContact}\n\nПідкажіть, будь ласка, наявність вільного місця?`
+      : `Hello! I would like to book a session at Balance Hot Yoga (Odesa).\n\n• Option: ${chosenFormatName}${
+          selectedTimeSlot ? `\n• Preferred Time: ${selectedTimeSlot}` : ""
+        }\n• Name: ${guestName}\n• Contact: ${guestContact}\n\nPlease confirm availability for this slot.`;
+
   const handleFormSubmission = (formEvent: React.FormEvent) => {
     formEvent.preventDefault();
+    setIsReadyToSendMessage(true);
+  };
 
-    const selectedOption = choiceOptions.find((item) => item.id === selectedChoice);
-    const chosenFormatName = locale === "uk" ? selectedOption?.labelUk : selectedOption?.labelEn;
+  const handleCopyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(preparedMessageText);
+      setHasCopiedMessageToClipboard(true);
+      if (copyResetTimerReference.current) {
+        clearTimeout(copyResetTimerReference.current);
+      }
+      copyResetTimerReference.current = setTimeout(() => {
+        setHasCopiedMessageToClipboard(false);
+      }, 3000);
+    } catch {
+      setHasCopiedMessageToClipboard(false);
+    }
+  };
 
-    const directMessagePayload =
-      locale === "uk"
-        ? `Вітаю! Хочу записатися до студії Balance.\n\n• Формат: ${chosenFormatName}\n• Ім'я: ${guestName}\n• Контакт: ${guestContact}\n\nПідкажіть, будь ласка, вільний час?`
-        : `Hello! I would like to book a hot yoga class at Balance Studio.\n\n• Format: ${chosenFormatName}\n• Name: ${guestName}\n• Contact: ${guestContact}\n\nPlease let me know the available time slots.`;
-
-    const encodedInstagramPayload = encodeURIComponent(directMessagePayload);
-    window.open(`${BRAND.instagram}?text=${encodedInstagramPayload}`, "_blank", "noopener,noreferrer");
-
-    setIsRequestSubmitted(true);
+  const handleOpenInstagramDirect = () => {
+    const encodedPayload = encodeURIComponent(preparedMessageText);
+    const directUrl = `${BRAND.instagram}?text=${encodedPayload}`;
+    window.open(directUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out ${
         isAnimationActive
-          ? "bg-black/70 backdrop-blur-md opacity-100"
+          ? "bg-black/75 backdrop-blur-md opacity-100"
           : "bg-black/0 backdrop-blur-none opacity-0 pointer-events-none"
       }`}
       role="dialog"
       aria-modal="true"
+      aria-labelledby="booking-modal-title"
       onClick={startCloseAnimationSequence}
     >
       <div
-        className={`relative w-full max-w-md bg-[#1F2620] border border-[#B87557]/30 rounded-3xl p-6 sm:p-8 text-[#F5F2E9] shadow-2xl transition-all duration-300 ease-out transform ${
+        className={`relative w-full max-w-md bg-[#1F2620] border border-[#B87557]/30 rounded-3xl p-6 sm:p-8 text-[#F5F2E9] shadow-2xl transition-all duration-300 ease-out transform max-h-[92vh] overflow-y-auto ${
           isAnimationActive
             ? "opacity-100 scale-100 translate-y-0"
             : "opacity-0 scale-95 translate-y-4"
@@ -135,12 +194,12 @@ export default function BookingModal({
         <button
           type="button"
           onClick={startCloseAnimationSequence}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-[#E8DFD1] hover:text-white transition-all cursor-pointer"
+          className="absolute top-4 right-4 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-[#E8DFD1] hover:text-white transition-all cursor-pointer"
           aria-label={locale === "uk" ? "Закрити" : "Close"}
         >
           <svg
-            width="12"
-            height="12"
+            width="14"
+            height="14"
             viewBox="0 0 14 14"
             fill="none"
             stroke="currentColor"
@@ -152,61 +211,120 @@ export default function BookingModal({
           </svg>
         </button>
 
-        {isRequestSubmitted ? (
-          <div className="py-6 text-center space-y-5 animate-fade-in-up">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#B87557] to-[#D4793A] flex items-center justify-center text-white shadow-lg shadow-[#B87557]/30">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
+        {isReadyToSendMessage ? (
+          <div className="py-2 space-y-5 animate-fade-in-up">
+            <div className="text-center space-y-2">
+              <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-[#B87557] to-[#D4793A] flex items-center justify-center text-white shadow-lg shadow-[#B87557]/30">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
 
-            <div className="space-y-1.5">
-              <h3 className="font-serif italic text-2xl sm:text-3xl text-white">
-                {locale === "uk" ? "Заявку надіслано" : "Request Sent"}
+              <h3
+                id="booking-modal-title"
+                className="font-serif italic text-2xl sm:text-3xl text-white font-medium"
+              >
+                {locale === "uk" ? "Завершіть запис у Direct" : "Send Request in Direct"}
               </h3>
-              <p className="text-xs sm:text-sm text-[#828A73] leading-relaxed max-w-xs mx-auto">
+              <p className="text-xs text-[#828A73] leading-relaxed max-w-sm mx-auto">
                 {locale === "uk"
-                  ? "Ми відкрили діалог зі студією в Instagram Direct. Надішліть повідомлення, і ми забронюємо за вами коврик."
-                  : "We opened a direct conversation with Balance Studio on Instagram. Send your message and we will reserve your mat."}
+                  ? "Ми сформували текст вашої заявки. Натисніть кнопку, щоб перейти в Direct, або скопіюйте текст для повідомлення:"
+                  : "Your reservation request is prepared. Tap below to open Direct or copy the message text:"}
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={startCloseAnimationSequence}
-              className="w-full py-3.5 px-6 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-widest font-medium transition-all cursor-pointer"
-            >
-              {locale === "uk" ? "Зрозуміло" : "Got it"}
-            </button>
+            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 space-y-3">
+              <pre className="text-xs text-[#EAE5D9] whitespace-pre-wrap font-sans leading-relaxed select-all">
+                {preparedMessageText}
+              </pre>
+
+              <button
+                type="button"
+                onClick={handleCopyToClipboard}
+                className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer"
+              >
+                <span>{hasCopiedMessageToClipboard ? "✓ Текст скопійовано" : (locale === "uk" ? "Скопіювати текст заявки" : "Copy Message Text")}</span>
+              </button>
+            </div>
+
+            <div className="space-y-2 pt-1">
+              <button
+                type="button"
+                onClick={handleOpenInstagramDirect}
+                className="w-full min-h-[48px] py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B87557] to-[#D4793A] hover:brightness-110 active:scale-[0.99] text-white font-medium text-xs uppercase tracking-widest transition-all shadow-lg shadow-[#B87557]/25 cursor-pointer flex items-center justify-center gap-2"
+              >
+                <span>{locale === "uk" ? "Перейти в Instagram Direct" : "Open Instagram Direct"}</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsReadyToSendMessage(false)}
+                className="w-full py-2.5 text-xs text-[#828A73] hover:text-white transition-colors cursor-pointer"
+              >
+                {locale === "uk" ? "← Змінити дані або час" : "← Change information"}
+              </button>
+            </div>
           </div>
         ) : (
-          <form onSubmit={handleFormSubmission} className="space-y-5">
-            <div className="space-y-1 pr-6">
+          <form onSubmit={handleFormSubmission} className="space-y-4">
+            <div className="space-y-1 pr-8">
               <span className="text-[10px] uppercase tracking-widest text-[#B87557] font-semibold block">
-                {locale === "uk" ? "Hot Yoga · Одеса · 38–40°C" : "Hot Yoga · Odesa · 38–40°C"}
+                {locale === "uk" ? "Hot Yoga · ЖК «Одісей» · 38–40°C" : "Hot Yoga · Odisey Complex · 38–40°C"}
               </span>
-              <h3 className="font-serif italic text-2xl sm:text-3xl text-white font-medium">
+              <h3
+                id="booking-modal-title"
+                className="font-serif italic text-2xl sm:text-3xl text-white font-medium"
+              >
                 {locale === "uk" ? "Запис на практику" : "Book a Practice"}
               </h3>
               <p className="text-xs text-[#828A73] font-light">
                 {locale === "uk"
-                  ? "Залиште контакти — адміністратор зв'яжеться з вами та підтвердить зручний час."
-                  : "Leave your contact details — our administrator will confirm your preferred class time."}
+                  ? "Залиште ім'я та телефон — ми зарезервуємо килимок за вами."
+                  : "Leave your name and phone — we will reserve your mat."}
               </p>
             </div>
 
+            {selectedTimeSlot && (
+              <div className="px-3.5 py-2 rounded-xl bg-[#B87557]/15 border border-[#B87557]/30 flex items-center justify-between text-xs text-[#EAE5D9]">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#B87557]" />
+                  <span>{selectedTimeSlot}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedTimeSlot(null)}
+                  className="text-[10px] text-[#B87557] hover:underline"
+                >
+                  {locale === "uk" ? "Змінити" : "Clear"}
+                </button>
+              </div>
+            )}
+
             <div className="space-y-1.5">
               <label className="block text-[11px] uppercase tracking-wider text-[#828A73] font-medium">
-                {locale === "uk" ? "Що вас цікавить" : "Select Format"}
+                {locale === "uk" ? "Напрям або тариф" : "Select Format / Pass"}
               </label>
               <div className="grid grid-cols-1 gap-1.5">
                 {choiceOptions.map((choiceOption) => {
@@ -216,7 +334,7 @@ export default function BookingModal({
                       key={choiceOption.id}
                       type="button"
                       onClick={() => setSelectedChoice(choiceOption.id)}
-                      className={`py-2 px-3.5 rounded-xl text-left text-xs transition-all cursor-pointer border flex items-center justify-between ${
+                      className={`min-h-[44px] py-2.5 px-3.5 rounded-xl text-left text-xs transition-all cursor-pointer border flex items-center justify-between ${
                         isChoiceSelected
                           ? "bg-[#B87557]/20 border-[#B87557] text-white ring-1 ring-[#B87557]/40"
                           : "bg-white/[0.03] border-white/10 text-[#828A73] hover:text-white hover:border-white/20"
@@ -226,7 +344,7 @@ export default function BookingModal({
                         {locale === "uk" ? choiceOption.labelUk : choiceOption.labelEn}
                       </span>
                       <span
-                        className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                        className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                           isChoiceSelected ? "border-[#B87557] bg-[#B87557]" : "border-white/20"
                         }`}
                       >
@@ -240,24 +358,30 @@ export default function BookingModal({
 
             <div className="space-y-2.5">
               <div>
+                <label className="sr-only">
+                  {locale === "uk" ? "Ваше ім'я" : "Your Name"}
+                </label>
                 <input
                   type="text"
                   required
                   value={guestName}
                   onChange={(inputChangeEvent) => setGuestName(inputChangeEvent.target.value)}
-                  placeholder={locale === "uk" ? "Ваше ім'я" : "Your Name"}
-                  className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-sm text-white placeholder-[#828A73] outline-none transition-all"
+                  placeholder={locale === "uk" ? "Ваше ім'я *" : "Your Name *"}
+                  className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-base text-white placeholder-[#828A73] outline-none transition-all"
                 />
               </div>
 
               <div>
+                <label className="sr-only">
+                  {locale === "uk" ? "Телефон або @instagram / telegram" : "Phone or @instagram / telegram"}
+                </label>
                 <input
                   type="text"
                   required
                   value={guestContact}
                   onChange={(inputChangeEvent) => setGuestContact(inputChangeEvent.target.value)}
-                  placeholder={locale === "uk" ? "Телефон або @instagram / telegram" : "Phone or @instagram / telegram"}
-                  className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-sm text-white placeholder-[#828A73] outline-none transition-all"
+                  placeholder={locale === "uk" ? "Телефон або @instagram *" : "Phone or @instagram *"}
+                  className="w-full bg-white/[0.04] border border-white/10 focus:border-[#B87557] focus:bg-white/[0.07] focus:ring-1 focus:ring-[#B87557] rounded-xl px-4 py-3 text-base text-white placeholder-[#828A73] outline-none transition-all"
                 />
               </div>
             </div>
@@ -265,9 +389,9 @@ export default function BookingModal({
             <div className="pt-1">
               <button
                 type="submit"
-                className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B87557] to-[#D4793A] hover:brightness-110 active:scale-[0.99] text-white font-medium text-xs uppercase tracking-widest transition-all shadow-lg shadow-[#B87557]/25 cursor-pointer flex items-center justify-center gap-2 group"
+                className="w-full min-h-[48px] py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B87557] to-[#D4793A] hover:brightness-110 active:scale-[0.99] text-white font-medium text-xs uppercase tracking-widest transition-all shadow-lg shadow-[#B87557]/25 cursor-pointer flex items-center justify-center gap-2 group"
               >
-                <span>{locale === "uk" ? "Записатися на заняття" : "Book Your Class"}</span>
+                <span>{locale === "uk" ? "Продовжити запис" : "Continue Booking"}</span>
                 <svg
                   width="14"
                   height="14"
@@ -285,8 +409,8 @@ export default function BookingModal({
               </button>
               <p className="text-center text-[10px] text-[#828A73] mt-2 font-light">
                 {locale === "uk"
-                  ? "Без онлайн-оплати · Відповімо протягом 15 хвилин"
-                  : "No upfront payment · Direct confirmation within 15 minutes"}
+                  ? "Без передплати на сайті · Підтвердження за 10–15 хвилин"
+                  : "No upfront payment · Direct confirmation in 10–15 mins"}
               </p>
             </div>
           </form>

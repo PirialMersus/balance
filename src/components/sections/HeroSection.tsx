@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { translations, Locale } from "@/lib/translations";
 import AtmosphericCanvas from "@/components/ambient/AtmosphericCanvas";
+import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 import { getAssetPath } from "@/lib/brand";
 
 interface HeroSectionProps {
@@ -11,11 +12,14 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const heroTranslations = translations[locale].hero;
   const routePrefix = locale === "uk" ? "" : "/en";
   const badgeText = locale === "uk"
-    ? "Єдина студія гарячої йоги в Одесі"
-    : "The only dedicated hot yoga studio in Odesa";
+    ? "Єдина студія гарячої йоги в Одесі · ЖК «Одісей»"
+    : "Dedicated hot yoga studio in Odesa · Odisey Complex";
   const heroAltText = locale === "uk"
     ? "Студія гарячої йоги Balance Одеса"
     : "Balance Hot Yoga Studio Odesa";
+
+  const primaryButtonText = locale === "uk" ? "Записатися на пробне" : "Book a Trial Class";
+  const secondaryButtonText = locale === "uk" ? "Розклад занять" : "Class Schedule";
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#1A2019]">
@@ -31,7 +35,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           className="w-full h-full object-cover"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-[#1A2019]/80 via-[#1A2019]/60 to-[#1A2019]/95"
+          className="absolute inset-0 bg-gradient-to-b from-[#1A2019]/85 via-[#1A2019]/60 to-[#1A2019]/95"
         />
       </div>
 
@@ -66,17 +70,17 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         </path>
       </svg>
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto pt-28 pb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-8">
+      <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 max-w-4xl mx-auto pt-24 sm:pt-28 pb-12 sm:pb-16">
+        <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-6 sm:mb-8">
           <span className="w-2 h-2 rounded-full bg-[#D4793A] animate-pulse" />
-          <span className="text-xs uppercase tracking-widest text-[#F5F2E9] font-medium">
+          <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#F5F2E9] font-medium">
             {badgeText}
           </span>
         </div>
 
         <h1
-          className="font-serif italic text-white leading-[1.08] mb-8 drop-shadow-md"
-          style={{ fontSize: "clamp(48px, 8vw, 92px)" }}
+          className="font-serif italic text-white leading-[1.08] mb-6 sm:mb-8 drop-shadow-md"
+          style={{ fontSize: "clamp(44px, 8vw, 92px)" }}
         >
           {heroTranslations.headline.split("\n").map((headlineRow, headlineRowIndex) => (
             <span key={headlineRowIndex} className="block">
@@ -86,24 +90,25 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         </h1>
 
         <p
-          className="text-[#F5F2E9]/90 text-lg md:text-xl leading-relaxed mb-12 max-w-xl font-light"
+          className="text-[#F5F2E9]/90 text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-12 max-w-xl font-light"
           style={{ whiteSpace: "pre-line" }}
         >
           {heroTranslations.sub}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-5 items-center">
-          <Link
-            href={`${routePrefix}/practices`}
-            className="w-full sm:w-auto px-9 py-4 bg-[#B87557] hover:bg-[#D4793A] text-white font-medium tracking-widest transition-all duration-300 text-xs uppercase shadow-xl hover:shadow-2xl text-center rounded-full"
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center w-full sm:w-auto">
+          <BookingTriggerButton
+            tariffTitle="Пробне заняття (350 ₴)"
+            className="w-full sm:w-auto min-h-[48px] px-8 sm:px-9 py-4 bg-[#B87557] hover:bg-[#D4793A] text-white font-medium tracking-widest transition-all duration-300 text-xs uppercase shadow-xl hover:shadow-2xl text-center rounded-full cursor-pointer"
           >
-            {heroTranslations.ctaPractice}
-          </Link>
+            {primaryButtonText}
+          </BookingTriggerButton>
+
           <Link
             href={`${routePrefix}/schedule`}
-            className="w-full sm:w-auto px-9 py-4 border border-white/80 hover:bg-white/10 text-white font-medium tracking-widest transition-all duration-300 text-xs uppercase text-center rounded-full backdrop-blur-sm"
+            className="w-full sm:w-auto min-h-[48px] px-8 sm:px-9 py-4 border border-white/80 hover:bg-white/10 text-white font-medium tracking-widest transition-all duration-300 text-xs uppercase text-center rounded-full backdrop-blur-sm flex items-center justify-center"
           >
-            {heroTranslations.ctaSchedule}
+            {secondaryButtonText}
           </Link>
         </div>
       </div>

@@ -8,11 +8,14 @@ export function PricingView({ locale }: { locale: Locale }) {
   const pricingTiers = [
     {
       title: locale === "uk" ? "Пробне заняття" : "Trial Class",
+      price: "350 ₴",
+      pricePerClass: locale === "uk" ? "для нових гостей студії" : "for new guests",
       description:
         locale === "uk"
           ? "Ідеальне перше знайомство з практикою гарячої йоги в Одесі."
           : "The ideal first introduction to hot yoga practice in Odesa.",
       highlight: locale === "uk" ? "Спецціна для новачків" : "Special offer for beginners",
+      buttonLabel: locale === "uk" ? "Записатися на пробне" : "Book Trial Class",
       features: [
         locale === "uk" ? "75 хвилин практики при 38–40°C" : "75 minutes of practice at 38–40°C",
         locale === "uk" ? "Персональний інструктаж перед класом" : "Personal briefing before class",
@@ -23,11 +26,14 @@ export function PricingView({ locale }: { locale: Locale }) {
     },
     {
       title: locale === "uk" ? "Абонемент на 8 занять" : "8-Class Pass",
+      price: "3 200 ₴",
+      pricePerClass: locale === "uk" ? "400 ₴ за одне заняття" : "400 ₴ per class",
       description:
         locale === "uk"
           ? "Оптимальна регулярність (2 рази на тиждень) для стабільної адаптації тіла."
           : "Optimal regularity (twice a week) for sustainable body adaptation.",
       highlight: locale === "uk" ? "Рекомендований вибір" : "Most recommended",
+      buttonLabel: locale === "uk" ? "Придбати абонемент" : "Select 8-Class Pass",
       features: [
         locale === "uk" ? "Діє 35 днів" : "Valid for 35 days",
         locale === "uk" ? "Доступ до всіх класів розкладу" : "Access to all scheduled classes",
@@ -38,11 +44,14 @@ export function PricingView({ locale }: { locale: Locale }) {
     },
     {
       title: locale === "uk" ? "Індивідуальна практика" : "Private Practice",
+      price: "1 400 ₴",
+      pricePerClass: locale === "uk" ? "персональний сеанс 75 хв" : "75 min personal session",
       description:
         locale === "uk"
           ? "Персональна робота з Марією Мироновою під ваші цілі та фізичні особливості."
           : "Personal 1-on-1 session with Maria Mironova tailored to your goals.",
       highlight: locale === "uk" ? "1 на 1 із засновницею" : "1-on-1 with founder",
+      buttonLabel: locale === "uk" ? "Замовити індивідуальну" : "Book Private Session",
       features: [
         locale === "uk" ? "Індивідуальний температурний режим" : "Customized temperature settings",
         locale === "uk" ? "Глибоке налаштування біомеханіки асан" : "In-depth biomechanics alignment",
@@ -54,7 +63,11 @@ export function PricingView({ locale }: { locale: Locale }) {
   ];
 
   const popularBadgeText = locale === "uk" ? "Популярний" : "Popular";
-  const chooseTierButtonText = locale === "uk" ? "Обрати абонемент" : "Select pass";
+  const dropInText = locale === "uk"
+    ? "Також доступне разове відвідування будь-якого групового заняття без абонемента — 500 ₴."
+    : "Single drop-in class without a membership pass is also available — 500 ₴.";
+  const locationBadge = locale === "uk" ? "Одеса · ЖК «Одісей»" : "Odesa · Odisey Complex";
+
   const noteTitle = locale === "uk" ? "Усі абонементи включають:" : "All memberships include:";
   const noteOne = locale === "uk" ? "Оренду фірмового несковзкого килимка" : "Use of premium non-slip mat";
   const noteTwo = locale === "uk" ? "Великий махровий рушник для практики" : "Large plush practice towel";
@@ -66,7 +79,7 @@ export function PricingView({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
           <p className="text-xs uppercase tracking-widest text-[#B87557] mb-4 font-medium">
-            Balance Hot Yoga · {BRAND.city}
+            Balance Hot Yoga · {locationBadge}
           </p>
           <h1
             className="font-serif italic text-[#1A2019] leading-tight mb-6"
@@ -79,18 +92,18 @@ export function PricingView({ locale }: { locale: Locale }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-stretch">
           {pricingTiers.map((tierItem, tierIndex) => (
             <div
               key={tierIndex}
-              className={`bg-white border flex flex-col justify-between p-8 md:p-10 transition-shadow ${
+              className={`bg-white border flex flex-col justify-between p-8 md:p-10 transition-shadow rounded-2xl ${
                 tierItem.isPopular
                   ? "border-[#B87557] shadow-xl relative"
                   : "border-[#293A30]/10 hover:shadow-lg"
               }`}
             >
               {tierItem.isPopular && (
-                <span className="absolute -top-3 left-8 px-3 py-1 bg-[#B87557] text-[#F5F2E9] text-[10px] uppercase tracking-widest font-semibold">
+                <span className="absolute -top-3 left-8 px-3.5 py-1 bg-[#B87557] text-[#F5F2E9] text-[10px] uppercase tracking-widest font-semibold rounded-full shadow-sm">
                   {popularBadgeText}
                 </span>
               )}
@@ -99,10 +112,20 @@ export function PricingView({ locale }: { locale: Locale }) {
                 <span className="text-xs uppercase tracking-widest text-[#828A73] block mb-2 font-medium">
                   {tierItem.highlight}
                 </span>
-                <h2 className="font-serif italic text-3xl text-[#1A2019] mb-4">
+                <h2 className="font-serif italic text-3xl text-[#1A2019] mb-3">
                   {tierItem.title}
                 </h2>
-                <p className="text-sm text-[#79776E] mb-8 leading-relaxed">
+
+                <div className="mb-4">
+                  <div className="font-serif italic text-4xl text-[#B87557] font-semibold">
+                    {tierItem.price}
+                  </div>
+                  <span className="text-xs text-[#79776E] block mt-0.5">
+                    {tierItem.pricePerClass}
+                  </span>
+                </div>
+
+                <p className="text-sm text-[#79776E] mb-6 leading-relaxed">
                   {tierItem.description}
                 </p>
 
@@ -123,20 +146,25 @@ export function PricingView({ locale }: { locale: Locale }) {
 
               <div>
                 <BookingTriggerButton
-                  className={`w-full py-4 text-xs uppercase tracking-widest font-semibold transition-colors cursor-pointer ${
+                  tariffTitle={`${tierItem.title} (${tierItem.price})`}
+                  className={`w-full py-4 px-6 rounded-full text-xs uppercase tracking-widest font-semibold transition-all cursor-pointer shadow-md ${
                     tierItem.isPopular
-                      ? "bg-[#B87557] hover:bg-[#D4793A] text-white"
+                      ? "bg-[#B87557] hover:bg-[#D4793A] text-white shadow-[#B87557]/20"
                       : "bg-[#293A30] hover:bg-[#1A2019] text-[#F5F2E9]"
                   }`}
                 >
-                  {chooseTierButtonText}
+                  {tierItem.buttonLabel}
                 </BookingTriggerButton>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 border-l-4 border-[#B87557]">
+        <div className="mb-16 p-4 rounded-xl bg-white/70 border border-[#293A30]/10 text-center text-sm text-[#293A30]">
+          {dropInText}
+        </div>
+
+        <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 border-l-4 border-[#B87557] rounded-2xl shadow-lg">
           <h2 className="font-serif italic text-2xl md:text-3xl mb-4">
             {noteTitle}
           </h2>

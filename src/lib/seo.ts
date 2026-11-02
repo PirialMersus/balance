@@ -36,8 +36,8 @@ export function buildSeoMeta(params: {
   const title = pageTitle ? `${pageTitle} | ${siteName}` : siteName;
 
   const defaultDescriptions: Record<Locale, string> = {
-    uk: "Єдина спеціалізована студія гарячої йоги в Одесі (38–40°C). Запис на практику через Instagram Direct.",
-    en: "The premier dedicated hot yoga studio in Odesa, Ukraine (38–40°C). Book your class via Instagram Direct.",
+    uk: "Єдина спеціалізована студія гарячої йоги в Одесі (ЖК «Одісей», 38–40°C). Запис на практику через Instagram Direct.",
+    en: "The premier dedicated hot yoga studio in Odesa (Odisey Complex, 38–40°C). Book your class via Instagram Direct.",
   };
   const description = pageDescription ?? defaultDescriptions[locale];
 
@@ -66,22 +66,23 @@ export function buildJsonLd(locale: Locale) {
     name: locale === "uk" ? "Баланс - Hot Yoga - Одеса" : "Balance - Hot Yoga - Odesa",
     description:
       locale === "uk"
-        ? "Єдина спеціалізована студія гарячої йоги в Одесі (38–40°C)"
-        : "The dedicated hot yoga studio in Odesa (38–40°C)",
+        ? "Єдина спеціалізована студія гарячої йоги в Одесі (38–40°C, ЖК «Одісей»)"
+        : "The dedicated hot yoga studio in Odesa (38–40°C, Odisey Complex)",
     url: locale === "uk" ? `${BASE_URL}` : `${BASE_URL}/en`,
     sameAs: [BRAND.instagram],
     image: OG_IMAGE,
-    priceRange: "$$",
+    priceRange: "350 - 3200 UAH",
     sport: "Hot Yoga",
     address: {
       "@type": "PostalAddress",
+      streetAddress: locale === "uk" ? "Люстдорфська дорога, 55К (ЖК «Одісей»)" : "55K Liustdorfska Road (Odisey Complex)",
       addressLocality: locale === "uk" ? "Одеса" : "Odesa",
       addressCountry: "UA",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 46.4825,
-      longitude: 30.7233,
+      latitude: 46.4172,
+      longitude: 30.7231,
     },
     openingHoursSpecification: [
       {
@@ -95,7 +96,7 @@ export function buildJsonLd(locale: Locale) {
           "Saturday",
           "Sunday",
         ],
-        opens: "08:00",
+        opens: "08:30",
         closes: "21:30",
       },
     ],

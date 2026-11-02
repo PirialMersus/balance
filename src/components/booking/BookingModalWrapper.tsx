@@ -5,7 +5,7 @@ import BookingModal from "@/components/booking/BookingModal";
 import { Locale } from "@/lib/translations";
 
 export default function BookingModalWrapper({ locale }: { locale: Locale }) {
-  const { isBookingOpen, closeBooking, selectedPractice } = useBooking();
+  const { isBookingOpen, closeBooking, selectedPractice, bookingDetails } = useBooking();
 
   return (
     <BookingModal
@@ -13,6 +13,7 @@ export default function BookingModalWrapper({ locale }: { locale: Locale }) {
       isOpen={isBookingOpen}
       onClose={closeBooking}
       initialPracticeSlug={selectedPractice}
+      bookingDetails={bookingDetails}
     />
   );
 }

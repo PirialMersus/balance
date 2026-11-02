@@ -2,6 +2,15 @@ import { translations, type Locale } from "@/lib/translations";
 import { BRAND } from "@/lib/brand";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
 
+function formatClassCount(count: number, locale: Locale): string {
+  if (locale === "uk") {
+    if (count === 1) return "1 клас";
+    if (count >= 2 && count <= 4) return `${count} класи`;
+    return `${count} класів`;
+  }
+  return count === 1 ? "1 class" : `${count} classes`;
+}
+
 export function ScheduleView({ locale }: { locale: Locale }) {
   const currentTranslations = translations[locale];
 
@@ -129,12 +138,14 @@ export function ScheduleView({ locale }: { locale: Locale }) {
     ? "Вибирайте легкий спортивний одяг, що дихає та не сковує амплітуду рухів."
     : "Choose lightweight, breathable sportswear that does not restrict your movement range.";
 
+  const locationBadge = locale === "uk" ? "Одеса · ЖК «Одісей»" : "Odesa · Odisey Complex";
+
   return (
     <div className="bg-[#F5F2E9] text-[#222923] min-h-screen pt-28 pb-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
           <p className="text-xs uppercase tracking-widest text-[#B87557] mb-4 font-medium">
-            Balance Hot Yoga · {BRAND.city}
+            Balance Hot Yoga · {locationBadge}
           </p>
           <h1
             className="font-serif italic text-[#1A2019] leading-tight mb-6"
@@ -151,61 +162,65 @@ export function ScheduleView({ locale }: { locale: Locale }) {
           {scheduleDays.map((singleDay, dayIndex) => (
             <div
               key={dayIndex}
-              className="bg-white border border-[#293A30]/10 p-6 md:p-8 transition-shadow hover:shadow-md"
+              className="bg-white border border-[#293A30]/10 p-6 md:p-8 transition-shadow hover:shadow-md rounded-2xl"
             >
               <div className="flex items-center justify-between border-b border-[#293A30]/10 pb-4 mb-6">
                 <h2 className="font-serif italic text-2xl md:text-3xl text-[#1A2019]">
                   {singleDay.dayName}
                 </h2>
                 <span className="text-xs uppercase tracking-widest text-[#828A73]">
-                  {singleDay.classes.length} {locale === "uk" ? "класи" : "classes"}
+                  {formatClassCount(singleDay.classes.length, locale)}
                 </span>
               </div>
 
               <div className="divide-y divide-[#293A30]/10">
-                {singleDay.classes.map((singleClass, classIndex) => (
-                  <div
-                    key={classIndex}
-                    className="py-5 first:pt-0 last:pb-0 flex flex-col md:flex-row md:items-center justify-between gap-4"
-                  >
-                    <div className="flex items-start md:items-center gap-6">
-                      <span className="font-mono text-2xl font-light text-[#B87557] w-20">
-                        {singleClass.time}
-                      </span>
-                      <div>
-                        <h3 className="text-lg font-medium text-[#1A2019] mb-1">
-                          {singleClass.title}
-                        </h3>
-                        <p className="text-sm text-[#79776E]">
-                          {instructorLabel}: {singleClass.instructor}
-                        </p>
-                      </div>
-                    </div>
+                {singleDay.classes.map((singleClass, classIndex) => {
+                  const classFormattedSlot = `${singleDay.dayName}, ${singleClass.time} (${singleClass.title})`;
 
-                    <div className="flex items-center gap-4 self-end md:self-center">
-                      <div className="flex items-center gap-2 text-xs text-[#828A73]">
-                        <span className="px-2.5 py-1 bg-[#F5F2E9] rounded-none border border-[#293A30]/10">
-                          {singleClass.duration}
+                  return (
+                    <div
+                      key={classIndex}
+                      className="py-5 first:pt-0 last:pb-0 flex flex-col md:flex-row md:items-center justify-between gap-4"
+                    >
+                      <div className="flex items-start md:items-center gap-6">
+                        <span className="font-mono text-2xl font-light text-[#B87557] w-20">
+                          {singleClass.time}
                         </span>
-                        <span className="px-2.5 py-1 bg-[#F5F2E9] rounded-none border border-[#293A30]/10">
-                          {singleClass.temp}
-                        </span>
+                        <div>
+                          <h3 className="text-lg font-medium text-[#1A2019] mb-1">
+                            {singleClass.title}
+                          </h3>
+                          <p className="text-sm text-[#79776E]">
+                            {instructorLabel}: {singleClass.instructor}
+                          </p>
+                        </div>
                       </div>
-                      <BookingTriggerButton
-                        timeSlot={`${singleDay.dayName} ${singleClass.time}`}
-                        className="px-5 py-2.5 bg-[#293A30] hover:bg-[#B87557] text-[#F5F2E9] text-xs uppercase tracking-widest transition-colors cursor-pointer"
-                      >
-                        {bookSlotText}
-                      </BookingTriggerButton>
+
+                      <div className="flex items-center gap-4 self-end md:self-center">
+                        <div className="flex items-center gap-2 text-xs text-[#828A73]">
+                          <span className="px-2.5 py-1 bg-[#F5F2E9] rounded-md border border-[#293A30]/10">
+                            {singleClass.duration}
+                          </span>
+                          <span className="px-2.5 py-1 bg-[#F5F2E9] rounded-md border border-[#293A30]/10">
+                            {singleClass.temp}
+                          </span>
+                        </div>
+                        <BookingTriggerButton
+                          timeSlot={classFormattedSlot}
+                          className="px-5 py-2.5 bg-[#293A30] hover:bg-[#B87557] text-[#F5F2E9] text-xs uppercase tracking-widest transition-colors cursor-pointer rounded-full min-h-[40px]"
+                        >
+                          {bookSlotText}
+                        </BookingTriggerButton>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="border border-[#293A30]/20 p-8 md:p-12 bg-white">
+        <div className="border border-[#293A30]/20 p-8 md:p-12 bg-white rounded-2xl shadow-sm">
           <h2 className="font-serif italic text-2xl md:text-3xl text-[#1A2019] mb-4">
             {recommendationTitle}
           </h2>

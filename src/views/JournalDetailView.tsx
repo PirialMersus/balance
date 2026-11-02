@@ -1,9 +1,42 @@
+import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { translations, type Locale } from "@/lib/translations";
 import { journalArticles } from "@/lib/journal";
 import { BRAND } from "@/lib/brand";
 import BookingTriggerButton from "@/components/booking/BookingTriggerButton";
+
+function renderFormattedParagraph(content: string, index: number) {
+  const trimmed = content.trim();
+
+  if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.slice(2, -2).includes("**")) {
+    return (
+      <h2
+        key={index}
+        className="font-serif italic text-2xl md:text-3xl text-[#1A2019] pt-6 mb-2 leading-snug"
+      >
+        {trimmed.slice(2, -2)}
+      </h2>
+    );
+  }
+
+  const segments = trimmed.split(/(\*\*.*?\*\*)/g);
+
+  return (
+    <p key={index} className="text-[#293A30] text-lg leading-relaxed">
+      {segments.map((segment, segmentIndex) => {
+        if (segment.startsWith("**") && segment.endsWith("**")) {
+          return (
+            <strong key={segmentIndex} className="font-semibold text-[#1A2019]">
+              {segment.slice(2, -2)}
+            </strong>
+          );
+        }
+        return segment;
+      })}
+    </p>
+  );
+}
 
 export function JournalDetailView({
   locale,
@@ -28,8 +61,8 @@ export function JournalDetailView({
   const authorRoleText = locale === "uk" ? "Засновниця Balance Hot Yoga" : "Founder of Balance Hot Yoga";
   const ctaTitleText = locale === "uk" ? "Відчуйте силу гарячої йоги особисто" : "Experience the power of hot yoga firsthand";
   const ctaSubtitleText = locale === "uk"
-    ? "Запишіться на пробне заняття у студії Balance в центрі Одеси."
-    : "Book your trial class at Balance studio in the heart of Odesa.";
+    ? "Запишіться на пробне заняття у студії Balance (ЖК «Одісей», Одеса)."
+    : "Book your trial class at Balance studio (Odisey Complex, Odesa).";
 
   return (
     <article className="bg-[#F5F2E9] text-[#222923] min-h-screen pt-28 pb-24">
@@ -37,7 +70,7 @@ export function JournalDetailView({
         <div className="mb-10">
           <Link
             href={`${routePrefix}/journal`}
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#B87557] hover:text-[#D4793A] transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#B87557] hover:text-[#D4793A] transition-colors mb-8 min-h-[44px]"
           >
             <span>←</span>
             <span>{backLinkText}</span>
@@ -58,7 +91,7 @@ export function JournalDetailView({
           </p>
         </div>
 
-        <div className="mb-12 border border-[#293A30]/10 overflow-hidden">
+        <div className="mb-12 border border-[#293A30]/10 overflow-hidden rounded-2xl shadow-md">
           <img
             src={currentArticle.image}
             alt={currentArticle.title[locale]}
@@ -70,10 +103,10 @@ export function JournalDetailView({
           />
         </div>
 
-        <div className="space-y-6 text-[#293A30] text-lg leading-relaxed mb-16">
-          {formattedParagraphs.map((paragraphContent, index) => (
-            <p key={index}>{paragraphContent}</p>
-          ))}
+        <div className="space-y-6 mb-16">
+          {formattedParagraphs.map((paragraphContent, index) =>
+            renderFormattedParagraph(paragraphContent, index)
+          )}
         </div>
 
         <div className="border-t border-b border-[#293A30]/15 py-8 my-16 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
@@ -87,20 +120,23 @@ export function JournalDetailView({
           </div>
           <Link
             href={`${routePrefix}/journal`}
-            className="text-xs uppercase tracking-widest text-[#B87557] hover:underline"
+            className="text-xs uppercase tracking-widest text-[#B87557] hover:underline min-h-[44px] inline-flex items-center"
           >
             {backLinkText} →
           </Link>
         </div>
 
-        <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 text-center">
+        <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 text-center rounded-2xl shadow-lg border-l-4 border-[#B87557]">
           <h2 className="font-serif italic text-2xl md:text-3xl mb-4">
             {ctaTitleText}
           </h2>
           <p className="text-sm text-[#EAE5D9] max-w-xl mx-auto mb-6">
             {ctaSubtitleText}
           </p>
-          <BookingTriggerButton className="inline-block px-8 py-3.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-semibold transition-colors cursor-pointer">
+          <BookingTriggerButton
+            tariffTitle="Пробне заняття (350 ₴)"
+            className="inline-block px-8 py-3.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-semibold transition-colors cursor-pointer rounded-full min-h-[44px]"
+          >
             {currentTranslations.nav.book}
           </BookingTriggerButton>
         </div>

@@ -2,38 +2,40 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type Locale, translations } from "@/lib/translations";
-import { BRAND, getAssetPath } from "@/lib/brand";
+import { translations, Locale } from "@/lib/translations";
 import { useBooking } from "@/components/booking/BookingContext";
+import { getAssetPath } from "@/lib/brand";
 
 interface HeaderProps {
   locale: Locale;
 }
 
 export function Header({ locale }: HeaderProps) {
-  const currentPathname = usePathname() || "";
-  const navigationTranslations = translations[locale].nav;
-  const { openBooking } = useBooking();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openBooking } = useBooking();
 
-  const alternateLanguageUrl = (() => {
-    if (locale === "en") {
-      const strippedPathname = currentPathname.replace(/^\/en(?=\/|$)/, "");
-      return strippedPathname || "/";
-    }
-    const cleanPathname = currentPathname === "/" ? "" : currentPathname;
-    return `/en${cleanPathname}`;
-  })();
+  const navigationTranslations = translations[locale].nav;
 
   useEffect(() => {
-    const handleScrollActivity = () => {
+    const handleWindowScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScrollActivity, { passive: true });
-    return () => window.removeEventListener("scroll", handleScrollActivity);
+
+    window.addEventListener("scroll", handleWindowScroll);
+    return () => window.removeEventListener("scroll", handleWindowScroll);
   }, []);
+
+  useEffect(() => {
+    const handleEscapeKey = (keyboardEvent: KeyboardEvent) => {
+      if (keyboardEvent.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+    return () => window.removeEventListener("keydown", handleEscapeKey);
+  }, [isMobileMenuOpen]);
 
   const routePrefix = locale === "en" ? "/en" : "";
 
@@ -42,13 +44,14 @@ export function Header({ locale }: HeaderProps) {
     { href: `${routePrefix}/schedule`, label: navigationTranslations.schedule },
     { href: `${routePrefix}/pricing`, label: navigationTranslations.pricing },
     { href: `${routePrefix}/studio`, label: navigationTranslations.studio },
-    { href: `${routePrefix}/teachers`, label: translations[locale].teachers.title },
-    { href: `${routePrefix}/journal`, label: translations[locale].journal.title },
+    { href: `${routePrefix}/teachers`, label: locale === "uk" ? "Команда" : "Team" },
+    { href: `${routePrefix}/journal`, label: locale === "uk" ? "Журнал" : "Journal" },
     { href: `${routePrefix}/contacts`, label: navigationTranslations.contacts },
   ];
 
+  const alternateLanguageUrl = locale === "uk" ? "/en" : "/";
   const homePageUrl = locale === "en" ? "/en" : "/";
-  const studioSubtitle = locale === "uk" ? "Hot Yoga · Одеса" : "Hot Yoga · Odesa";
+  const studioSubtitle = locale === "uk" ? "Hot Yoga · ЖК «Одісей»" : "Hot Yoga · Odisey Complex";
 
   return (
     <>
@@ -60,7 +63,7 @@ export function Header({ locale }: HeaderProps) {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-6 lg:gap-8">
+          <div className="flex items-center justify-between gap-4 lg:gap-8">
             <Link
               href={homePageUrl}
               className="flex items-center gap-3 transition-opacity hover:opacity-90 group flex-shrink-0"
@@ -99,14 +102,14 @@ export function Header({ locale }: HeaderProps) {
             <div className="hidden xl:flex items-center gap-3.5 2xl:gap-5 flex-shrink-0">
               <Link
                 href={alternateLanguageUrl}
-                className="text-xs uppercase tracking-widest font-semibold px-3 py-1.5 border border-[#828A73]/40 rounded-full text-[#F5F2E9] hover:border-[#B87557] hover:text-[#B87557] transition-colors whitespace-nowrap"
+                className="text-xs uppercase tracking-widest font-semibold px-3 py-1.5 border border-[#828A73]/40 rounded-full text-[#F5F2E9] hover:border-[#B87557] hover:text-[#B87557] transition-colors whitespace-nowrap min-h-[38px] flex items-center"
               >
                 {navigationTranslations.switchLang}
               </Link>
               <button
                 type="button"
-                onClick={() => openBooking()}
-                className="px-5 py-2.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium rounded-full transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer whitespace-nowrap"
+                onClick={() => openBooking("first-trial")}
+                className="px-5 py-2.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium rounded-full transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer whitespace-nowrap min-h-[40px]"
               >
                 {navigationTranslations.book}
               </button>
@@ -115,22 +118,25 @@ export function Header({ locale }: HeaderProps) {
             <div className="flex items-center gap-2 sm:gap-3 xl:hidden">
               <Link
                 href={alternateLanguageUrl}
-                className="text-[11px] uppercase tracking-wider font-semibold px-2.5 py-1 border border-[#828A73]/40 rounded-full text-[#F5F2E9] whitespace-nowrap"
+                className="text-[11px] uppercase tracking-wider font-semibold px-2.5 py-1.5 border border-[#828A73]/40 rounded-full text-[#F5F2E9] whitespace-nowrap min-h-[40px] min-w-[40px] flex items-center justify-center hover:border-[#B87557] transition-colors"
+                aria-label={navigationTranslations.switchLang}
               >
-                {navigationTranslations.switchLang}
+                <span className="sm:hidden">{locale === "uk" ? "EN" : "UA"}</span>
+                <span className="hidden sm:inline">{navigationTranslations.switchLang}</span>
               </Link>
               <button
                 type="button"
-                onClick={() => openBooking()}
-                className="hidden sm:inline-flex px-4 py-1.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-[11px] uppercase tracking-wider font-medium rounded-full transition-colors shadow-sm whitespace-nowrap cursor-pointer"
+                onClick={() => openBooking("first-trial")}
+                className="hidden sm:inline-flex px-4 py-1.5 bg-[#B87557] hover:bg-[#D4793A] text-white text-[11px] uppercase tracking-wider font-medium rounded-full transition-colors shadow-sm whitespace-nowrap cursor-pointer min-h-[40px] items-center"
               >
                 {navigationTranslations.book}
               </button>
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="px-3 py-1.5 rounded-full border border-white/20 hover:border-[#B87557] text-white transition-colors flex items-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
+                className="min-h-[44px] min-w-[44px] px-3 py-1.5 rounded-full border border-white/20 hover:border-[#B87557] text-white transition-colors flex items-center justify-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
                 aria-label="Toggle navigation menu"
+                aria-expanded={isMobileMenuOpen}
               >
                 <span className="text-[11px] uppercase tracking-wider font-medium hidden xs:inline-block">
                   {isMobileMenuOpen ? (locale === "uk" ? "Закрити" : "Close") : (locale === "uk" ? "Меню" : "Menu")}
@@ -165,7 +171,7 @@ export function Header({ locale }: HeaderProps) {
                   key={navigationLink.href}
                   href={navigationLink.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="font-serif italic text-2xl text-[#F5F2E9] hover:text-[#B87557] transition-colors py-1 border-b border-white/5"
+                  className="font-serif italic text-2xl text-[#F5F2E9] hover:text-[#B87557] transition-colors py-1.5 border-b border-white/5 min-h-[44px] flex items-center"
                 >
                   {navigationLink.label}
                 </Link>
@@ -176,15 +182,15 @@ export function Header({ locale }: HeaderProps) {
                 type="button"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  openBooking();
+                  openBooking("first-trial");
                 }}
-                className="w-full py-4 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium text-center transition-colors shadow-md rounded-full cursor-pointer"
+                className="w-full min-h-[48px] py-4 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium text-center transition-colors shadow-md rounded-full cursor-pointer"
               >
                 {navigationTranslations.book}
               </button>
               <div className="text-center pt-2">
                 <span className="text-[11px] uppercase tracking-widest text-[#828A73]">
-                  {locale === "uk" ? "Одеса · 38–40°C · Balance Hot Yoga" : "Odesa · 38–40°C · Balance Hot Yoga"}
+                  {locale === "uk" ? "Одеса · ЖК «Одісей» · 38–40°C · Balance" : "Odesa · Odisey Complex · 38–40°C · Balance"}
                 </span>
               </div>
             </div>

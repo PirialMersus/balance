@@ -15,8 +15,8 @@ export function Footer({ locale }: FooterProps) {
     { href: `${routePrefix}/schedule`, label: pageTranslations.nav.schedule },
     { href: `${routePrefix}/pricing`, label: pageTranslations.nav.pricing },
     { href: `${routePrefix}/studio`, label: pageTranslations.nav.studio },
-    { href: `${routePrefix}/teachers`, label: pageTranslations.teachers.title },
-    { href: `${routePrefix}/journal`, label: pageTranslations.journal.title },
+    { href: `${routePrefix}/teachers`, label: locale === "uk" ? "Команда" : "Team" },
+    { href: `${routePrefix}/journal`, label: locale === "uk" ? "Журнал" : "Journal" },
     { href: `${routePrefix}/contacts`, label: pageTranslations.nav.contacts },
   ];
 
@@ -36,7 +36,7 @@ export function Footer({ locale }: FooterProps) {
                 : "The dedicated hot yoga studio in Odesa. A mindful space where warmth, intentional practice, and community nurture inner balance."}
             </p>
             <p className="text-xs text-[#B87557] font-medium tracking-wider uppercase pt-2">
-              {locale === "uk" ? "Одеса, Україна" : "Odesa, Ukraine"}
+              {locale === "uk" ? "Одеса, Люстдорфська дорога, 55К (ЖК «Одісей»)" : "Odesa, 55K Liustdorfska Road (Odisey Complex)"}
             </p>
           </div>
 
@@ -49,7 +49,7 @@ export function Footer({ locale }: FooterProps) {
                 <Link
                   key={navigationLink.href}
                   href={navigationLink.href}
-                  className="text-xs uppercase tracking-wider text-[#F5F2E9]/80 hover:text-[#B87557] transition-colors"
+                  className="text-xs uppercase tracking-wider text-[#F5F2E9]/80 hover:text-[#B87557] transition-colors min-h-[36px] flex items-center"
                 >
                   {navigationLink.label}
                 </Link>
@@ -66,7 +66,7 @@ export function Footer({ locale }: FooterProps) {
                 href={BRAND.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-[#F5F2E9]/80 hover:text-[#B87557] transition-colors group"
+                className="flex items-center gap-3 text-[#F5F2E9]/80 hover:text-[#B87557] transition-colors group min-h-[44px]"
               >
                 <svg
                   width="18"
@@ -81,11 +81,11 @@ export function Footer({ locale }: FooterProps) {
                 >
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
                 <span>{BRAND.instagramHandle}</span>
               </a>
-              <div className="text-xs text-[#828A73] pt-2">
+              <div className="text-xs text-[#828A73] pt-1">
                 {locale === "uk"
                   ? "Практики щодня за попереднім записом"
                   : "Daily practices by prior appointment"}
@@ -98,7 +98,7 @@ export function Footer({ locale }: FooterProps) {
           <p>© {currentYear} Balance Hot Yoga Odesa. {locale === "uk" ? "Усі права захищені." : "All rights reserved."}</p>
           <Link
             href={`${routePrefix}/privacy`}
-            className="hover:text-[#F5F2E9] transition-colors underline-offset-4 hover:underline"
+            className="hover:text-[#B87557] transition-colors min-h-[44px] flex items-center"
           >
             {locale === "uk" ? "Політика конфіденційності" : "Privacy Policy"}
           </Link>

@@ -19,10 +19,11 @@ export function ContactsView({ locale }: { locale: Locale }) {
     ? "Єдина спеціалізована студія гарячої йоги в Одесі. Практика при 38–40°C для глибокого розкриття тіла та спокою розуму."
     : "The only dedicated hot yoga studio in Odesa. Practice at 38–40°C for deep somatic release and mental serenity.";
 
+  const addressText = locale === "uk" ? BRAND.address : BRAND.addressEn;
   const openInMapsText = locale === "uk" ? "Відкрити на картах Google" : "Open in Google Maps";
   const mapHintText = locale === "uk"
-    ? "Студія гарячої йоги в самому серці Одеси. Зручний під'їзд та піша доступність."
-    : "Hot yoga studio in the heart of Odesa. Convenient access and walking distance.";
+    ? "ЖК «Одісей», зручний під'їзд з Люстдорфської дороги, гостьовий паркінг біля комплексу."
+    : "Odisey Complex, convenient entrance from Liustdorfska Road, guest parking available.";
 
   const faqTitle = locale === "uk" ? "Часті питання перед візитом" : "Frequently Asked Questions";
   const faqItems = [
@@ -54,7 +55,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
           <p className="text-xs uppercase tracking-widest text-[#B87557] mb-4 font-medium">
-            Balance Hot Yoga · {BRAND.city}
+            Balance Hot Yoga · {locale === "uk" ? "Одеса" : "Odesa"}
           </p>
           <h1
             className="font-serif italic text-[#1A2019] leading-tight mb-6"
@@ -69,7 +70,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           <div className="lg:col-span-5 space-y-8">
-            <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm">
+            <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm rounded-2xl">
               <span className="text-xs uppercase tracking-widest text-[#B87557] font-semibold block mb-2">
                 Instagram Direct
               </span>
@@ -83,34 +84,34 @@ export function ContactsView({ locale }: { locale: Locale }) {
                 href={BRAND.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block w-full py-4 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium text-center transition-colors"
+                className="inline-flex items-center justify-center min-h-[48px] w-full py-4 px-6 bg-[#B87557] hover:bg-[#D4793A] text-white text-xs uppercase tracking-widest font-medium text-center transition-colors rounded-full shadow-md"
               >
                 {currentTranslations.contacts.booking}
               </a>
             </div>
 
-            <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm">
+            <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm rounded-2xl">
               <span className="text-xs uppercase tracking-widest text-[#828A73] font-semibold block mb-2">
                 {currentTranslations.contacts.address}
               </span>
-              <p className="font-serif italic text-xl text-[#1A2019] mb-4">
-                {BRAND.address}
+              <p className="font-serif italic text-xl text-[#1A2019] mb-4 leading-snug">
+                {addressText}
               </p>
-              <p className="text-xs text-[#79776E] mb-6">
+              <p className="text-xs text-[#79776E] mb-6 leading-relaxed">
                 {mapHintText}
               </p>
               <a
-                href="https://maps.google.com/?q=Odesa+Balance+Hot+Yoga"
+                href={BRAND.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#B87557] hover:underline"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#B87557] hover:text-[#D4793A] font-semibold transition-colors min-h-[44px]"
               >
                 <span>{openInMapsText}</span>
                 <span>↗</span>
               </a>
             </div>
 
-            <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm">
+            <div className="p-8 bg-white border border-[#293A30]/10 shadow-sm rounded-2xl">
               <span className="text-xs uppercase tracking-widest text-[#828A73] font-semibold block mb-2">
                 {hoursLabel}
               </span>
@@ -124,7 +125,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 mb-8">
+            <div className="bg-[#293A30] text-[#F5F2E9] p-8 md:p-12 mb-8 rounded-2xl shadow-lg border-l-4 border-[#B87557]">
               <h2 className="font-serif italic text-2xl md:text-3xl mb-4">
                 {BRAND.fullName}
               </h2>
@@ -134,9 +135,9 @@ export function ContactsView({ locale }: { locale: Locale }) {
               <div className="border-t border-[#F5F2E9]/15 pt-6 grid grid-cols-2 gap-4 text-xs">
                 <div>
                   <span className="text-[#B87557] block mb-1">
-                    {locale === "uk" ? "Місто" : "City"}
+                    {locale === "uk" ? "Локація" : "Location"}
                   </span>
-                  <span>{BRAND.city}</span>
+                  <span>ЖК «Одісей»</span>
                 </div>
                 <div>
                   <span className="text-[#B87557] block mb-1">
@@ -147,7 +148,7 @@ export function ContactsView({ locale }: { locale: Locale }) {
               </div>
             </div>
 
-            <div className="border border-[#293A30]/10 bg-white p-8 md:p-12">
+            <div className="border border-[#293A30]/10 bg-white p-8 md:p-12 rounded-2xl shadow-sm">
               <h2 className="font-serif italic text-2xl text-[#1A2019] mb-6">
                 {faqTitle}
               </h2>
